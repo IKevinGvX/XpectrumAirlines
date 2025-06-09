@@ -1,0 +1,141 @@
+﻿@page
+@using Newtonsoft.Json
+@model Xpectrum_Structure.Pages.Promotions.Vuelos
+@{
+    ViewData["Title"] = "Flight History";
+}
+
+<head>
+    <link href="~/css/cuerpo.css" rel="stylesheet" />
+</head>
+
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .table-container {
+        background-color: #222;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        margin-top: 30px;
+        max-height: 600px;
+        overflow: auto;
+    }
+
+    .vuelos-table-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .vuelos-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #1a1a1a;
+        color: #f5c518;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+        .vuelos-table th {
+            background-color: #f5c518;
+            color: #222;
+            font-weight: bold;
+            padding: 18px;
+            text-align: left;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #33FF33;
+            text-transform: uppercase;
+        }
+
+        .vuelos-table td {
+            padding: 15px;
+            text-align: center;
+            font-size: 1rem;
+            border-bottom: 1px solid #444;
+        }
+
+        .vuelos-table tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        .vuelos-table tr:hover {
+            background-color: #444;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(51, 255, 51, 0.3);
+        }
+
+        .vuelos-table td:hover {
+            background-color: #555;
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+
+        .vuelos-table tr.selected {
+            background-color: #33FF33;
+            color: #fff;
+        }
+</style>
+
+<div class="table-container">
+    <div class="vuelos-table-wrapper">
+        <table class="vuelos-table">
+            <thead>
+                <tr>
+                    <th>Flight Code</th>
+                    <th>Departure Date</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Date</th>
+                    <th>Arrival Time</th>
+                    <th>Flight Status</th>
+                    <th>Price (USD)</th>
+                    <th>Duration</th>
+                    <th>Departure Airport</th>
+                    <th>Arrival Airport</th>
+                    <th>Aircraft Model</th>
+                    <th>Capacity</th>
+                    <th>Class</th>
+                    <th>Travel Type</th>
+                    <th>Benefit</th>
+                    <th>City of Origin</th>
+                    <th>City of Destination</th>
+                    <th>User Name</th>
+                    <th>Day of the Week</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vuelo in Model.Vuelitos)
+                {
+                    <tr id="vuelo-@vuelo.CodigoVuelo">
+                        <td>@vuelo.CodigoVuelo</td>
+                        <td>@vuelo.FechaSalida?.ToString("dd/MM/yyyy")</td>
+                        <td>@vuelo.HoraSalida</td>
+                        <td>@vuelo.FechaLlegada?.ToString("dd/MM/yyyy")</td>
+                        <td>@vuelo.HoraLlegada</td>
+                        <td>@vuelo.EstadoVuelo</td>
+                        <td>@vuelo.PrecioUSD</td>
+                        <td>@vuelo.DuracionHoras hrs @vuelo.DuracionMinutos mins</td>
+                        <td>@vuelo.AeropuertoOrigen</td>
+                        <td>@vuelo.AeropuertoDestino</td>
+                        <td>@vuelo.AeronaveModelo</td>
+                        <td>@vuelo.AeronaveCapacidad</td>
+                        <td>@vuelo.Clase</td>
+                        <td>@vuelo.TipoViaje</td>
+                        <td>@vuelo.Beneficio</td>
+                        <td>@vuelo.CiudadOrigen</td>
+                        <td>@vuelo.CiudadDestino</td>
+                        <td>@vuelo.NombreUsuario</td>
+                        <td>@vuelo.DiaSemana</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

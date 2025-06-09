@@ -1,0 +1,57 @@
+﻿@* Navbar Partial Mejorado *@
+<link href="~/css/header.css" rel="stylesheet" />
+
+<nav class="navbar navbar-expand-lg navbar-light bg-navbar fixed-top shadow-sm">
+    <div class="container">
+        <span class="brand-text">Xpectrum</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+           <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link active" asp-page="/Index" aria-current="page">Inicio</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="vuelosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Vuelos
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="vuelosDropdown">
+                        <li>
+                            <a class="dropdown-item" asp-page="/Promotions/VueloDetails" asp-route-codigoVuelo="AV1001">Ver detalles del vuelo</a>
+                        </li>                        <li><a class="dropdown-item" asp-page="/Bookings/MyReservations">Mis reservas</a></li>
+                        <li><a class="dropdown-item" asp-page="/Flights/Status">Estado del vuelo</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="serviciosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Servicios
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="serviciosDropdown">
+                        <li><a class="dropdown-item" asp-page="/Services/Extras">Servicios adicionales</a></li>
+                        <li><a class="dropdown-item" asp-page="/Services/Luggage">Equipaje</a></li>
+                        <li><a class="dropdown-item" asp-page="/Services/Assistance">Asistencia especial</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/AboutUs">Sobre nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Contact">Contacto</a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-primary btn-sm px-4 fw-semibold" asp-page="/Account/Login" role="button" aria-label="Iniciar sesión">Iniciar sesión</a>
+                </li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-outline-primary btn-sm px-4 fw-semibold" asp-page="/Account/Register" role="button" aria-label="Registrarse">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

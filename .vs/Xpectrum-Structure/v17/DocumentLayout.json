@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|c:\\users\\bytezon\\desktop\\xpectrumweb\\xpectrumdss\\wwwroot\\css\\footer.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|solutionrelative:wwwroot\\css\\footer.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|c:\\users\\bytezon\\desktop\\xpectrumweb\\xpectrumdss\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|solutionrelative:pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|c:\\users\\bytezon\\desktop\\xpectrumweb\\xpectrumdss\\wwwroot\\css\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|solutionrelative:wwwroot\\css\\header.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|c:\\users\\bytezon\\desktop\\xpectrumweb\\xpectrumdss\\pages\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{34E382EE-C2E6-69DD-F969-A6CC177F04A9}|Xpectrum-Structure.csproj|solutionrelative:pages\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "footer.css",
+              "DocumentMoniker": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\wwwroot\\css\\footer.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\footer.css",
+              "ToolTip": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\wwwroot\\css\\footer.css",
+              "RelativeToolTip": "wwwroot\\css\\footer.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-08T03:18:56.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Header.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\Pages\\Shared\\_Header.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Shared\\_Header.cshtml",
+              "ToolTip": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\Pages\\Shared\\_Header.cshtml",
+              "RelativeToolTip": "Pages\\Shared\\_Header.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T02:38:12.8Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "header.css",
+              "DocumentMoniker": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\wwwroot\\css\\header.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\header.css",
+              "ToolTip": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\wwwroot\\css\\header.css",
+              "RelativeToolTip": "wwwroot\\css\\header.css",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAAD8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-08T02:38:04.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\Pages\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcCAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T00:37:58.239Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

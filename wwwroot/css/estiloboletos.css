@@ -1,0 +1,365 @@
+﻿/* Paleta base */
+:root {
+    --color-primario: #F5C518; /* Amarillo / dorado */
+    --color-secundario: #292929; /* Gris oscuro */
+    --color-fondo: #121212; /* Negro muy oscuro */
+    --color-texto-claro: #EAEAEA; /* Blanco hueso */
+    --color-texto-secundario: #B0B0B0; /* Gris claro */
+    --color-acento: #FFC107; /* Amarillo brillante */
+    --color-error: #dc3545; /* rojo para errores */
+    --color-exito: #28a745; /* verde para éxito */
+}
+
+/* Body */
+body {
+    background: var(--color-fondo);
+    color: var(--color-texto-claro);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding-top: 70px; /* Para navbar fijo */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, var(--color-secundario), #1a1a1a);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.9);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1030;
+    transition: background-color 0.4s ease;
+}
+
+    .navbar.scrolled {
+        background-color: #1a1a1add; /* Un poco más opaco al hacer scroll */
+    }
+
+.navbar-brand, .nav-link {
+    color: var(--color-primario) !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+
+    .nav-link:hover, .nav-link:focus {
+        color: var(--color-acento) !important;
+        text-shadow: 0 0 12px var(--color-primario);
+    }
+
+/* Dropdown */
+.dropdown-menu {
+    background: var(--color-secundario);
+    border: none;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.9);
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    min-width: 12rem;
+}
+
+.dropdown-item {
+    color: var(--color-texto-claro);
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        background-color: var(--color-primario);
+        color: var(--color-secundario);
+        border-radius: 8px;
+    }
+
+/* Footer */
+footer {
+    background: linear-gradient(45deg, var(--color-secundario), #1a1a1a);
+    color: var(--color-texto-secundario);
+    text-align: center;
+    padding: 25px 10px;
+    font-size: 0.9rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    user-select: none;
+    z-index: 1020;
+}
+
+    footer a {
+        color: var(--color-primario);
+        text-decoration: none;
+        font-weight: 600;
+        margin: 0 12px;
+        transition: color 0.3s ease;
+    }
+
+        footer a:hover, footer a:focus {
+            color: var(--color-acento);
+            text-shadow: 0 0 8px var(--color-primario);
+        }
+
+/* Botones */
+.btn-primary {
+    background-color: var(--color-primario);
+    border: none;
+    font-weight: 700;
+    color: var(--color-secundario);
+    padding: 12px 32px;
+    border-radius: 50px;
+    box-shadow: 0 0 18px var(--color-primario);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--color-acento);
+        box-shadow: 0 0 28px var(--color-acento);
+        color: var(--color-secundario);
+    }
+
+/* Botones secundarios */
+.btn-outline-light {
+    border: 2px solid var(--color-primario);
+    background-color: transparent;
+    color: var(--color-primario);
+    font-weight: 700;
+    padding: 10px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+    .btn-outline-light:hover, .btn-outline-light:focus {
+        background-color: var(--color-primario);
+        color: var(--color-secundario);
+        box-shadow: 0 0 20px var(--color-primario);
+    }
+
+/* Títulos */
+h1, h2, h3, h4 {
+    color: var(--color-primario);
+    text-shadow: 0 0 12px var(--color-primario);
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    user-select: none;
+}
+
+/* Subtítulos y párrafos */
+h5, p, label, small {
+    color: var(--color-texto-secundario);
+}
+
+/* Links */
+a {
+    color: var(--color-primario);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+    a:hover, a:focus {
+        color: var(--color-acento);
+        text-shadow: 0 0 10px var(--color-primario);
+    }
+
+/* Carrusel */
+.carousel-item img {
+    filter: brightness(65%);
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 16px;
+    user-select: none;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+}
+
+/* Tablas (ejemplo para listados) */
+.table {
+    color: var(--color-texto-claro);
+    background-color: var(--color-secundario);
+    border-radius: 12px;
+    user-select: none;
+}
+
+    .table thead th {
+        border-bottom: 3px solid var(--color-primario);
+        color: var(--color-primario);
+        font-weight: 700;
+        letter-spacing: 1.2px;
+    }
+
+    .table tbody tr:hover {
+        background-color: var(--color-primario);
+        color: var(--color-secundario);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+/* Responsive padding */
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Formularios */
+input, select, textarea {
+    background-color: var(--color-secundario);
+    border: 1.8px solid var(--color-primario);
+    border-radius: 10px;
+    color: var(--color-texto-claro);
+    padding: 10px 15px;
+    font-weight: 600;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    user-select: text;
+}
+
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--color-acento);
+        outline: none;
+        box-shadow: 0 0 12px var(--color-acento);
+    }
+
+/* Animaciones sutiles para botones */
+.btn-primary, .btn-outline-light {
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-primary::after, .btn-outline-light::after {
+        content: "";
+        position: absolute;
+        left: -100%;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: all 0.5s ease;
+        pointer-events: none;
+        border-radius: 50px;
+    }
+
+    .btn-primary:hover::after, .btn-outline-light:hover::after {
+        left: 100%;
+    }
+
+/* Scroll to top button */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background-color: var(--color-primario);
+    color: var(--color-secundario);
+    border: none;
+    padding: 12px 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--color-primario);
+    cursor: pointer;
+    display: none;
+    z-index: 1100;
+    transition: background-color 0.3s ease;
+}
+
+    #scrollTopBtn:hover {
+        background-color: var(--color-acento);
+    }
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1rem !important;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Smooth shadow for cards and panels */
+.card, .panel {
+    background-color: var(--color-secundario);
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+    color: var(--color-texto-claro);
+    padding: 20px;
+    margin-bottom: 30px;
+    user-select: none;
+}
+
+/* Inputs with icons */
+.input-icon {
+    position: relative;
+}
+
+    .input-icon > input {
+        padding-left: 40px;
+    }
+
+    .input-icon > .icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-primario);
+    }
+
+/* Toast notifications */
+.toast {
+    background-color: var(--color-secundario);
+    border-left: 6px solid var(--color-primario);
+    color: var(--color-texto-claro);
+}
+
+/* Helper utilities */
+.text-primary-glow {
+    color: var(--color-primario);
+    text-shadow: 0 0 10px var(--color-primario);
+    font-weight: 700;
+}
+
+.text-accent-glow {
+    color: var(--color-acento);
+    text-shadow: 0 0 14px var(--color-acento);
+    font-weight: 700;
+}
+
+/* Tables responsive */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+/* Loading spinner centered */
+.spinner-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Card headers */
+.card-header {
+    border-bottom: 2px solid var(--color-primario);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--color-primario);
+    user-select: none;
+}

@@ -1,0 +1,62 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Boletos.IndexModel
+
+<link rel="stylesheet" href="~/css/estiloboletos.css" />
+
+<h1>Lista de Boletos</h1>
+
+@if (Model.Boletos == null || !Model.Boletos.Any())
+{
+    <p class="no-boletos">No hay boletos disponibles.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Reserva ID</th>
+                <th>Código</th>
+                <th>Fecha Emisión</th>
+                <th>Estado</th>
+                <th>Código BO</th>
+                <th>QR</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Boletos.Count; i++)
+            {
+                var boleto = Model.Boletos[i];
+                var fechaEmisionStr = boleto.FechaEmision.ToString("dd/MM/yyyy");
+
+                <tr>
+                    <td>@boleto.BoletoId</td>
+                    <td>@boleto.ReservaId</td>
+                    <td>@boleto.CodigoBoleto</td>
+                    <td>@fechaEmisionStr</td>
+                    <td>@boleto.EstadoBoleto</td>
+                    <td>@boleto.CodigoBO</td>
+                    <td>
+                        <div id="qrcode-@i" class="qrcode-container"></div>
+                        <button type="button" onclick="downloadQRCode(@i, '@boleto.CodigoBO')" class="btn-link mt-2">Descargar QR</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/Boletos/Create" class="btn">Crear Nuevo Boleto</a>
+}
+<script>
+    window.boletoData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<dynamic>>(
+        Model.Boletos != null
+            ? Model.Boletos.Select(b => new { b.ReservaId, b.CodigoBoleto }).ToList()
+            : new List<dynamic>()
+    ))
+
+
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="~/js/site.js"></script>

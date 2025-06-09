@@ -1,0 +1,306 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Promotions.HistorialModel
+@{
+    ViewData["Title"] = "Flight History";
+}
+
+<head>
+    <link href="~/css/cuerpo.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<style>
+    body {
+        background-color: #333;
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .section-header {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #33FF33;
+        margin-bottom: 30px;
+        padding: 20px 30px;
+        background-color: #222;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(51, 255, 51, 0.4);
+        text-align: center;
+        animation: fadeIn 1s ease-out;
+    }
+
+    .filters-container {
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #222;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-around;
+    }
+
+        .filters-container select, .filters-container input {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #f5c518; /* Beige */
+            border-radius: 5px;
+            padding: 10px;
+            width: 220px;
+            margin: 10px;
+            box-shadow: inset 0 0 5px rgba(51, 255, 51, 0.4);
+            transition: all 0.3s ease;
+        }
+
+            .filters-container select:focus, .filters-container input:focus {
+                border-color: #e0be17; /* Focus border color */
+                box-shadow: 0 0 8px rgba(51, 255, 51, 0.6);
+            }
+
+        .filters-container button {
+            background: linear-gradient(135deg, #f5c518, #222); /* Gradient of beige to black */
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, transform 0.3s ease;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .filters-container button:hover {
+                background: linear-gradient(135deg, #e0be17, #444);
+                transform: scale(1.05);
+            }
+
+            .filters-container button:focus {
+                outline: none;
+            }
+
+    .table-container {
+        background-color: #222;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        margin-top: 30px;
+        overflow-x: auto;
+        max-height: 600px;
+    }
+
+    .vuelos-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #1a1a1a;
+        color: #f5c518;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+        .vuelos-table th {
+            background-color: #f5c518;
+            color: #222;
+            font-weight: bold;
+            padding: 18px;
+            text-align: left;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #33FF33;
+            text-transform: uppercase;
+            box-shadow: inset 0 -2px 0 0 rgba(51, 255, 51, 0.5);
+        }
+
+        .vuelos-table td {
+            padding: 15px;
+            text-align: center;
+            font-size: 1rem;
+            border-bottom: 1px solid #444;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .vuelos-table tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        .vuelos-table tr:hover {
+            background-color: #444;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(51, 255, 51, 0.3);
+        }
+
+        .vuelos-table td:hover {
+            background-color: #555;
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+
+        .vuelos-table tr.selected {
+            background-color: #33FF33;
+            color: #fff;
+        }
+</style>
+
+<div class="container py-5">
+    <div class="section-header">
+        Flight History
+    </div>
+
+    <!-- Filters (Divided into two sections) -->
+    <div class="filters-container">
+        <div class="filter-section">
+            <h3>Choose Dates</h3>
+            <label for="fechaInicio">Start Date</label>
+            <input type="date" id="fechaInicio" name="fechaInicio">
+
+            <label for="fechaFin">End Date</label>
+            <input type="date" id="fechaFin" name="fechaFin">
+
+            <label for="precioMin">Min Price</label>
+            <input type="number" id="precioMin" name="precioMin" placeholder="Min USD">
+
+            <label for="precioMax">Max Price</label>
+            <input type="number" id="precioMax" name="precioMax" placeholder="Max USD">
+        </div>
+
+        <div class="filter-section">
+            <h3>Choose Destination</h3>
+            <label for="aeropuertoOrigen">Departure Airport</label>
+            <select id="aeropuertoOrigen" name="aeropuertoOrigen">
+                <option value="">Select Origin Airport</option>
+                @foreach (var aeropuerto in Model.AeropuertosOrigen)
+                {
+                    <option value="@aeropuerto">@aeropuerto</option>
+                }
+            </select>
+
+            <label for="aeropuertoDestino">Arrival Airport</label>
+            <select id="aeropuertoDestino" name="aeropuertoDestino">
+                <option value="">Select Destination Airport</option>
+                @foreach (var aeropuerto in Model.AeropuertosDestino)
+                {
+                    <option value="@aeropuerto">@aeropuerto</option>
+                }
+            </select>
+
+            <label for="ciudadOrigen">Departure City</label>
+            <select id="ciudadOrigen" name="ciudadOrigen">
+                <option value="">Select Departure City</option>
+                @foreach (var ciudad in Model.CiudadesOrigen)
+                {
+                    <option value="@ciudad">@ciudad</option>
+                }
+            </select>
+
+            <label for="ciudadDestino">Arrival City</label>
+            <select id="ciudadDestino" name="ciudadDestino">
+                <option value="">Select Arrival City</option>
+                @foreach (var ciudad in Model.CiudadesDestino)
+                {
+                    <option value="@ciudad">@ciudad</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <!-- Apply Filters Button -->
+    <div class="d-flex justify-content-center">
+        <button class="action-button" onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <div class="table-container">
+        <table class="vuelos-table">
+            <thead>
+                <tr>
+                    <th>Flight Code</th>
+                    <th>Departure Date</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Date</th>
+                    <th>Arrival Time</th>
+                    <th>Departure Airport</th>
+                    <th>Arrival Airport</th>
+                    <th>Flight Status</th>
+                    <th>Aeroplane Model</th>
+                    <th>Price USD</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vuelo in Model.Historiales)
+                {
+                    <tr>
+                        <td>@vuelo.CodigoVuelo</td>
+                        <td>@vuelo.FechaSalida?.ToString("dd/MM/yyyy")</td>
+                        <td>@vuelo.HoraSalida</td>
+                        <td>@vuelo.FechaLlegada?.ToString("dd/MM/yyyy")</td>
+                        <td>@vuelo.HoraLlegada</td>
+                        <td>@vuelo.AeropuertoOrigen</td>
+                        <td>@vuelo.AeropuertoDestino</td>
+                        <td>@vuelo.EstadoVuelo</td>
+                        <td>@vuelo.AeronaveModelo</td>
+                        <td>@vuelo.PrecioUSD</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('select').select2(); // Activating select2 after page load
+    });
+
+    function applyFilters() {
+        // Logic to apply filters
+        alert("Filters applied!");
+    }
+</script>
+<script>
+    function applyFilters() {
+        // Captura los valores de los filtros
+        const startDate = document.getElementById('fechaInicio').value;
+        const endDate = document.getElementById('fechaFin').value;
+        const minPrice = document.getElementById('precioMin').value;
+        const maxPrice = document.getElementById('precioMax').value;
+        const departureAirport = document.getElementById('aeropuertoOrigen').value;
+        const arrivalAirport = document.getElementById('aeropuertoDestino').value;
+        const departureCity = document.getElementById('ciudadOrigen').value;
+        const arrivalCity = document.getElementById('ciudadDestino').value;
+
+        // Aquí podrías hacer una llamada AJAX para actualizar la tabla
+        fetch(`/Promotions/Historial?startDate=${startDate}&endDate=${endDate}&minPrice=${minPrice}&maxPrice=${maxPrice}&departureAirport=${departureAirport}&arrivalAirport=${arrivalAirport}&departureCity=${departureCity}&arrivalCity=${arrivalCity}`)
+            .then(response => response.json())
+            .then(data => {
+                // Limpiar la tabla antes de agregar los nuevos datos
+                const tableBody = document.querySelector(".vuelos-table tbody");
+                tableBody.innerHTML = '';
+
+                // Agregar los nuevos datos filtrados a la tabla
+                data.forEach(vuelo => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${vuelo.CodigoVuelo}</td>
+                        <td>${new Date(vuelo.FechaSalida).toLocaleDateString()}</td>
+                        <td>${vuelo.HoraSalida}</td>
+                        <td>${new Date(vuelo.FechaLlegada).toLocaleDateString()}</td>
+                        <td>${vuelo.HoraLlegada}</td>
+                        <td>${vuelo.AeropuertoOrigen}</td>
+                        <td>${vuelo.AeropuertoDestino}</td>
+                        <td>${vuelo.EstadoVuelo}</td>
+                        <td>${vuelo.AeronaveModelo}</td>
+                        <td>${vuelo.PrecioUSD}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+
