@@ -6041,23 +6041,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bytezon\\.nuget\\packages\\": {},
+    "C:\\Users\\PC - OS\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\Xpectrum-Structure.csproj",
+      "projectUniqueName": "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\Xpectrum-Structure.csproj",
       "projectName": "Xpectrum-Structure",
-      "projectPath": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\Xpectrum-Structure.csproj",
-      "packagesPath": "C:\\Users\\Bytezon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bytezon\\Desktop\\Xpectrumweb\\XpectrumDSS\\obj\\",
+      "projectPath": "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\Xpectrum-Structure.csproj",
+      "packagesPath": "C:\\Users\\PC - OS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bytezon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC - OS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6066,6 +6066,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6084,7 +6085,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -6154,7 +6155,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

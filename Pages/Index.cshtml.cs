@@ -1,82 +1,74 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Xpectrum_Structure.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Xpectrum_Structure.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly string connectionString = "Server=xpectrum.mssql.somee.com;Database=xpectrum;User Id=KKevinyouman2004_SQLLogin_2;Password=Kevinyouman2004;TrustServerCertificate=True;Encrypt=True;MultipleActiveResultSets=True;Connection Timeout=30;";
+        private readonly HttpClient _httpClient;
 
-        public List<VueloViewModel> Vuelos { get; set; } = new List<VueloViewModel>();
+        // Cambiamos el tipo de Vuelos para que sea directamente List<VueloAPI>
+        public List<VueloAPI> Vuelos { get; set; } = new List<VueloAPI>();
 
-        public IndexModel()
+        // Constructor
+        public IndexModel(HttpClient httpClient)
         {
+            _httpClient = httpClient;
         }
 
+        // Método para obtener vuelos desde la API
         public async Task OnGetAsync()
         {
-            // Obtener todos los vuelos sin paginación
-            Vuelos = await ObtenerVuelosAsync() ?? new List<VueloViewModel>();
+            // Obtener vuelos de la API
+            Vuelos = await ObtenerVuelosDesdeAPI() ?? new List<VueloAPI>();
         }
 
-        public async Task<List<VueloViewModel>> ObtenerVuelosAsync()
+        // Método para obtener los vuelos de la API
+        public async Task<List<VueloAPI>> ObtenerVuelosDesdeAPI()
         {
-            List<VueloViewModel> vuelos = new List<VueloViewModel>();
+            List<VueloAPI> vuelos = new List<VueloAPI>();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                try
-                {
-                    await connection.OpenAsync();
-                    SqlCommand command = new SqlCommand("dbo.Splistadodevuelosinvocados", connection);
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                // URL de la API
+                string apiUrl = "http://www.apiswagger.somee.com/api/vuelos/getvuelos";
 
-                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                // Realizando la solicitud GET
+                var response = await _httpClient.GetStringAsync(apiUrl);
 
-                    while (await reader.ReadAsync())
-                    {
-                        VueloViewModel vuelo = new VueloViewModel
-                        {
-                            CodigoVuelo = reader["codigoVuelo"].ToString(),
-                            FechaSalida = reader["fechaSalida"] != DBNull.Value ? Convert.ToDateTime(reader["fechaSalida"]) : (DateTime?)null,
-                            HoraSalida = reader["horaSalida"].ToString(),
-                            FechaLlegada = reader["fechaLlegada"] != DBNull.Value ? Convert.ToDateTime(reader["fechaLlegada"]) : (DateTime?)null,
-                            HoraLlegada = reader["horaLlegada"].ToString(),
-                            DuracionHoras = reader["duracionHoras"] != DBNull.Value ? Convert.ToDouble(reader["duracionHoras"]) : 0,
-                            DuracionMinutos = reader["duracionMinutos"] != DBNull.Value ? Convert.ToDouble(reader["duracionMinutos"]) : 0,
-                            EstadoVueloFinal = reader["estadoVueloFinal"].ToString(),
-                            AeropuertoOrigen = reader["aeropuertoOrigen"].ToString(),
-                            AeropuertoDestino = reader["aeropuertoDestino"].ToString(),
-                            AeronaveModelo = reader["aeronaveModelo"].ToString(),
-                            AeronaveCapacidad = reader["aeronaveCapacidad"] != DBNull.Value ? Convert.ToInt32(reader["aeronaveCapacidad"]) : 0,
-                            EstadoVuelo = reader["estadoVuelo"].ToString(),
-                            TipoViaje = reader["tipoviaje"].ToString(),
-                            Clase = reader["clase"].ToString(),
-                            Beneficio = reader["beneficio"].ToString(),
-                            PrecioUSD = reader["preciousd"] != DBNull.Value ? Convert.ToDouble(reader["preciousd"]) : 0,
-                            PrecioPEN = reader["preciopen"] != DBNull.Value ? Convert.ToDouble(reader["preciopen"]) : 0,
-                            CiudadOrigen = reader["ciudadOrigen"].ToString(),
-                            CiudadDestino = reader["ciudadDestino"].ToString()
-                        };
-
-                        vuelos.Add(vuelo);
-                    }
-
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    // Manejo de errores
-                    Console.WriteLine("Error: " + ex.Message);
-                }
+                // Deserializamos la respuesta JSON
+                vuelos = JsonConvert.DeserializeObject<List<VueloAPI>>(response);
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Console.WriteLine("Error al consumir la API: " + ex.Message);
             }
 
             return vuelos;
         }
+    }
+
+    // Modelo para los datos que se reciben de la API
+    public class VueloAPI
+    {
+        public string CodigoVuelo { get; set; }
+        public DateTime? FechaSalida { get; set; }
+        public string HoraSalida { get; set; }
+        public DateTime? FechaLlegada { get; set; }
+        public string HoraLlegada { get; set; }
+        public string EstadoVuelo { get; set; }
+        public string Aerolinea { get; set; }
+        public double PrecioUSD { get; set; }
+        public double PrecioPEN { get; set; }
+
+        // Nuevas propiedades para los datos del aeropuerto de origen
+        public string AeropuertoOrigen { get; set; }
+        public string CiudadOrigen { get; set; }
+        public string PaisOrigen { get; set; }
     }
 }

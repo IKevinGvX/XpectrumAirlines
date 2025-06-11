@@ -25,4 +25,5 @@
     // Nuevas propiedades que podrían faltar según el contexto proporcionado:
     public string NombreUsuario { get; set; }  // Nombre del usuario que ha reservado el vuelo
     public string DiaSemana { get; set; }      // Día de la semana del vuelo (por ejemplo: "Sunday")
+    public string Aerolinea { get; internal set; }
 }
