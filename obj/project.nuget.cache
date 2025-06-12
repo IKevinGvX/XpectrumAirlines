@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "P8ajqIZWbno=",
+  "dgSpecHash": "9Ive6Qb33Mg=",
   "success": true,
   "projectFilePath": "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\Xpectrum-Structure.csproj",
   "expectedPackageFiles": [
@@ -82,9 +82,9 @@
     "C:\\Users\\PC - OS\\.nuget\\packages\\system.text.json\\9.0.5\\system.text.json.9.0.5.nupkg.sha512",
     "C:\\Users\\PC - OS\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\PC - OS\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\PC - OS\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.5\\microsoft.aspnetcore.app.runtime.win-x64.9.0.5.nupkg.sha512",
-    "C:\\Users\\PC - OS\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.5\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.5.nupkg.sha512",
-    "C:\\Users\\PC - OS\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.5\\microsoft.netcore.app.runtime.win-x64.9.0.5.nupkg.sha512"
+    "C:\\Users\\PC - OS\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.6\\microsoft.aspnetcore.app.runtime.win-x64.9.0.6.nupkg.sha512",
+    "C:\\Users\\PC - OS\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.6\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.6.nupkg.sha512",
+    "C:\\Users\\PC - OS\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.6\\microsoft.netcore.app.runtime.win-x64.9.0.6.nupkg.sha512"
   ],
   "logs": []
 }

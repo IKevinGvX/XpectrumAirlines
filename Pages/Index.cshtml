@@ -416,7 +416,36 @@
         
         
     }
+    .btn-download {
+        background-color: #2c374d;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
+    .btn-download:hover {
+        background-color: #eee5d0;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30, 64, 175, 0.6);
+    }
+
+    .btn-download:focus {
+        outline: none;
+    }
+
+    .qr-container {
+        text-align: center;
+    }
+
+    .qr-image {
+        width: 150px; /* Ajustar tamaño del QR */
+        height: 150px;
+        border-radius: 10px;
+    }
         .imagen-derecha img {
            
             width: 40%;
@@ -447,6 +476,7 @@
         </div>
     </div>
 </section>
+
 <!-- Main Content -->
 <main class="main" id="flights-section">
     <div class="container">
@@ -476,7 +506,7 @@
                         {
                             <tr>
                                 <td>@vuelo.CodigoVuelo</td>
-                                <td>@(vuelo.FechaSalida.HasValue ? vuelo.FechaSalida.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                                <td>@(vuelo.FechaSalida.HasValue? vuelo.FechaSalida.Value.ToString("dd/MM/yyyy") : "N/A")</td>
                                 <td>@vuelo.HoraSalida</td>
                                 <td>@vuelo.FechaLlegada</td>
                                 <td>@vuelo.HoraLlegada</td>
@@ -520,61 +550,54 @@
         </div>
     </div>
 </main>
-
-<!-- Scripts -->
+<!-- Carga del script de QRCode.js -->
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="~/js/tablaestadistica.js"></script>
 
 <script>
-    // Apply dynamic colors to status based on the flight status
-    function changeStateColor() {
-        const statusElements = document.querySelectorAll('.status');
-        statusElements.forEach(element => {
-            const statusText = element.textContent.toLowerCase(); // Get the flight status text
-            if (statusText.includes('retrasa')) {
-                element.classList.add('status-delayed');
-                element.classList.remove('status-on-time');
-            } else if (statusText.includes('cancel')) {
-                element.classList.add('status-cancelled');
-                element.classList.remove('status-on-time');
-            } else {
-                element.classList.add('status-on-time'); // Default to 'on-time' if no status
-                element.classList.remove('status-delayed', 'status-cancelled');
-            }
-        });
-    }
-
-    // Initialize the page with dynamic state colors
-    window.onload = function() {
-        changeStateColor(); // Apply the status colors when the page loads
-        generateQRs(); // Generate QR codes for each flight
-    };
-
-    // Generate QR Code for each row
-    function generateQRs() {
-        const vuelos = @Html.Raw(Json.Serialize(Model.Vuelos)); // Obtener los datos de los vuelos
+       function generateQRs(vuelos) {
+        console.log('Generando códigos QR...');
 
         vuelos.forEach(vuelo => {
-            const qrCodeContainer = document.getElementById('qrcode-' + vuelo.CodigoVuelo); // Seleccionar el contenedor del QR
+            const qrCodeContainer = document.getElementById('qrcode-' + vuelo.codigoVuelo); // Seleccionar el contenedor del QR
+            if (!qrCodeContainer) {
+                console.error('No se encontró el contenedor para el vuelo con código: ' + vuelo.codigoVuelo);
+                return; // Si no se encuentra el contenedor, no intentamos generar el QR
+            }
+
+            // Verificación de los datos del vuelo
+            console.log(vuelo); // Muestra el objeto vuelo para asegurar que contiene los datos correctos
+
+            const fechaSalida = vuelo.FechaSalida ? new Date(vuelo.FechaSalida).toLocaleDateString() : 'Fecha no disponible';
+            const horaSalida = vuelo.HoraSalida || 'Hora no disponible';
+            const fechaLlegada = vuelo.FechaLlegada ? new Date(vuelo.FechaLlegada).toLocaleDateString() : 'Fecha no disponible';
+            const horaLlegada = vuelo.HoraLlegada || 'Hora no disponible';
+            const aeropuertoOrigen = vuelo.AeropuertoOrigen || 'Aeropuerto no disponible';
+            const ciudadOrigen = vuelo.CiudadOrigen || 'Ciudad no disponible';
+            const paisOrigen = vuelo.PaisOrigen || 'País no disponible';
+
+            // Creamos el contenido del QR con los datos del vuelo
             const qrData = `
-                Código de Vuelo: ${vuelo.CodigoVuelo}\n
-                Destino: ${vuelo.PaisOrigen} - ${vuelo.AeropuertoOrigen}\n
-                Fecha Llegada: ${vuelo.FechaLlegada ? new Date(vuelo.FechaLlegada).toLocaleDateString() : 'N/A'}\n
-                Hora Llegada: ${vuelo.HoraLlegada}
-            `; // Datos del vuelo que se incluirán en el QR
+                Código de Vuelo: ${vuelo.codigoVuelo}\n
+                Fecha de Salida: ${fechaSalida} ${horaSalida}\n
+                Fecha de Llegada: ${fechaLlegada} ${horaLlegada}\n
+                Origen: ${aeropuertoOrigen}, ${ciudadOrigen} - ${paisOrigen}
+            `;
 
             // Generar el QR Code y mostrarlo en la columna "Visualizar QR"
             QRCode.toDataURL(qrData, function (error, url) {
                 if (error) {
-                    console.error("Error generando el QR para el vuelo " + vuelo.CodigoVuelo, error);
+                    console.error("Error generando el QR para el vuelo " + vuelo.codigoVuelo, error);
+                } else {
+                    console.log('QR generado correctamente para el vuelo ' + vuelo.codigoVuelo); // Confirmación
+                    qrCodeContainer.innerHTML = `
+                        <img src="${url}" alt="QR de ${vuelo.codigoVuelo}" class="qr-image" />
+                    `; // Mostrar imagen del QR en la tabla
                 }
-                qrCodeContainer.innerHTML = `
-                    <img src="${url}" alt="QR de ${vuelo.CodigoVuelo}" class="qr-image"/>
-                `; // Mostrar imagen del QR en la tabla
             });
         });
     }
 
-    // Función para descargar el QR Code
     function downloadQR(codigoVuelo) {
         const qrCodeContainer = document.getElementById('qrcode-' + codigoVuelo);
         const img = qrCodeContainer.querySelector('img'); // Selecciona la imagen generada
@@ -585,44 +608,11 @@
             link.click();
         }
     }
+
+    window.onload = function() {
+        fetchVuelos(); // Llamamos a la función para obtener los vuelos al cargar la página
+    };
 </script>
-
-<!-- Styling for buttons -->
-<style>
-    .btn-download {
-        background-color: #2c374d;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        font-size: 0.875rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-        .btn-download:hover {
-            background-color: #eee5d0;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.6);
-        }
-
-        .btn-download:focus {
-            outline: none;
-        }
-
-    .qr-container {
-        text-align: center;
-    }
-
-    .qr-image {
-        width: 150px; /* Ajustar tamaño del QR */
-        height: 150px;
-        border-radius: 10px;
-    }
-</style>
-
-</script>
-
 
         <div class="actions">
             <button class="action-btn" onclick="verVuelos()">Ver Vuelos</button>
