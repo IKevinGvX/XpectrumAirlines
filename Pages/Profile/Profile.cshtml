@@ -1,0 +1,167 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Profile.ProfileModel
+
+@{
+    ViewData["Title"] = "Mi Cuenta";
+    Layout = null;
+}
+
+<head>
+    <!-- Agregar el archivo CSS -->
+    <link href="~/css/profile.css" rel="stylesheet" type="text/css">
+
+    <!-- Cargar Bootstrap desde CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Agregar SweetAlert2 para notificaciones -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<div class="container my-5">
+    <h2 class="text-center">@ViewData["Title"]</h2>
+
+    <!-- Panel de perfil -->
+    <div class="card shadow-lg">
+        <div class="card-header text-white bg-primary">
+            <h5 class="card-title mb-0">Detalles de la Cuenta</h5>
+        </div>
+        <div class="card-body">
+
+            <!-- Mostrar mensajes de error globales -->
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+
+            <!-- Formulario -->
+            <form method="post" class="needs-validation" novalidate>
+                <!-- Errores globales de validación -->
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+                <!-- Nombre -->
+                <div class="mb-3">
+                    <label for="Nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="Nombre" name="Nombre" value="@Model.UserProfile?.Nombre" required />
+                    <div class="invalid-feedback">
+                        Por favor, ingresa un nombre válido.
+                    </div>
+                </div>
+
+                <!-- Email (solo lectura) -->
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="Email" name="Email" value="@Model.UserProfile.Email" readonly />
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-3">
+                    <label for="Telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="Telefono" name="Telefono" value="@Model.UserProfile.Telefono" required />
+                    <div class="invalid-feedback">
+                        Por favor, ingresa un teléfono válido.
+                    </div>
+                </div>
+
+                <!-- Dirección -->
+                <div class="mb-3">
+                    <label for="Direccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="Direccion" name="Direccion" value="@Model.UserProfile.Direccion" required />
+                    <div class="invalid-feedback">
+                        Por favor, ingresa una dirección válida.
+                    </div>
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="mb-3">
+                    <label for="FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" id="FechaNacimiento" name="FechaNacimiento" value="@Model.UserProfile.FechaNacimiento?.ToString("yyyy-MM-dd")" required />
+                    <div class="invalid-feedback">
+                        Por favor, ingresa una fecha de nacimiento válida.
+                    </div>
+                </div>
+
+                <!-- Tipo de Usuario -->
+                <div class="mb-3">
+                    <label for="TipoUsuario" class="form-label">Tipo de Usuario</label>
+                    <input type="text" class="form-control" id="TipoUsuario" name="TipoUsuario" value="@Model.UserProfile.TipoUsuario" required />
+                    <div class="invalid-feedback">
+                        Por favor, ingresa el tipo de usuario.
+                    </div>
+                </div>
+
+                <!-- Estado -->
+                <div class="mb-3">
+                    <label for="Estado" class="form-label">Estado</label>
+                    <input type="text" class="form-control" id="Estado" name="Estado" value="@Model.UserProfile.Estado" required />
+                    <div class="invalid-feedback">
+                        Por favor, ingresa un estado válido.
+                    </div>
+                </div>
+
+                <!-- Preferencias de Notificación -->
+                <div class="mb-3">
+                    <label for="PreferenciasNotificaciones" class="form-label">Preferencias de Notificación</label>
+                    <input type="text" class="form-control" id="PreferenciasNotificaciones" name="PreferenciasNotificaciones" value="@Model.UserProfile.PreferenciasNotificaciones" required />
+                    <div class="invalid-feedback">
+                        Por favor, ingresa las preferencias de notificación.
+                    </div>
+                </div>
+
+                <!-- Botón de actualizar -->
+                <button type="submit" class="btn btn-primary w-100 py-2 mt-3">Actualizar</button>
+
+                <!-- Botón de redirección -->
+                <a href="/Index" class="btn btn-outline-secondary w-100 py-2 mt-3">Volver al Inicio</a>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />
+<!-- Agregar SweetAlert2 Script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    // Validación del formulario con JavaScript
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })();
+
+    // Mostrar mensajes de SweetAlert2
+    @if (TempData["ErrorMessage"] != null)
+    {
+            <text>
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: '@TempData["ErrorMessage"]',
+                    showConfirmButton: true
+                });
+            </text>
+    }
+    else if (TempData["SuccessMessage"] != null)
+    {
+            <text>
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Felicidades!',
+                    text: '@TempData["SuccessMessage"]',
+                    showConfirmButton: true
+                });
+            </text>
+    }
+</script>

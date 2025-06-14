@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xpectrum_Structure.Services;
 
@@ -23,6 +25,10 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();            // Permite todas las cabeceras
     });
 });
+builder.Services.AddRazorPages().AddMvcOptions(options =>
+{
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
 
 // Configuración de la base de datos
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -30,6 +36,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Registrar otros servicios personalizados
 builder.Services.AddScoped<FlightService>();
+
+// Configuración de la autenticación basada en cookies (si la estás utilizando)
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login"; // Página de login
+        options.LogoutPath = "/Account/Logout"; // Página de logout
+        options.Cookie.HttpOnly = true;  // Asegura que la cookie no sea accesible desde JavaScript
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Asegura que la cookie solo se envíe por HTTPS
+        options.SlidingExpiration = true; // Permite que la sesión se renueve
+    });
 
 var app = builder.Build();
 
@@ -48,8 +65,9 @@ app.UseCors("PermitirTodo");
 
 app.UseRouting();
 
-// app.UseAuthentication();
-// app.UseAuthorization();
+// Agregar autenticación y autorización
+app.UseAuthentication(); // Se coloca aquí, antes de UseAuthorization
+app.UseAuthorization();  // Se coloca aquí, después de UseAuthentication
 
 app.MapRazorPages();
 

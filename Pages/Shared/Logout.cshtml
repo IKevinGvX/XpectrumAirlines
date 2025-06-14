@@ -1,0 +1,58 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Shared.LogoutModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerrar sesión</title>
+    <link href="~/css/logout.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff4b5c, #ff6a00);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .logout-message {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-message">
+        <h2>¡Hasta luego!</h2>
+        <p>Estamos cerrando tu sesión. Serás redirigido a la página principal en breve.</p>
+    </div>
+
+    <script>
+        // Redirige automáticamente a la página de inicio después de 2 segundos
+        setTimeout(function() {
+            window.location.href = '/Index';  // Redirige a la página principal
+        }, 2000); // 2000 ms = 2 segundos
+    </script>
+</body>
+</html>

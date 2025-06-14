@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Xpectrum-Structure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3e674b0165e45c36400f6a18800b6081282cf385")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b3bbca51df5439baa4e2f4c508ca937ed3a5701")]
 [assembly: System.Reflection.AssemblyProductAttribute("Xpectrum-Structure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Xpectrum-Structure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

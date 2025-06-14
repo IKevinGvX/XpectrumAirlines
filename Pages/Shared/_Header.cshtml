@@ -1,6 +1,37 @@
-﻿@* Navbar Partial Mejorado *@
-<link href="~/css/header.css" rel="stylesheet" />
+﻿<link href="~/css/header.css" rel="stylesheet" />
+<style>
+    /* Estilo para el avatar y el panel de usuario */
+    .user-avatar {
+        width: 1.5em; /* Ajusta el tamaño según el tamaño del texto */
+        height: 1.5em;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover; /* Para asegurarse de que la imagen se ajuste dentro del contenedor circular */
+    }
 
+    .nav-item.dropdown .dropdown-menu {
+        background-color: #333;
+        border-radius: 5px;
+    }
+
+    .dropdown-item {
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+    }
+
+        .dropdown-item:hover {
+            background-color: #444;
+        }
+
+    .dropdown-toggle {
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+    </style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    
 <nav class="navbar navbar-expand-lg navbar-light bg-navbar fixed-top shadow-sm">
     <div class="container">
         <span class="brand-text">Xpectrum</span>
@@ -9,24 +40,40 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-           <div class="collapse navbar-collapse" id="navbarMain">
+        <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item">
                     <a class="nav-link active" asp-page="/Index" aria-current="page">Inicio</a>
                 </li>
 
+                <!-- Ofertas Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="vuelosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Vuelos
+                    <a class="nav-link dropdown-toggle" href="#" id="ofertasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ofertas
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="vuelosDropdown">
-                        <li>
-                            <a class="dropdown-item" asp-page="/Promotions/VueloDetails" asp-route-codigoVuelo="AV1001">Ver detalles del vuelo</a>
-                        </li>                        <li><a class="dropdown-item" asp-page="/Bookings/MyReservations">Mis reservas</a></li>
-                        <li><a class="dropdown-item" asp-page="/Flights/Status">Estado del vuelo</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ofertasDropdown">
+                        <li><a class="dropdown-item" href="#">Destinos</a></li>
+                        <li><a class="dropdown-item" href="#">Paquetes turísticos</a></li>
+                        <li><a class="dropdown-item" href="#">Alojamientos</a></li>
+                        <li><a class="dropdown-item" href="#">Alquiler de autos</a></li>
+                        <li><a class="dropdown-item" href="#">Asistencia en viaje</a></li>
+                        <li><a class="dropdown-item" href="#">Más servicios</a></li>
                     </ul>
                 </li>
 
+                <!-- Mis Viajes Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="misViajesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Mis Viajes
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="misViajesDropdown">
+                        <li><a class="dropdown-item" asp-page="/Bookings/MyReservations">Administración de viajes</a></li>
+                        <li><a class="dropdown-item" asp-page="/CheckIn">Check-In</a></li>
+                        <li><a class="dropdown-item" asp-page="/Flights/Status">Consulta tus vuelos</a></li>
+                    </ul>
+                </li>
+
+                <!-- Servicios Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="serviciosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Servicios
@@ -39,18 +86,33 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" asp-page="/AboutUs">Sobre nosotros</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" asp-page="/Contact">Contacto</a>
                 </li>
 
-                <li class="nav-item ms-lg-3">
-                    <a class="btn btn-primary btn-sm px-4 fw-semibold" asp-page="/Account/Login" role="button" aria-label="Iniciar sesión">Iniciar sesión</a>
-                </li>
-                <li class="nav-item ms-lg-2">
-                    <a class="btn btn-outline-primary btn-sm px-4 fw-semibold" asp-page="/Account/Register" role="button" aria-label="Registrarse">Registrarse</a>
-                </li>
+                @if (User.Identity.IsAuthenticated)  // Verificar si el usuario está autenticado
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle user-avatar"></i> <!-- Muñequito de usuario -->
+                            <span>@TempData["nombre"]</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/Profile/Profile">Ver perfil</a></li>
+                            <li><a class="dropdown-item" href="/Profile/Configuracion">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/Shared/Logout">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary btn-sm px-4 fw-semibold" asp-page="/Account/Login" role="button" aria-label="Iniciar sesión">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-outline-primary btn-sm px-4 fw-semibold" asp-page="/Account/Register" role="button" aria-label="Registrarse">Registrarse</a>
+                    </li>
+                }
+
             </ul>
         </div>
     </div>

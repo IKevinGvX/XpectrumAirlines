@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Xpectrum_Structure.Pages
 {
@@ -13,6 +14,26 @@ namespace Xpectrum_Structure.Pages
 
         // Cambiamos el tipo de Vuelos para que sea directamente List<VueloAPI>
         public List<VueloAPI> Vuelos { get; set; } = new List<VueloAPI>();
+        public string GetGravatarUrl(string email)
+        {
+            // Asegúrate de que el correo esté en minúsculas y sin espacios.
+            string cleanedEmail = email.Trim().ToLower();
+            string hash = CalculateMD5Hash(cleanedEmail);  // Calcula el hash MD5 del correo
+
+            // URL de Gravatar
+            return $"https://www.gravatar.com/avatar/{hash}?d=identicon&s=200";
+        }
+
+        // Método para calcular el hash MD5
+        private string CalculateMD5Hash(string input)
+        {
+            using (var md5 = System.Security.Cryptography.MD5.Create())
+            {
+                var hashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+                var hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+                return hash;
+            }
+        }
 
         // Constructor
         public IndexModel(HttpClient httpClient)

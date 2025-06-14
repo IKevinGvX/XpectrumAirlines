@@ -1,0 +1,29 @@
+﻿/* Animación de rebote */
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Título del error */
+h2 {
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
+    animation: text-blink 0.5s step-end infinite alternate;
+}
+
+/* Efecto de parpadeo en el texto */
+@keyframes text-blink {
+    0% {
+        color: #ff2d00;
+    }
+
+    100% {
+        color: #ffffff;
+    }
+}

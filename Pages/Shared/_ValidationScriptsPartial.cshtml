@@ -1,0 +1,35 @@
+﻿@section Scripts {
+    <!-- Cargar jQuery y validación -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-o7O+gYZF5wD9fV7W9K+41dx/Ju02Wv+QsL+QhOUwSfmfyfVgFTuZFCkpP0WoopFh" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha384-jQAnT0pae/uL7k70vb5rdp3ijWyZlLkbVqA/ICjTg3vF5m5zLJ24HYqFqOdI3/4v" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha384-Kg43P+gqruTkW7U1pVOk7lPQh2WRGE2zEXcVpU+L9ztjsRUZXdxEu6zqt35zY3s0" crossorigin="anonymous"></script>
+
+    <!-- Cargar SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Ejecutar SweetAlert2 -->
+    <script>
+        @if (TempData["ErrorMessage"] != null)
+        {
+                    <text>
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Error!',
+                            text: '@TempData["ErrorMessage"]',
+                            showConfirmButton: true
+                        });
+                    </text>
+        }
+        else if (TempData["SuccessMessage"] != null)
+        {
+                    <text>
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Felicidades!',
+                            text: '@TempData["SuccessMessage"]',
+                            showConfirmButton: true
+                        });
+                    </text>
+        }
+    </script>
+}

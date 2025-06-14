@@ -2,10 +2,14 @@ wwwroot\css\cuerpo.css
 wwwroot\css\estiloboletos.css
 wwwroot\css\footer.css
 wwwroot\css\header.css
+wwwroot\css\logout.css
+wwwroot\css\profile.css
 wwwroot\favicon.ico
 wwwroot\img\Font.png
 wwwroot\img\loggo.jpg
+wwwroot\img\login.css
 wwwroot\img\newyork.jpg
+wwwroot\img\status.gif
 wwwroot\js\scroll.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -71,7 +75,7 @@ wwwroot\lib\jquery\LICENSE.txt
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\cuerpo.css
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\estiloboletos.css
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\footer.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\header.css
+C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\logout.css
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\favicon.ico
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\js\scroll.js
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\js\site.js
@@ -134,3 +138,6 @@ C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.sl
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\img\login.css
+C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\profile.css
+C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\header.css

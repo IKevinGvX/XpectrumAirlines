@@ -453,9 +453,94 @@
             border-radius:10%;
         }
 
+    .filters {
+        margin-bottom: 1rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+        .filters label {
+            color: var(--text);
+        }
+
+        .filters select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            width: 200px;
+        }
+    /* Agregar transición de hover en los botones de acción */
+    .action-btn {
+        transition: all 0.3s ease-in-out;
+    }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    /* Mejorar la visibilidad de los botones de descarga de QR */
+    .btn-download {
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .btn-download:hover {
+            background-color: #64ffda;
+            transform: translateY(-3px);
+        }
+
+    .footer {
+        padding: 3rem 0;
+        background-color: var(--background);
+        color: var(--text-secondary);
+        text-align: center;
+        border-top: 1px solid var(--border);
+        margin-top: 3rem;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1.5rem;
+    }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .footer-links a:hover {
+                color: var(--accent);
+            }
+
+    .filters {
+        margin-bottom: 1rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+        .filters label {
+            color: var(--text);
+        }
+
+        .filters input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            width: 150px;
+        }
+
 </style>
 
-<!-- Header -->
 <!-- Hero Section -->
 <section class="hero">
     <div class="container">
@@ -477,6 +562,27 @@
     </div>
 </section>
 
+<!-- Filtros de Origen y Destino -->
+<div class="filters">
+    <label for="filter-origin">Origen</label>
+    <select id="filter-origin" onchange="filterVuelos()">
+        <option value="">Selecciona un Origen</option>
+        @foreach (var vuelo in Model.Vuelos)
+        {
+            <option value="@vuelo.AeropuertoOrigen">@vuelo.AeropuertoOrigen</option>
+        }
+    </select>
+
+    <label for="filter-destination">Destino</label>
+    <select id="filter-destination" onchange="filterVuelos()">
+        <option value="">Selecciona un Destino</option>
+        @foreach (var vuelo in Model.Vuelos)
+        {
+            <option value="@vuelo.PaisOrigen">@vuelo.PaisOrigen</option>
+        }
+    </select>
+</div>
+
 <!-- Main Content -->
 <main class="main" id="flights-section">
     <div class="container">
@@ -495,8 +601,6 @@
                         <th>Origen</th>
                         <th>Destino</th>
                         <th>Estado</th>
-                        <th>Visualizar QR</th> <!-- Nueva columna para mostrar QR -->
-                        <th>Descargar QR</th>  <!-- Columna para descargar el QR -->
                     </tr>
                 </thead>
                 <tbody>
@@ -504,7 +608,15 @@
                     {
                         foreach (var vuelo in Model.Vuelos)
                         {
-                            <tr>
+                            <tr data-codigo-vuelo="@vuelo.CodigoVuelo"
+                                data-fecha-salida="@vuelo.FechaSalida"
+                                data-hora-salida="@vuelo.HoraSalida"
+                                data-fecha-llegada="@vuelo.FechaLlegada"
+                                data-hora-llegada="@vuelo.HoraLlegada"
+                                data-aeropuerto-origen="@vuelo.AeropuertoOrigen"
+                                data-ciudad-origen="@vuelo.CiudadOrigen"
+                                data-pais-origen="@vuelo.PaisOrigen"
+                                data-estado="@vuelo.EstadoVuelo">
                                 <td>@vuelo.CodigoVuelo</td>
                                 <td>@(vuelo.FechaSalida.HasValue? vuelo.FechaSalida.Value.ToString("dd/MM/yyyy") : "N/A")</td>
                                 <td>@vuelo.HoraSalida</td>
@@ -526,16 +638,6 @@
                                     }
                                     <span class="status @statusClass">@vuelo.EstadoVuelo</span>
                                 </td>
-                                <td>
-                                    <!-- Contenedor para el QR Code -->
-                                    <div id="qrcode-@vuelo.CodigoVuelo" class="qr-container">
-                                        <!-- El QR se generará aquí -->
-                                    </div>
-                                </td>
-                                <td>
-                                    <!-- Botón para descargar el QR -->
-                                    <button class="btn-download" onclick="downloadQR('@vuelo.CodigoVuelo')">Descargar QR</button>
-                                </td>
                             </tr>
                         }
                     }
@@ -550,81 +652,44 @@
         </div>
     </div>
 </main>
-<!-- Carga del script de QRCode.js -->
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-<script src="~/js/tablaestadistica.js"></script>
-
 <script>
-       function generateQRs(vuelos) {
-        console.log('Generando códigos QR...');
 
-        vuelos.forEach(vuelo => {
-            const qrCodeContainer = document.getElementById('qrcode-' + vuelo.codigoVuelo); // Seleccionar el contenedor del QR
-            if (!qrCodeContainer) {
-                console.error('No se encontró el contenedor para el vuelo con código: ' + vuelo.codigoVuelo);
-                return; // Si no se encuentra el contenedor, no intentamos generar el QR
+    // Filter flights based on selected Origin and Destination
+    function filterVuelos() {
+        const originFilter = document.getElementById('filter-origin').value.toLowerCase();
+        const destinationFilter = document.getElementById('filter-destination').value.toLowerCase();
+        const vuelos = document.querySelectorAll('tr[data-codigo-vuelo]');
+
+        vuelos.forEach(vueloRow => {
+            const aeropuertoOrigen = vueloRow.getAttribute('data-aeropuerto-origen').toLowerCase();
+            const paisOrigen = vueloRow.getAttribute('data-pais-origen').toLowerCase();
+
+            const matchesOrigin = !originFilter || aeropuertoOrigen.includes(originFilter);
+            const matchesDestination = !destinationFilter || paisOrigen.includes(destinationFilter);
+
+            if (matchesOrigin && matchesDestination) {
+                vueloRow.style.display = '';
+            } else {
+                vueloRow.style.display = 'none';
             }
-
-            // Verificación de los datos del vuelo
-            console.log(vuelo); // Muestra el objeto vuelo para asegurar que contiene los datos correctos
-
-            const fechaSalida = vuelo.FechaSalida ? new Date(vuelo.FechaSalida).toLocaleDateString() : 'Fecha no disponible';
-            const horaSalida = vuelo.HoraSalida || 'Hora no disponible';
-            const fechaLlegada = vuelo.FechaLlegada ? new Date(vuelo.FechaLlegada).toLocaleDateString() : 'Fecha no disponible';
-            const horaLlegada = vuelo.HoraLlegada || 'Hora no disponible';
-            const aeropuertoOrigen = vuelo.AeropuertoOrigen || 'Aeropuerto no disponible';
-            const ciudadOrigen = vuelo.CiudadOrigen || 'Ciudad no disponible';
-            const paisOrigen = vuelo.PaisOrigen || 'País no disponible';
-
-            // Creamos el contenido del QR con los datos del vuelo
-            const qrData = `
-                Código de Vuelo: ${vuelo.codigoVuelo}\n
-                Fecha de Salida: ${fechaSalida} ${horaSalida}\n
-                Fecha de Llegada: ${fechaLlegada} ${horaLlegada}\n
-                Origen: ${aeropuertoOrigen}, ${ciudadOrigen} - ${paisOrigen}
-            `;
-
-            // Generar el QR Code y mostrarlo en la columna "Visualizar QR"
-            QRCode.toDataURL(qrData, function (error, url) {
-                if (error) {
-                    console.error("Error generando el QR para el vuelo " + vuelo.codigoVuelo, error);
-                } else {
-                    console.log('QR generado correctamente para el vuelo ' + vuelo.codigoVuelo); // Confirmación
-                    qrCodeContainer.innerHTML = `
-                        <img src="${url}" alt="QR de ${vuelo.codigoVuelo}" class="qr-image" />
-                    `; // Mostrar imagen del QR en la tabla
-                }
-            });
         });
     }
 
-    function downloadQR(codigoVuelo) {
-        const qrCodeContainer = document.getElementById('qrcode-' + codigoVuelo);
-        const img = qrCodeContainer.querySelector('img'); // Selecciona la imagen generada
-        if (img) {
-            const link = document.createElement('a');
-            link.href = img.src;
-            link.download = `${codigoVuelo}_QR.png`; // Nombre del archivo descargado
-            link.click();
-        }
-    }
-
+    // Initialize QR generation on page load
     window.onload = function() {
-        fetchVuelos(); // Llamamos a la función para obtener los vuelos al cargar la página
+        generateQRs();
     };
 </script>
 
-        <div class="actions">
-            <button class="action-btn" onclick="verVuelos()">Ver Vuelos</button>
-            <button class="action-btn" onclick="verPromociones()">Ver Promociones</button>
-            <button class="action-btn" onclick="verHistorial()">Ver Historial</button>
-        </div>
-    </div>
-</main>
+<!-- Actions -->
+<div class="actions">
+    <button class="action-btn" onclick="verVuelos()">Ver Vuelos</button>
+    <button class="action-btn" onclick="verPromociones()">Ver Promociones</button>
+    <button class="action-btn" onclick="verHistorial()">Ver Historial</button>
+</div>
 
 <!-- Footer -->
-<footer class="footer">
-</footer>
+<footer class="footer"></footer>
 
 <script>
     function verVuelos() {
@@ -645,3 +710,15 @@
         });
     }
 </script>
+
+<!-- Footer con enlaces adicionales -->
+<footer class="footer">
+    <div class="footer-text">
+        <p>&copy; 2025 Xpectrum Airlines. Todos los derechos reservados.</p>
+    </div>
+    <div class="footer-links">
+        <a href="/about">Acerca de</a>
+        <a href="/terms">Términos de Servicio</a>
+        <a href="/contact">Contacto</a>
+    </div>
+</footer>
