@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Dapper;
 using System.Data;
 using Microsoft.Data.SqlClient;
-using BCrypt.Net; // Asegúrate de agregar esta librería
+using BCrypt.Net;
+using Microsoft.AspNetCore.Identity;
 
 namespace Xpectrum_Structure.Pages.Profile
 {
     public class ConfiguracionModel : PageModel
     {
+
         private readonly string _connectionString = "Server=xpectrum.mssql.somee.com;Database=xpectrum;User Id=KKevinyouman2004_SQLLogin_2;Password=Kevinyouman2004;TrustServerCertificate=True;Encrypt=True;MultipleActiveResultSets=True;Connection Timeout=30;";
 
         [BindProperty]
@@ -21,7 +23,7 @@ namespace Xpectrum_Structure.Pages.Profile
         public string ConfirmPassword { get; set; }
 
         // Acción para manejar el cambio de contraseña
-        public IActionResult OnPostChangePassword()
+        public async Task<IActionResult> OnPostChangePassword()
         {
             // Validar que la nueva contraseña y la confirmación sean iguales
             if (NewPassword != ConfirmPassword)
@@ -30,24 +32,34 @@ namespace Xpectrum_Structure.Pages.Profile
                 return RedirectToPage();
             }
 
-            // Suponemos que tenemos el usuarioId del usuario actual (esto generalmente vendría de la sesión o un token)
-            int userId = 1; // Reemplaza esto con la lógica real para obtener el usuario logueado
+            var nombre = User?.Identity?.Name;
 
-            // Hashear la nueva contraseña antes de almacenarla
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(NewPassword);
+            if (string.IsNullOrEmpty(nombre))
+            {
+                TempData["ErrorMessage"] = "No se ha podido obtener el nombre del usuario.";
+                return RedirectToPage("/Account/Login");
+            }
 
-            // Conexión a la base de datos y ejecución del procedimiento almacenado
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 db.Open();
 
-                // Ejecutar el procedimiento almacenado para cambiar la contraseña
-                var parameters = new { UsuarioId = userId, NewPassword = hashedPassword };
-                db.Execute("ChangePassword", parameters, commandType: CommandType.StoredProcedure);
-            }
+                var user = await db.QuerySingleOrDefaultAsync<ApplicationUser>("SELECT * FROM dbo.Usuarios WHERE nombre = @Nombre", new { Nombre = nombre });
 
-            TempData["SuccessMessage"] = "Contraseña actualizada exitosamente.";
-            return RedirectToPage();
+                if (user == null)
+                {
+                    TempData["ErrorMessage"] = "Usuario no encontrado.";
+                    return RedirectToPage("/Account/Login");
+                }
+
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(NewPassword);
+                var parameters = new { nombre = nombre, NewPassword = hashedPassword };
+
+                await db.ExecuteAsync("UPDATE dbo.Usuarios SET contra = @NewPassword WHERE nombre = @nombre", parameters);
+
+                TempData["SuccessMessage"] = "Contraseña actualizada exitosamente.";
+                return RedirectToPage("");
+            }
         }
     }
 }

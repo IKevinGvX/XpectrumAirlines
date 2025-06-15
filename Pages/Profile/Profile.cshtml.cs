@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
-using static QRCoder.PayloadGenerator;
 
 namespace Xpectrum_Structure.Pages.Profile
 {
@@ -22,37 +20,42 @@ namespace Xpectrum_Structure.Pages.Profile
                 return Page(); // Si hay errores de validación, regresa a la misma página
             }
 
-            // Actualizar los datos del usuario usando el nombre en lugar del usuarioId
+            var nombre = User?.Identity?.Name;  // Obtener el nombre del usuario autenticado
+
+            if (string.IsNullOrEmpty(nombre))
+            {
+                TempData["ErrorMessage"] = "No se ha podido obtener el nombre del usuario.";
+                return RedirectToPage("/Account/Login"); // Si no está autenticado, redirige al login
+            }
+
+            // Actualizar los datos del usuario usando el nombre
             using (var conn = new SqlConnection(_connectionString))
             {
                 await conn.OpenAsync();
-                var query = "UPDATE dbo.Usuarios SET nombre = @Nombre, telefono = @Telefono, direccion = @Direccion, " +
-                            "fechaNacimiento = @FechaNacimiento, tipoUsuario = @TipoUsuario, estado = @Estado, " +
-                            "preferenciasNotificaciones = @PreferenciasNotificaciones WHERE nombre = @Nombre"; // Usar 'nombre' en lugar de 'usuarioId'
+                var query = "UPDATE dbo.Usuarios SET telefono = @Telefono, direccion = @Direccion, " +
+                            "fechaNacimiento = @FechaNacimiento, preferenciasNotificaciones = @PreferenciasNotificaciones WHERE nombre = @Nombre"; // Usar 'nombre' en lugar de 'email'
 
                 var cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Nombre", updatedProfile.Nombre); // Usamos el 'Nombre' para identificar al usuario
+                cmd.Parameters.AddWithValue("@Nombre", nombre);  // Usamos el 'Nombre' para identificar al usuario
                 cmd.Parameters.AddWithValue("@Telefono", updatedProfile.Telefono);
                 cmd.Parameters.AddWithValue("@Direccion", updatedProfile.Direccion);
                 cmd.Parameters.AddWithValue("@FechaNacimiento", updatedProfile.FechaNacimiento);
-                cmd.Parameters.AddWithValue("@TipoUsuario", updatedProfile.TipoUsuario);
-                cmd.Parameters.AddWithValue("@Estado", updatedProfile.Estado);
                 cmd.Parameters.AddWithValue("@PreferenciasNotificaciones", updatedProfile.PreferenciasNotificaciones);
 
                 await cmd.ExecuteNonQueryAsync(); // Ejecuta la actualización
             }
 
+            TempData["SuccessMessage"] = "Perfil actualizado con éxito.";
             return RedirectToPage(); // Redirigir a la misma página con los datos actualizados
         }
 
-
-      
         public async Task<IActionResult> OnGetAsync()
         {
-            var nombre = User?.Identity?.Name;  // Obtener el email del usuario autenticado
+            var nombre = User?.Identity?.Name;  // Obtener el nombre del usuario autenticado
 
             if (string.IsNullOrEmpty(nombre))
             {
+                TempData["ErrorMessage"] = "No se ha podido obtener el nombre del usuario.";
                 return RedirectToPage("/Account/Login"); // Si no está autenticado, redirige al login
             }
 
@@ -60,10 +63,10 @@ namespace Xpectrum_Structure.Pages.Profile
             {
                 await conn.OpenAsync();
 
-                // Usamos email en lugar de nombre para obtener el perfil
-                var query = "SELECT * FROM dbo.Usuarios WHERE nombre = @nombre";
+                // Usamos nombre en lugar de email para obtener el perfil
+                var query = "SELECT * FROM dbo.Usuarios WHERE nombre = @Nombre";
                 var cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@nombre", nombre);  // Usamos el email del usuario autenticado
+                cmd.Parameters.AddWithValue("@Nombre", nombre);  // Usamos el nombre del usuario autenticado
 
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
@@ -77,10 +80,7 @@ namespace Xpectrum_Structure.Pages.Profile
                             Telefono = reader["telefono"]?.ToString(),
                             Direccion = reader["direccion"]?.ToString(),
                             FechaNacimiento = reader["fechaNacimiento"] as DateTime?,
-                            TipoUsuario = reader["tipoUsuario"]?.ToString(),
-                            Activo = reader["activo"] as bool?,
                             FechaRegistro = reader["fechaRegistro"] as DateTime?,
-                            Estado = reader["estado"]?.ToString(),
                             PreferenciasNotificaciones = reader["preferenciasNotificaciones"]?.ToString()
                         };
                     }
@@ -95,10 +95,8 @@ namespace Xpectrum_Structure.Pages.Profile
             return Page(); // Retorna la página con los datos cargados
         }
 
-
         public class Profile
         {
-
             public int UsuarioId { get; set; } // ID del usuario
 
             [Required]
@@ -117,20 +115,10 @@ namespace Xpectrum_Structure.Pages.Profile
 
             public DateTime? FechaNacimiento { get; set; } // Fecha de Nacimiento
 
-            [StringLength(50)]
-            public string TipoUsuario { get; set; } // Tipo de usuario
-
-            public bool? Activo { get; set; } // Estado de la cuenta
-
             public DateTime? FechaRegistro { get; set; } // Fecha de registro
-
-            [StringLength(20)]
-            public string Estado { get; set; } // Estado
 
             [StringLength(255)]
             public string PreferenciasNotificaciones { get; set; } // Preferencias de notificación
         }
-
     }
-
 }

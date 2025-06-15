@@ -14,9 +14,26 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
-<div class="container mx-auto p-6">
-    <h2 class="text-4xl font-semibold text-center text-gray-800 mb-8">Configuración de Seguridad</h2>
+<!-- Navbar -->
+<nav class="bg-blue-600 p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/Index" class="text-white text-2xl font-semibold">Xpectrum Airlines</a>
+        <div class="space-x-4">
+            <a href="/Configuracion" class="text-white hover:bg-blue-700 px-4 py-2 rounded-md">Configuración</a>
+            <a href="/Logout" class="text-white hover:bg-blue-700 px-4 py-2 rounded-md">Cerrar Sesión</a>
+        </div>
+    </div>
+</nav>
 
+<!-- Header -->
+<header class="bg-gray-100 py-10">
+    <div class="container mx-auto text-center">
+        <h1 class="text-3xl font-bold text-gray-800">Configuración de Seguridad</h1>
+        <p class="text-gray-600 mt-2">Aquí puedes actualizar tu configuración de seguridad.</p>
+    </div>
+</header>
+
+<div class="container mx-auto p-6">
     <!-- Mensajes de éxito o error -->
     @if (TempData["ErrorMessage"] != null)
     {
@@ -32,9 +49,9 @@
     }
 
     <!-- Formulario de cambio de contraseña -->
-    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto mb-6">
         <h3 class="text-2xl font-medium text-gray-700 mb-6">Cambiar Contraseña</h3>
-        <form method="post" asp-page-handler="ChangePassword" class="space-y-6">
+        <form method="post" asp-page-handler="ChangePassword" class="space-y-6" id="changePasswordForm">
             <div>
                 <label for="CurrentPassword" class="block text-sm font-medium text-gray-700">Contraseña Actual</label>
                 <input type="password" id="CurrentPassword" name="CurrentPassword" class="mt-2 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm" required />
@@ -53,6 +70,11 @@
             <button type="submit" class="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors">Actualizar Contraseña</button>
         </form>
     </div>
+
+    <!-- Botón de regreso -->
+    <div class="text-center">
+        <a href="javascript:history.back()" class="bg-gray-300 text-gray-800 hover:bg-gray-400 py-2 px-4 rounded-md">Regresar</a>
+    </div>
 </div>
 
 <!-- Scripts -->
@@ -61,32 +83,24 @@
     // Mostrar SweetAlert2 en caso de mensajes de error o éxito
     @if (TempData["ErrorMessage"] != null)
     {
-            <text>
-                Swal.fire({
-                    icon: 'error',
-                    title: '¡Error!',
-                    text: '@TempData["ErrorMessage"]',
-                    showConfirmButton: true
-                }).then(function() {
-                    // Redirigir después de que el usuario cierre la alerta de error
-                    window.location.href = '/Configuracion'; // O la página que desees redirigir en caso de error
-                });
-            </text>
+                <text>
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: '@TempData["ErrorMessage"]',
+                        showConfirmButton: true
+                    });
+                </text>
     }
     else if (TempData["SuccessMessage"] != null)
     {
-            <text>
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Felicidades!',
-                    text: '@TempData["SuccessMessage"]',
-                    showConfirmButton: true
-                }).then(function() {
-                    // Redirigir después de 5 segundos
-                    setTimeout(function() {
-                        window.location.href = '/Index';
-                    }, 3000); // 5 segundos
-                });
-            </text>
+                <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Felicidades!',
+                        text: '@TempData["SuccessMessage"]',
+                        showConfirmButton: true
+                    });
+                </text>
     }
 </script>
