@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model Xpectrum_Structure.Pages.Account.LoginModel
 @{
     Layout = null;
@@ -39,61 +39,103 @@
         }
 
         body {
+            margin: 0;
+            padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text);
+            background-color: #0a192f;
+            color: #e6f1ff;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-image: url('/img/status.gif');
             background-size: cover;
             background-position: center;
-            transition: background-color 0.3s ease;
+            background-attachment: fixed;
         }
 
         .login-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
             width: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .login-wrapper {
+            display: flex;
+            max-width: 50%;
+            width: 100%;
+            background: rgba(10, 25, 47);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px -15px rgba(2, 12, 27, 0.7);
+            border: 1px solid rgba(100, 255, 218, 0.1);
         }
 
         .welcome-panel {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 1rem;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 400px;
-            margin-bottom: 2rem;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            flex: 1;
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            color: var(--text);
+            background: linear-gradient(135deg, rgba(16, 42, 82, 0.8) 0%, rgba(10, 25, 47, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+
+        .welcome-panel h3 {
+            color: #64ffda;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1rem;
-            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.5rem;
             overflow: hidden;
-            margin: 0 auto;
+            margin: 0 auto 1.5rem;
+            padding: 3px;
         }
 
             .logo img {
                 width: 100%;
                 height: 100%;
+                border-radius: 10%;
                 object-fit: cover;
             }
 
         .login-form {
-            background-color: var(--card);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
+            flex: 1;
+            padding: 3rem 2.5rem;
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
             .login-form h1 {
@@ -115,25 +157,37 @@
 
             .form-group input {
                 width: 100%;
-                padding: 0.75rem;
+                padding: 0.875rem 1rem;
                 font-size: 1rem;
-                color: var(--text);
-                border: 1px solid var(--border);
-                border-radius: 4px;
-                background-color: var(--secondary);
-                transition: border-color 0.3s ease;
+                color: #e6f1ff;
+                border: 1px solid rgba(100, 255, 218, 0.2);
+                border-radius: 6px;
+                background-color: rgba(0, 0, 0, 0.2);
+                transition: all 0.3s ease;
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group input:focus {
+                outline: none;
+                border-color: #64ffda;
+                box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
             }
 
         .btn-submit {
             width: 100%;
             padding: 1rem;
-            background-color: var(--accent);
-            color: var(--primary);
+            background: #64b6ff;
+            color: #0a192f;
             border: none;
-            border-radius: 4px;
-            font-size: 1.2rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
             .btn-submit:hover {
@@ -141,29 +195,52 @@
             }
 
         .footer-links {
-            margin-top: 1rem;
-            font-size: 0.875rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            text-align: center;
         }
 
             .footer-links a {
-                color: var(--accent);
+                color: #64ffda;
                 text-decoration: none;
-                margin: 0.5rem;
+                margin: 0 0.75rem;
+                transition: color 0.3s ease;
+                position: relative;
+                padding-bottom: 2px;
+            }
+
+            .footer-links a:after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 1px;
+                bottom: 0;
+                left: 0;
+                background-color: #64ffda;
+                transition: width 0.3s ease;
+            }
+
+            .footer-links a:hover:after {
+                width: 100%;
             }
     </style>
 
 </head>
 <body>
     <div class="login-container">
-        <div class="welcome-panel">
-            <div class="logo">
-                <img src="/img/loggo.jpg" alt="Xpectrum Airlines Logo">
+        <div class="login-wrapper">
+            <div class="welcome-panel">
+                <div class="logo">
+                    <img src="/img/loggo.jpg" alt="Xpectrum Airlines Logo">
+                </div>
+                <h3>Welcome Back</h3>
+                <p style="color: #8892b0; text-align: center; line-height: 1.6; max-width: 300px; margin: 0 auto 2rem;">
+                    Sign in to access your account and manage your bookings
+                </p>
             </div>
-            <h3>Welcome, Passenger</h3>
-        </div>
 
-        <!-- Login Form -->
-        <div class="login-form">
+            <!-- Login Form -->
+            <div class="login-form">
             <h1>Login</h1>
             <form method="post">
                 <div class="form-group">
@@ -178,8 +255,9 @@
                 <div class="footer-links">
                     <a href="/Account/Register">Create an Account</a>
                     <a href="#">Forgot Your Password?</a>
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <script>

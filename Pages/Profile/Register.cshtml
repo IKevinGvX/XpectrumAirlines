@@ -1,4 +1,4 @@
-﻿
+
 @page
 @model Xpectrum_Structure.Pages.Profile.RegisterModel
 @{
@@ -10,84 +10,341 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>@ViewData["Title"] - Xpectrum Airlines</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #172a45;
+            --accent: #64ffda;
+            --text: #ccd6f6;
+            --text-secondary: #8892b0;
+            --background: #0a192f;
+            --card: #112240;
+            --border: #233554;
+            --success: #64ffda;
+            --warning: #ffb74d;
+            --danger: #ff5252;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background: url('/img/status.gif') no-repeat center center fixed;
-            background-size: cover;
-            height: 100vh;
-            color: #fff;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a192f;
+            color: #e6f1ff;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            background-image: url('/img/status.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
+
         .register-container {
-            max-width: 600px;
-            padding: 30px;
-            background-color: rgba(0, 0, 0, 0.7);  /* Transparent background */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            padding: 2rem;
         }
-        .register-header {
+        
+        .register-wrapper {
+            display: flex;
+            max-width: 50%;
+            
+    height: 827px;
+
+            width: 100%;
+            background: rgba(10, 25, 47);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px -15px rgba(2, 12, 27, 0.7);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .welcome-panel {
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            flex: 1;
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(16, 42, 82, 0.8) 0%, rgba(10, 25, 47, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+
+        .welcome-panel h3 {
+            color: #64ffda;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            padding: 3px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10%;
+            object-fit: cover;
+        }
+
+        .register-form {
+            flex: 1.5;
+            padding: 2rem 2.5rem;
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            max-height: 100%;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            min-width: 0;
+        }
+        
+        /* Anchos específicos para cada campo */
+        #Nombre {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        #Email {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        #Contra {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        #Telefono {
+            width: 150px;
+        }
+        
+        #FechaNacimiento {
+            width: 180px;
+        }
+        
+        #Direccion {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .register-form h1 {
+            color: #64ffda;
+            margin-bottom: 2rem;
+            text-align: center;
             font-size: 2rem;
-            color: #0056b3;
+            font-weight: 600;
         }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #64ffda;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .form-control {
-            background-color: #f8f9fa;
-            color: #333;
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            color: #e6f1ff;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 6px;
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
         }
-        .btn-primary {
-            background-color: #0056b3;
-            border-color: #0056b3;
+
+        .form-control:focus {
+            outline: none;
+            border-color: #64ffda;
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: #64b6ff;
+            color: #0a192f;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            .btn-submit:hover {
+                background-color: var(--success);
+            }
+
+        .footer-links {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .footer-links a {
+            color: #64ffda;
+            text-decoration: none;
+            margin: 0 0.75rem;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .footer-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #64ffda;
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover:after {
+            width: 100%;
         }
     </style>
 </head>
 <body>
     <div class="register-container">
-        <h2 class="register-header">Welcome to Xpectrum Airlines</h2>
-        <h4 class="text-center">Create an account</h4>
-
-        <form method="post">
-            <div class="mb-3">
-                <label for="Nombre" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="Nombre" name="Input.Nombre" required value="@Model.Input?.Nombre" />
+        <div class="register-wrapper">
+            <div class="welcome-panel">
+                <div class="logo">
+                    <img src="/img/loggo.jpg" alt="Xpectrum Airlines Logo">
+                </div>
+                <h3>Join Us</h3>
+                <p style="color: #8892b0; text-align: center; line-height: 1.6; max-width: 300px; margin: 0 auto 2rem;">
+                    Create your account to start your journey with Xpectrum Airlines
+                </p>
             </div>
 
-            <div class="mb-3">
-                <label for="Email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="Email" name="Input.Email" required value="@Model.Input?.Email" />
-            </div>
+            <div class="register-form">
+                <h1>Create Account</h1>
+                <form method="post" class="form-container">
+                    <div class="form-group">
+                        <label for="Nombre">Full Name</label>
+                        <input type="text" class="form-control" id="Nombre" name="Input.Nombre" required value="@Model.Input?.Nombre" />
+                    </div>
 
-            <div class="mb-3">
-                <label for="Contra" class="form-label">Password</label>
-                <input type="password" class="form-control" id="Contra" name="Input.Contra" required value="@Model.Input?.Contra" />
-            </div>
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1.5;">
+                            <label for="Email">Email</label>
+                            <input type="email" class="form-control" id="Email" name="Input.Email" required value="@Model.Input?.Email" />
+                        </div>
 
-            <div class="mb-3">
-                <label for="Telefono" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="Telefono" name="Input.Telefono" required value="@Model.Input?.Telefono" />
-            </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="Telefono">Phone</label>
+                            <input type="text" class="form-control" id="Telefono" name="Input.Telefono" required value="@Model.Input?.Telefono" />
+                        </div>
+                    </div>
 
-            <div class="mb-3">
-                <label for="FechaNacimiento" class="form-label">Date of Birth</label>
-                <input type="date" class="form-control" id="FechaNacimiento" name="Input.FechaNacimiento" required value="@Model.Input?.FechaNacimiento.ToString("yyyy-MM-dd")" />
-            </div>
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="Contra">Password</label>
+                            <input type="password" class="form-control" id="Contra" name="Input.Contra" required value="@Model.Input?.Contra" />
+                        </div>
+                        <div class="form-group" style="width: 180px;">
+                            <label for="FechaNacimiento">Date of Birth</label>
+                            <input type="date" class="form-control" id="FechaNacimiento" name="Input.FechaNacimiento" required value="@Model.Input?.FechaNacimiento.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
 
-            <div class="mb-3">
-                <label for="Direccion" class="form-label">Address</label>
-                <input type="text" class="form-control" id="Direccion" name="Input.Direccion" required value="@Model.Input?.Direccion" />
-            </div>
+                    <div class="form-group">
+                        <label for="Direccion">Address</label>
+                        <input type="text" class="form-control" id="Direccion" name="Input.Direccion" required value="@Model.Input?.Direccion" />
+                    </div>
 
-            <button type="submit" class="btn btn-primary w-100">Register</button>
-        </form>
+                    <button type="submit" class="btn-submit">Register</button>
+                    
+                    <div class="footer-links">
+                        <span>Already have an account? </span>
+                        <a href="/Account/Login">Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mostrar notificación de éxito o error si existe un mensaje
+        @if (!string.IsNullOrEmpty(Model?.Message))
+        {
+            <text>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: '@(Model.IsSuccess ? "Success" : "Error")',
+                    text: '@Model.Message',
+                    icon: '@(Model.IsSuccess ? "success" : "error")',
+                    confirmButtonColor: '#64b6ff',
+                    confirmButtonText: 'OK'
+                });
+            });
+            </text>
+        }
+    </script>
 </body>
 </html>
