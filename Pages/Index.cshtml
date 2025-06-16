@@ -1,8 +1,9 @@
-﻿@page
+@page
 @model IndexModel
 @{
     ViewData["Title"] = "Xpectrum Airlines";
 }
+
 
 <style>
     :root {
@@ -454,24 +455,48 @@
         }
 
     .filters {
-        margin-bottom: 1rem;
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        margin-top: 1rem;
-    }
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    background: #0a192f;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #0003;
+    padding: 1.5rem 2.5rem;
+    border: 1px solid rgba(42, 82, 152, 0.18);
+    transition: background 0.3s;
+    width: 58%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        .filters label {
-            color: var(--text);
-        }
+.filters label {
+    font-weight: 500;
+    color: #e0e0e0;
+    margin-right: 0.5rem;
+    letter-spacing: 1px;
+}
 
-        .filters select {
-            padding: 0.5rem;
-            font-size: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            width: 200px;
-        }
+.filters select {
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    border: 1.5px solid #2a5298;
+    background: rgba(35, 39, 47, 0.25);
+    color: #fff;
+    font-size: 1.08rem;
+    outline: none;
+    transition: border 0.2s, background 0.2s;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px #2a529866;
+}
+
+.filters select:focus {
+    border: 1.5px solid #64ffda;
+    background: rgba(35, 39, 47, 0.40);
+    color: #fff;
+}
     /* Agregar transición de hover en los botones de acción */
     .action-btn {
         transition: all 0.3s ease-in-out;
@@ -539,7 +564,63 @@
             width: 150px;
         }
 
-</style>
+.choices__list--dropdown, .choices__list[aria-expanded] {
+    background: rgba(35, 39, 47, 0.45) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 14px;
+    box-shadow: 0 4px 24px #0003;
+    color: #fff;
+}
+.choices__item--selectable {
+    color: #e0e0e0;
+    transition: background 0.2s, color 0.2s;
+}
+.choices__item--selectable.is-highlighted {
+    background: #2a5298;
+    color: #fff;
+}
+
+.trasparente {
+    background: rgba(35, 39, 47, 0.45);
+    border-radius: 14px;
+    box-shadow: 0 4px 24px #0003;
+    margin-top: 0.5rem;
+    min-width: 210px;
+    border: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.3s, backdrop-filter 0.3s;
+}
+
+/* Estilo para las opciones de los selects */
+select option {
+    background-color: #0a192f; /* Fondo azul oscuro */
+    color: #ffffff; /* Texto blanco */
+    padding: 10px 15px;
+    border: 1px solid rgba(100, 255, 218, 0.2); /* Borde sutil */
+    margin: 2px 0;
+    border-radius: 6px;
+}
+
+/* Efecto hover en las opciones */
+select option:hover,
+select option:focus {
+    background-color: #112240 !important; /* Color ligeramente más claro al pasar el ratón */
+    color: white !important;
+}
+
+/* Opción seleccionada */
+select option:checked {
+    background-color: #1e4b8a !important; /* Color para la opción seleccionada */
+    font-weight: 500;
+}
+
+/* Ocultar barra de desplazamiento en los selects */
+select::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+</style> 
 
 <!-- Hero Section -->
 <section class="hero">
@@ -556,7 +637,6 @@
                 <div class="imagen-derecha">
                     <img src="~/img/loggo.jpg" alt="logo" />
                 </div>
-                <button class="hero-btn" onclick="scrollToFlights()">Explorar Vuelos</button>
             </div>
         </div>
     </div>
@@ -567,18 +647,18 @@
     <label for="filter-origin">Origen</label>
     <select id="filter-origin" onchange="filterVuelos()">
         <option value="">Selecciona un Origen</option>
-        @foreach (var vuelo in Model.Vuelos)
+        @foreach (var aeropuerto in Model.Vuelos.Select(v => v.AeropuertoOrigen).Distinct().OrderBy(a => a))
         {
-            <option value="@vuelo.AeropuertoOrigen">@vuelo.AeropuertoOrigen</option>
+            <option value="@aeropuerto">@aeropuerto</option>
         }
     </select>
 
     <label for="filter-destination">Destino</label>
     <select id="filter-destination" onchange="filterVuelos()">
         <option value="">Selecciona un Destino</option>
-        @foreach (var vuelo in Model.Vuelos)
+        @foreach (var pais in Model.Vuelos.Select(v => v.PaisOrigen).Distinct().OrderBy(p => p))
         {
-            <option value="@vuelo.PaisOrigen">@vuelo.PaisOrigen</option>
+            <option value="@pais">@pais</option>
         }
     </select>
 </div>
@@ -652,6 +732,30 @@
         </div>
     </div>
 </main>
+
+<!-- Choices.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const originSelect = document.getElementById('filter-origin');
+    const destSelect = document.getElementById('filter-destination');
+    if (originSelect) new Choices(originSelect, {
+        searchEnabled: false,
+        itemSelectText: '',
+        classNames: {
+            containerOuter: 'choices glass-dropdown'
+        }
+    });
+    if (destSelect) new Choices(destSelect, {
+        searchEnabled: false,
+        itemSelectText: '',
+        classNames: {
+            containerOuter: 'choices glass-dropdown'
+        }
+    });
+});
+</script>
+
 <script>
 
     // Filter flights based on selected Origin and Destination
