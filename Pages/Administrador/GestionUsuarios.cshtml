@@ -1,0 +1,58 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Administrador.GestionUsuariosModel
+@{
+    ViewData["Title"] = "Gestión de Usuarios";
+    Layout = "_Layout";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="uk-container uk-margin-large-top">
+    <h2 class="uk-heading-divider">👥 Gestión de Usuarios</h2>
+
+    <table class="uk-table uk-table-divider uk-table-hover uk-table-striped uk-box-shadow-medium uk-table-responsive">
+        <thead>
+            <tr>
+                <th>Usuario ID</th> <!-- Columna añadida para mostrar el usuarioId -->
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Nacimiento</th>
+                <th>Estado</th>
+                <th>Notificaciones</th>
+                <th class="uk-text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Usuarios)
+            {
+                <tr>
+                    <td>@user.UsuarioId</td> <!-- Muestra el usuarioId -->
+                    <td>@user.Nombre</td>
+                    <td>@user.Email</td>
+                    <td>@user.TipoUsuario</td>
+                    <td>@user.Telefono</td>
+                    <td>@user.Direccion</td>
+                    <td>@user.FechaNacimiento.ToShortDateString()</td>
+                    <td>
+                        @if (user.Activo)
+                        {
+                            <span class="uk-label uk-label-success">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="uk-label uk-label-danger">Inactivo</span>
+                        }
+                    </td>
+                    <td>@user.PreferenciasNotificaciones</td>
+                    <td class="uk-text-center">
+                        <a class="uk-button uk-button-primary uk-button-small" href="/Administrador/EditarUsuario?id=@user.UsuarioId">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

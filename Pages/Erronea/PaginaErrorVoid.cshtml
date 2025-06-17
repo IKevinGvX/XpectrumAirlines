@@ -1,0 +1,196 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Erronea.PaginaErrorVoidModel
+@{
+    Layout = null;  // Sin Layout si no lo necesitas
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Acción no Permitida</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    /* Estilos generales del Header y Footer */
+    .error-header {
+        background-color: #e74c3c; /* Color rojo de fondo */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 22px;
+        border-bottom: 5px solid #c0392b;
+    }
+
+        .error-header .logo-img {
+            width: 100px;
+            height: auto;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .error-header h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+    .error-footer {
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+        .error-footer p {
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .error-footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+            .error-footer a:hover {
+                text-decoration: underline;
+            }
+
+    /* Estilos del panel de error */
+    .error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+    }
+
+    .error-panel {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 400px;
+    }
+
+    /* Estilo del contador */
+    .timer {
+        font-size: 24px;
+        margin-top: 20px;
+        font-weight: bold;
+        color: green;
+        transition: all 0.5s ease-in-out;
+    }
+
+    /* Botones */
+    .buttons-container {
+        margin-top: 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        margin: 10px;
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-support {
+        background-color: #25D366; /* WhatsApp Green */
+    }
+
+        .btn-support:hover {
+            background-color: #128C7E;
+        }
+
+    .btn-retry {
+        background-color: #3498db; /* Blue */
+    }
+
+        .btn-retry:hover {
+            background-color: #2980b9;
+        }
+
+</style>
+<body>
+
+    <!-- Header de error directo en la página -->
+    <header class="error-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/img/loggo.jpg" alt="Logo de error" class="logo-img">
+            </div>
+            <div class="error-title">
+                <h1>¡Error Crítico!</h1>
+                <p>Acción no permitida en esta página</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="error-container">
+        <div class="error-panel">
+            <div class="error-header">
+                <i class="fas fa-exclamation-circle"></i>
+                <h1>¡Error de Acceso!</h1>
+            </div>
+            <div class="error-message">
+                <p>Tu cuenta tiene un rol no autorizado. Por favor, contacta con soporte o vuelve a intentar.</p>
+            </div>
+
+            <!-- Temporizador mejorado -->
+            <div class="timer" id="timer">
+                <p>Redirigiendo en <span id="countdown">30</span> segundos...</p>
+            </div>
+
+            <div class="buttons-container">
+                <a href="https://wa.me/941691210" class="btn btn-support" target="_blank">
+                    Contactar Soporte (WhatsApp)
+                </a>
+                <a href="/Account/Login" class="btn btn-retry">
+                    Volver a Iniciar Sesión
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let countdown = 30;
+        const countdownElement = document.getElementById('countdown');
+
+        // Cambios en el contador: Agregar color dinámico y animación
+        setInterval(function() {
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            // Cambiar color según el tiempo
+            if (countdown <= 5) {
+                countdownElement.style.color = 'red';
+                countdownElement.style.fontSize = '30px'; // Aumentar el tamaño
+                countdownElement.style.fontWeight = 'bold'; // Negrita para urgencia
+            } else if (countdown <= 15) {
+                countdownElement.style.color = 'orange';
+            } else {
+                countdownElement.style.color = 'green';
+            }
+
+            // Animación para la cuenta regresiva
+            countdownElement.style.transition = 'all 0.5s ease-in-out';
+
+            if (countdown <= 0) {
+                window.location.href = "/Account/Login"; // Redirige si el tiempo se agota
+            }
+        }, 1000);
+    </script>
+
+</body>
+
+</html>

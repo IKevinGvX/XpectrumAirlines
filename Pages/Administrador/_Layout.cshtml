@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null; // solo si esto es un layout personalizado, de lo contrario puedes quitarlo también
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Xpectrum</title>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/css/uikit.min.css" />
+</head>
+<body>
+
+    <!-- Navbar o encabezado opcional -->
+    <nav class="uk-navbar-container uk-margin" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="/Administrador/Index">Xpectrum Admin</a>
+        </div>
+    </nav>
+
+    <!-- Cuerpo de la página -->
+    <div class="uk-container uk-margin-top">
+        @RenderBody()
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit-icons.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Administrador.ConfiguracionSistemaModel
+@{
+    ViewData["Title"] = "Configuración del Sistema";
+    Layout = "_Layout"; // Asegúrate que _Layout incluya UIkit
+}
+
+<div class="uk-container uk-margin-large-top">
+
+    <h2 class="uk-heading-divider">⚙️ Configuración del Sistema</h2>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="uk-alert-success" uk-alert>
+            <p>@TempData["Mensaje"]</p>
+        </div>
+    }
+
+    <form method="post" class="uk-form-stacked">
+
+        <table class="uk-table uk-table-divider uk-table-hover uk-table-middle uk-table-responsive uk-box-shadow-medium uk-card uk-card-default">
+            <thead>
+                <tr>
+                    <th class="uk-text-bold">Clave</th>
+                    <th class="uk-text-bold">Valor</th>
+                    <th class="uk-text-bold uk-visible@s">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Configuraciones.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.Configuraciones[i].Clave
+                            <input type="hidden" asp-for="Configuraciones[@i].ConfiguracionSistemaId" />
+                            <input type="hidden" asp-for="Configuraciones[@i].Clave" />
+                        </td>
+                        <td>
+                            <input asp-for="Configuraciones[@i].Valor" class="uk-input uk-form-small uk-width-medium" />
+                        </td>
+                        <td class="uk-visible@s">
+                            <span class="uk-text-meta">@Model.Configuraciones[i].Descripcion</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="uk-margin-top">
+            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1" type="submit">
+                💾 Guardar Configuración
+            </button>
+        </div>
+    </form>
+</div>

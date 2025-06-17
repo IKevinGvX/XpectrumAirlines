@@ -1,0 +1,127 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Administrador.GeneralesModel
+@{
+    ViewData["Title"] = "Generales - Gestión de Usuarios";
+    Layout = "_Layout";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="uk-container uk-margin-large-top">
+    <h2 class="uk-heading-divider uk-text-center" style="color: #4CAF50;">🛠️ Gestión General de Usuarios</h2>
+
+    <div class="uk-text-center">
+        <!-- Botón para actualizar el estado de los usuarios -->
+        <form method="post" id="formUpdateStatus">
+            <button type="button" class="uk-button uk-button-primary uk-button-large uk-margin-small" id="updateStatusButton" style="background-color: #4CAF50; border-color: #4CAF50;">Actualizar Estado de Usuarios</button>
+            <input type="hidden" name="action" value="updateStatus" />
+        </form>
+
+        <!-- Botón para actualizar las preferencias de notificación de los usuarios -->
+        <form method="post" id="formUpdatePreferences">
+            <button type="button" class="uk-button uk-button-primary uk-button-large uk-margin-small" id="updatePreferencesButton" style="background-color: #2196F3; border-color: #2196F3;">Actualizar Preferencias de Notificación</button>
+            <input type="hidden" name="action" value="updatePreferences" />
+        </form>
+
+        <!-- Botón para realizar auditoría de cambios en los usuarios -->
+        <form method="post" id="formAuditChanges">
+            <button type="button" class="uk-button uk-button-primary uk-button-large uk-margin-small" id="auditChangesButton" style="background-color: #FF9800; border-color: #FF9800;">Realizar Auditoría de Cambios</button>
+            <input type="hidden" name="action" value="auditChanges" />
+        </form>
+    </div>
+
+    <!-- Mostrar mensajes de éxito o error -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="uk-alert-success" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>@TempData["Message"]</p>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>@TempData["Error"]</p>
+        </div>
+    }
+</div>
+
+<script>
+    // Función para mostrar un SweetAlert de confirmación
+    function showConfirmationDialog(action) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Por favor, ingresa la contraseña para confirmar la acción.',
+            input: 'password',
+            inputPlaceholder: 'Contraseña de seguridad',
+            inputAttributes: {
+                autocapitalize: 'off',
+                maxlength: 20,
+                minlength: 6
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#FF5722',
+            showLoaderOnConfirm: true,
+            customClass: {
+                popup: 'swal-popup',
+                title: 'swal-title',
+                confirmButton: 'swal-confirm-button',
+                cancelButton: 'swal-cancel-button'
+            },
+            preConfirm: (password) => {
+                if (password !== 'administrador') {
+                    Swal.showValidationMessage('Contraseña incorrecta.');
+                    return false;
+                }
+                // Si la contraseña es correcta, proceder con la acción
+                document.getElementById(action).submit();  // Enviar el formulario de la acción
+            },
+            backdrop: true, // Muestra el fondo difuso
+            allowOutsideClick: false
+        });
+    }
+
+    // Eventos para los botones
+    document.getElementById('updateStatusButton').addEventListener('click', function () {
+        showConfirmationDialog('formUpdateStatus');
+    });
+
+    document.getElementById('updatePreferencesButton').addEventListener('click', function () {
+        showConfirmationDialog('formUpdatePreferences');
+    });
+
+    document.getElementById('auditChangesButton').addEventListener('click', function () {
+        showConfirmationDialog('formAuditChanges');
+    });
+</script>
+
+<!-- Estilos para mejorar el diseño de SweetAlert -->
+<style>
+    .swal-popup {
+        border-radius: 12px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .swal-title {
+        color: #2196F3;
+        font-size: 18px;
+    }
+
+    .swal-confirm-button {
+        background-color: #4CAF50;
+        border-color: #4CAF50;
+        color: white;
+    }
+
+    .swal-cancel-button {
+        background-color: #FF5722;
+        border-color: #FF5722;
+        color: white;
+    }
+</style>

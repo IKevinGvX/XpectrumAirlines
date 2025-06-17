@@ -1,0 +1,59 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Administrador.EditarUsuarioModel
+@{
+    ViewData["Title"] = "Editar Usuario";
+    Layout = "_Layout";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="uk-container uk-margin-large-top">
+    <h2 class="uk-heading-divider">✏️ Editar Usuario</h2>
+
+    <form method="post">
+        <!-- Campo hidden para almacenar el usuarioId -->
+        <input type="hidden" asp-for="Usuario.UsuarioId" />
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="nombre">Nombre</label>
+            <input class="uk-input" id="nombre" type="text" asp-for="Usuario.Nombre" value="@Model.Usuario.Nombre" />
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="email">Email</label>
+            <input class="uk-input" id="email" type="email" asp-for="Usuario.Email" value="@Model.Usuario.Email" />
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="telefono">Teléfono</label>
+            <input class="uk-input" id="telefono" type="text" asp-for="Usuario.Telefono" value="@Model.Usuario.Telefono" />
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="direccion">Dirección</label>
+            <input class="uk-input" id="direccion" type="text" asp-for="Usuario.Direccion" value="@Model.Usuario.Direccion" />
+        </div>
+
+        <button type="submit" class="uk-button uk-button-primary">Actualizar Usuario</button>
+    </form>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: '@TempData["Mensaje"]'
+            });
+        </script>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: '@TempData["Error"]'
+            });
+        </script>
+    }
+</div>
