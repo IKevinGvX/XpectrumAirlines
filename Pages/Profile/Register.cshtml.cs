@@ -57,22 +57,34 @@ namespace Xpectrum_Structure.Pages.Profile
 
             try
             {
-                string connectionString = "Server=DESKTOP-7I9SFFS;Database=Xpectrum;Integrated Security=True;TrustServerCertificate=True";
+                string connectionString = "workstation id=xpectrum.mssql.somee.com;packet size=4096;user id=KKevinyouman2004_SQLLogin_2;pwd=Kevinyouman2004;data source=xpectrum.mssql.somee.com;persist security info=False;initial catalog=xpectrum;TrustServerCertificate=True";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
-                    string query = "INSERT INTO Usuarios (Nombre, Email, Contraseña, Telefono, FechaNacimiento, Direccion, RolId) VALUES (@Nombre, @Email, @Contrasena, @Telefono, @FechaNacimiento, @Direccion, 2)";
+                    string query = "INSERT INTO Usuarios (Nombre, Email, contra, Telefono, FechaNacimiento, Direccion, tipoUsuario, activo, fechaRegistro, estado, preferenciasNotificaciones) " +
+                                   "VALUES (@Nombre, @Email, @contra, @Telefono, @FechaNacimiento, @Direccion, @tipoUsuario, @activo, @fechaRegistro, @estado, @preferenciasNotificaciones)";
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Nombre", Input.Nombre);
                         command.Parameters.AddWithValue("@Email", Input.Email);
-                        command.Parameters.AddWithValue("@Contrasena", HashPassword(Input.Contra));
+                        command.Parameters.AddWithValue("@contra", HashPassword(Input.Contra));
                         command.Parameters.AddWithValue("@Telefono", Input.Telefono);
                         command.Parameters.AddWithValue("@FechaNacimiento", Input.FechaNacimiento);
                         command.Parameters.AddWithValue("@Direccion", Input.Direccion);
 
+                        // Asignando "Vois" al campo tipoUsuario
+                        command.Parameters.AddWithValue("@tipoUsuario", "Void"); // Asigna "Cliente" como tipo de usuario
+
+                        // Otros campos
+                        command.Parameters.AddWithValue("@activo", true); // El usuario está activo por defecto
+                        command.Parameters.AddWithValue("@fechaRegistro", DateTime.Now); // Fecha actual
+                        command.Parameters.AddWithValue("@estado", "Activo"); // Estado por defecto
+                        command.Parameters.AddWithValue("@preferenciasNotificaciones", true); // Notificaciones habilitadas por defecto
+
                         await command.ExecuteNonQueryAsync();
                     }
+
                 }
 
                 Message = "Registration successful! Please log in.";
