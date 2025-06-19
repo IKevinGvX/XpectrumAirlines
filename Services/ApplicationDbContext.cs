@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using Xpectrum_Structure.Models;
 
 public class ApplicationDbContext : DbContext
 {

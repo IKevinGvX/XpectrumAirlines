@@ -1,0 +1,194 @@
+﻿@page
+@model Xpectrum_Structure.Pages.About.informacionModel
+@{
+    ViewData["Title"] = "Contacto - Xpectrum Airlines";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            height: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+        }
+
+        .scroll-effect {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+
+        .contact-info, .commitment {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .contact-item, .commitment-item {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 30%;
+            text-align: center;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-item h3, .commitment-item h3 {
+            font-size: 1.6rem;
+            color: #64ffda;
+        }
+
+        .contact-item p, .commitment-item p {
+            font-size: 1rem;
+            color: #ccc;
+            margin: 1rem 0;
+        }
+
+        .commitment-item {
+            background-color: rgba(16, 42, 82, 0.8);
+        }
+
+        .cta-button {
+            display: block;
+            background-color: #ff6b6b;
+            padding: 0.8rem 2rem;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 2rem;
+            border-radius: 5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background-color: #e54343;
+        }
+
+        .deadline {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .deadline span {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .deadline strong {
+            color: #ffdd57;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Section: About Xpectrum Airlines -->
+        <div class="section scroll-effect">
+            <h1 class="section-title">Acerca de Xpectrum Airlines</h1>
+            <p class="section-description">
+                <strong>Xpectrum Airlines</strong> es una aerolínea global en constante crecimiento. Nos dedicamos a ofrecer experiencias de viaje únicas, seguras y cómodas, mientras mantenemos un fuerte compromiso con la sostenibilidad y la innovación. Nuestro objetivo es conectar el mundo de manera eficiente, garantizando que nuestros pasajeros vivan una experiencia de vuelo de calidad superior.
+            </p>
+        </div>
+
+        <!-- Section: Contact Information -->
+        <div class="section scroll-effect">
+            <h2 class="section-title">Información de Contacto</h2>
+            <p class="section-description">
+                Si tienes alguna pregunta, duda o sugerencia, no dudes en contactarnos. Nuestro equipo de soporte está disponible para ayudarte.
+            </p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Dirección</h3>
+                    <p>Calle Ficticia 123, Ciudad Ejemplo, País</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Teléfono</h3>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <p>contacto@xpectrum.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Our Commitment -->
+        <div class="section scroll-effect">
+            <h2 class="section-title">Nuestro Compromiso</h2>
+            <p class="section-description">
+                En Xpectrum Airlines, nos comprometemos a ofrecerte una experiencia de vuelo segura, confortable y accesible. Nuestro objetivo es ser una aerolínea líder a nivel mundial, estableciendo nuevas referencias en la industria de la aviación.
+            </p>
+
+            <div class="commitment">
+                <div class="commitment-item">
+                    <h3>Compromiso con la Calidad</h3>
+                    <p>Trabajamos incansablemente para garantizar que cada vuelo sea impecable, con un servicio excepcional para cada uno de nuestros pasajeros.</p>
+                </div>
+                <div class="commitment-item">
+                    <h3>Compromiso con la Innovación</h3>
+                    <p>Incorporamos tecnología de vanguardia para hacer que tu experiencia de vuelo sea más eficiente y cómoda.</p>
+                </div>
+                <div class="commitment-item">
+                    <h3>Compromiso con el Medio Ambiente</h3>
+                    <p>Nos comprometemos a reducir nuestra huella de carbono mediante el uso de aeronaves más eficientes y prácticas sostenibles.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Deadlines -->
+        <div class="section deadline">
+            <h2>Plazos Importantes</h2>
+            <p><span>¡No te pierdas nuestras próximas ofertas y actualizaciones! Mantente al tanto de las fechas de lanzamiento y promociones especiales.</span></p>
+            <p><strong>Fecha de nuestra próxima campaña de verano: </strong><span>1 de junio de 2025</span></p>
+        </div>
+
+        <!-- Call to Action -->
+        <a href="/contact" class="cta-button">Contáctanos Ahora</a>
+    </div>
+</body>
+</html>

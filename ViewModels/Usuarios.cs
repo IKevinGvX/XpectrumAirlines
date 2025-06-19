@@ -1,40 +1,24 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Xpectrum_Structure.Models
+public class Usuarios
 {
-    public class Usuarios
-    {
-        [Key]
-        public int UsuarioId { get; set; }  // ID del usuario (clave primaria)
+    [Key]
+    public int UsuarioId { get; set; }
+    public string Nombre { get; set; }
+    public string Email { get; set; }
+    public string Contra { get; set; }
+    public string TipoUsuario { get; set; }
+    public string Telefono { get; set; }
+    public string Direccion { get; set; }
 
-        [Required]
-        [MaxLength(256)]
-        public string Nombre { get; set; }  // Nombre del usuario
+    public DateTime? FechaNacimiento { get; set; }  // Cambiado a nullable
+    public bool Activo { get; set; }
+    public DateTime FechaRegistro { get; set; }
+    public string Estado { get; set; }
+    public bool PreferenciasNotificaciones { get; set; }
+    public string TwoFactorSecret { get; set; }
+    public bool IsTwoFactorEnabled { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [MaxLength(256)]
-        public string Email { get; set; }  // Correo electrónico del usuario
-
-        [Required]
-        public string Contra { get; set; }  // Contraseña cifrada
-
-        public string TipoUsuario { get; set; }  // Tipo de usuario (admin, cliente, etc.)
-
-        public string Telefono { get; set; }  // Teléfono del usuario (opcional)
-
-        public string Direccion { get; set; }  // Dirección del usuario (opcional)
-
-        public DateTime FechaNacimiento { get; set; }  // Fecha de nacimiento
-
-        public bool Activo { get; set; }  // Estado del usuario (activo o no)
-
-        public DateTime FechaRegistro { get; set; }  // Fecha de registro del usuario
-
-        // Campos relacionados con la autenticación de dos factores (2FA)
-        public string TwoFactorSecret { get; set; }  // Clave secreta de 2FA (Base64)
-
-        public bool IsTwoFactorEnabled { get; set; }  // Indica si 2FA está habilitado (true/false)
-    }
+    public string SecretKey { get; set; }
+    public DateTime? FechaUltimoLogin { get; set; }  // Cambiado a nullable
 }

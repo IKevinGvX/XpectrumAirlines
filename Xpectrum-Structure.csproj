@@ -48,7 +48,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Book\" />
-    <Folder Include="Pages\About\" />
     <Folder Include="Pages\Help\" />
   </ItemGroup>
 
