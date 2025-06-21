@@ -73,73 +73,73 @@ wwwroot\lib\jquery\dist\jquery.slim.js
 wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\cuerpo.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\estiloboletos.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\footer.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\header.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\logout.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\profile.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\css\register.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\favicon.ico
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\img\login.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\js\scroll.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\js\site.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\additional-methods.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\jquery.validate.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery-validation\LICENSE.md
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.min.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.js
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.map
-C:\Users\PC - OS\source\repos\XpectrumAirlines\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.min.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation\LICENSE.md
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\jquery.validate.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation\dist\additional-methods.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\js\site.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\js\scroll.js
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\img\login.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\favicon.ico
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\register.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\profile.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\logout.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\header.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\footer.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\estiloboletos.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\cuerpo.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.map
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\LICENSE.txt
