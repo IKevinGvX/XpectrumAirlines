@@ -344,3 +344,5 @@ C:\Users\Bytezon\Desktop\XpectrumAirlines\obj\Debug\net9.0\Xpectrum-Structure.pd
 C:\Users\Bytezon\Desktop\XpectrumAirlines\obj\Debug\net9.0\Xpectrum-Structure.genruntimeconfig.cache
 C:\Users\Bytezon\Desktop\XpectrumAirlines\obj\Debug\net9.0\ref\Xpectrum-Structure.dll
 C:\Users\Bytezon\Desktop\XpectrumAirlines\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\Bytezon\Desktop\XpectrumAirlines\obj\Debug\net9.0\compressed\miqu33mm6f-v5fgigfdyb.gz
+C:\Users\Bytezon\Desktop\XpectrumAirlines\obj\Debug\net9.0\compressed\z6tm7rbtcn-0i56mzy92b.gz

@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model Xpectrum_Structure.Pages.AgenteDeVuelos.IndexModel
 @using System.Text.Json
 @{
@@ -131,7 +131,197 @@ else
             </ul>
         `;
 
-        // Scroll automático al detalle
-        contenedor.scrollIntoView({ behavior: "smooth" });
+    ;
     }
 </script>
+
+<style>
+    /* Estilos generales */
+    body {
+        background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+        color: #e6f1ff;
+        min-height: 100vh;
+    }
+
+    /* Tarjetas de navegación */
+    .uk-card {
+        background: rgba(23, 42, 69, 0.6) !important;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    }
+
+    .uk-card-hover:hover {
+        transform: translateY(-5px);
+        border-color: #64ffda;
+        box-shadow: 0 10px 20px rgba(100, 255, 218, 0.1);
+    }
+
+    .uk-card-title {
+        color: #e6f1ff;
+        font-weight: 600;
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .uk-card-body p {
+        color: #8892b0;
+        margin-top: 10px;
+    }
+
+    /* Tabla de vuelos */
+    .uk-table {
+        background: rgba(23, 42, 69, 0.6);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .uk-table th {
+        background: rgba(17, 34, 64, 0.8);
+        color: #64ffda;
+        font-weight: 500;
+        padding: 15px 20px;
+    }
+
+    .uk-table td {
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        color: #e6f1ff;
+    }
+
+    .uk-table tbody tr:hover {
+        background: rgba(100, 255, 218, 0.05) !important;
+        cursor: pointer;
+    }
+
+    /* Botones */
+    .uk-button-primary {
+        background-color: #64ffda;
+        color: #0a192f !important;
+        border: none;
+        border-radius: 4px;
+        font-weight: 500;
+        padding: 0 20px;
+        height: 40px;
+        transition: all 0.3s ease;
+    }
+
+    .uk-button-primary:hover {
+        background-color: #52d9bb;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+    }
+
+    /* Etiquetas de estado */
+    .uk-label {
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .uk-label-success {
+        background: rgba(46, 213, 115, 0.2);
+        color: #2ed573;
+    }
+
+    /* Paginación */
+    .uk-pagination > * > * {
+        color: #e6f1ff;
+        border: 1px solid rgba(100, 255, 218, 0.3);
+        margin: 0 5px;
+        border-radius: 4px;
+        min-width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .uk-pagination > .uk-active > * {
+        background: #64ffda;
+        color: #0a192f;
+        border-color: #64ffda;
+    }
+
+    .uk-pagination > * > :hover {
+        background: rgba(100, 255, 218, 0.1);
+        border-color: #64ffda;
+        color: #64ffda;
+    }
+
+    /* Sección de detalles */
+    #detalle-vuelo {
+        background: rgba(23, 42, 69, 0.6);
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+    }
+
+    .uk-list-divider > :nth-child(n+2) {
+        border-top: 1px solid rgba(100, 255, 218, 0.1);
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+
+    /* Títulos */
+    h2, h3, h4, h5, h6 {
+        color: #e6f1ff;
+        font-weight: 600;
+    }
+
+    h2.uk-heading-line {
+        margin: 30px 0;
+        font-size: 2rem;
+    }
+
+    /* Grid de tarjetas */
+    .uk-grid > * {
+        padding-left: 20px;
+        margin-top: 20px;
+    }
+
+    /* Efectos de transición */
+    .uk-transition-toggle {
+        transition: all 0.3s ease;
+    }
+
+    .uk-transition-toggle:hover {
+        background: rgba(100, 255, 218, 0.03) !important;
+    }
+
+    /* Scroll personalizado */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(17, 34, 64, 0.5);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #64ffda;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #52d9bb;
+    }
+
+    .uk-light .uk-button-primary{
+        background-color: #64ffda;
+            padding: 0 10px;
+    }
+    .uk-light .uk-label{
+        background-color: #008b36;
+    }
+</style>

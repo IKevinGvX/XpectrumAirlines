@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = null;
 }
 
@@ -7,45 +7,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] - Xpectrum Airlines</title>
 
     <!-- UIkit CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/uikit@3.6.0/dist/css/uikit.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/css/uikit.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" />
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="~/css/agente-layout.css" />
+    <link rel="stylesheet" href="~/css/agente-panel.css" />
+    
+    @await RenderSectionAsync("Styles", required: false)
 </head>
-<body>
+<body class="uk-light">
 
     <!-- Navbar -->
-    <nav class="uk-navbar uk-navbar-container uk-margin uk-background-primary">
-        <div class="uk-navbar-left">
-            <a class="uk-navbar-item uk-logo uk-text-white" href="#">Xpectrum Airlines</a>
-        </div>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li><a href="/AgenteDeVuelos" class="uk-button uk-button-default uk-text-white">Gestionar Vuelos</a></li>
-                <li><a href="/AgenteDeVuelos/GestionAeronaves" class="uk-button uk-button-default uk-text-white">Gestionar Aeronaves</a></li>
-                <li><a href="/AgenteDeVuelos/GestionPasajeros" class="uk-button uk-button-default uk-text-white">Gestionar Pasajeros</a></li>
-                <li><a href="/AgenteDeVuelos/GestionVuelos" class="uk-button uk-button-default uk-text-white">Gestionar Vuelos</a></li>
-                <li><a href="/Shared/Logout" class="uk-button uk-button-default uk-text-white">Cerrar sesión</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container uk-navbar-transparent">
+            <div class="uk-container">
+                <div uk-navbar>
+                    <div class="uk-navbar-left">
+                        <a class="uk-navbar-item uk-logo" href="/AgenteDeVuelos">
+                            <i class="fas fa-plane-departure uk-margin-small-right"></i>
+                            Xpectrum Airlines
+                        </a>
+                    </div>
+                    <div class="uk-navbar-right">
+                        <ul class="uk-navbar-nav">
+                            <li class="@(ViewContext.RouteData.Values["Page"].ToString() == "/AgenteDeVuelos/Index" ? "uk-active" : "")">
+                                <a href="/AgenteDeVuelos">
+                                    <span class="uk-icon uk-margin-small-right" uk-icon="icon: home"></span>
+                                    Inicio
+                                </a>
+                            </li>
+                            <li class="@(ViewContext.RouteData.Values["Page"].ToString().Contains("GestionAeronaves") ? "uk-active" : "")">
+                                <a href="/AgenteDeVuelos/GestionAeronaves">
+                                    <span class="uk-icon uk-margin-small-right" uk-icon="icon: plane"></span>
+                                    Aeronaves
+                                </a>
+                            </li>
+                            <li class="@(ViewContext.RouteData.Values["Page"].ToString().Contains("GestionPasajeros") ? "uk-active" : "")">
+                                <a href="/AgenteDeVuelos/GestionPasajeros">
+                                    <span class="uk-icon uk-margin-small-right" uk-icon="icon: users"></span>
+                                    Pasajeros
+                                </a>
+                            </li>
+                            <li class="@(ViewContext.RouteData.Values["Page"].ToString().Contains("GestionVuelos") ? "uk-active" : "")">
+                                <a href="/AgenteDeVuelos/GestionVuelos">
+                                    <span class="uk-icon uk-margin-small-right" uk-icon="icon: calendar"></span>
+                                    Vuelos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="uk-icon uk-margin-small-right" uk-icon="icon: user"></span>
+                                    @User.Identity?.Name
+                                </a>
+                                <div class="uk-navbar-dropdown" uk-dropdown="mode: click; offset: 10">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li class="uk-nav-header">Mi Cuenta</li>
+                                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: cog"></span> Configuración</a></li>
+                                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: lock"></span> Cambiar Contraseña</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="/Account/Logout"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Cerrar Sesión</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     <!-- Contenido Principal -->
-    <div class="uk-container">
+    <div class="uk-container uk-margin-top uk-margin-bottom">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="uk-alert-success" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>@TempData["SuccessMessage"]</p>
+            </div>
+        }
+        
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="uk-alert-danger" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>@TempData["ErrorMessage"]</p>
+            </div>
+        }
+        
         @RenderBody()
     </div>
 
-    <!-- Footer -->
-    <footer class="uk-section uk-section-small uk-background-muted uk-text-center">
-        <div class="uk-container">
-            <p class="uk-text-meta">© 2025 Xpectrum Airlines. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
+    
     <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.0/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.0/dist/js/uikit-icons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit-icons.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"></script>
+    
+    <!-- Scripts personalizados -->
+    <script>
+        // Mostrar notificaciones con SweetAlert2
+        function showNotification(type, message) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
 
-    @RenderSection("Scripts", required: false) <!-- 👈 ESTA LÍNEA ES LA CLAVE -->
+            Toast.fire({
+                icon: type,
+                title: message
+            });
+        }
+
+        // Mostrar notificaciones desde TempData
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = '@(TempData["SuccessMessage"] ?? "")';
+            const errorMessage = '@(TempData["ErrorMessage"] ?? "")';
+            
+            if (successMessage) {
+                showNotification('success', successMessage);
+            }
+            
+            if (errorMessage) {
+                showNotification('error', errorMessage);
+            }
+        });
+
+        // Confirmación para acciones de eliminación
+        function confirmDelete(event, formId) {
+            event.preventDefault();
+            
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Esta acción no se puede deshacer',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,5 +1,7 @@
 wwwroot\css\admin-layout.css
 wwwroot\css\admin-panel.css
+wwwroot\css\agente-layout.css
+wwwroot\css\agente-panel.css
 wwwroot\css\cuerpo.css
 wwwroot\css\estiloboletos.css
 wwwroot\css\footer.css
@@ -149,3 +151,5 @@ C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.js
 C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\agente-panel.css
+C:\Users\Bytezon\Desktop\XpectrumAirlines\wwwroot\css\agente-layout.css
