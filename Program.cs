@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using Xpectrum_Structure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,13 +51,23 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true; // Permite que la sesión se renueve
     });
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 var app = builder.Build();
+
+// Configuración de localización (idiomas soportados)
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("es-ES"), // Establece el idioma predeterminado a español
+    SupportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("es-ES") },
+    SupportedUICultures = new[] { new CultureInfo("en-US"), new CultureInfo("es-ES") }
+});
 
 // Configuración de error para producción
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+    app.UseExceptionHandler("/Error"); // Página de errores genérica
+    app.UseHsts(); // HSTS en producción
 }
 
 app.UseHttpsRedirection();

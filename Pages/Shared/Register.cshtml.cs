@@ -1,16 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Xpectrum_Structure.Pages.Profile
+namespace Xpectrum_Structure.Pages.Shared
 {
     public class RegisterModel : PageModel
     {
         [BindProperty]
         public InputModel Input { get; set; }
+
+        // Definir la cadena de conexión para toda la clase
+        private readonly string _connectionString = "Server=xpectrum.mssql.somee.com;Database=xpectrum;User Id=KKevinyouman2004_SQLLogin_2;Password=Kevinyouman2004;TrustServerCertificate=True;Encrypt=True;MultipleActiveResultSets=True;Connection Timeout=30;";
 
         [TempData]
         public string Message { get; set; }
@@ -41,13 +44,12 @@ namespace Xpectrum_Structure.Pages.Profile
             [DataType(DataType.Date)]
             public DateTime FechaNacimiento { get; set; }
 
-
             [Required]
             [StringLength(255)]
             public string Direccion { get; set; }
         }
 
-
+        // Método para procesar el registro cuando se envía el formulario
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -57,10 +59,12 @@ namespace Xpectrum_Structure.Pages.Profile
 
             try
             {
-                string connectionString = "workstation id=xpectrum.mssql.somee.com;packet size=4096;user id=KKevinyouman2004_SQLLogin_2;pwd=Kevinyouman2004;data source=xpectrum.mssql.somee.com;persist security info=False;initial catalog=xpectrum;TrustServerCertificate=True";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                // Usar la cadena de conexión de la clase
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
                     await connection.OpenAsync();
+
+                    // La consulta SQL para insertar el nuevo usuario
                     string query = "INSERT INTO Usuarios (Nombre, Email, contra, Telefono, FechaNacimiento, Direccion, tipoUsuario, activo, fechaRegistro, estado, preferenciasNotificaciones) " +
                                    "VALUES (@Nombre, @Email, @contra, @Telefono, @FechaNacimiento, @Direccion, @tipoUsuario, @activo, @fechaRegistro, @estado, @preferenciasNotificaciones)";
 
@@ -73,8 +77,8 @@ namespace Xpectrum_Structure.Pages.Profile
                         command.Parameters.AddWithValue("@FechaNacimiento", Input.FechaNacimiento);
                         command.Parameters.AddWithValue("@Direccion", Input.Direccion);
 
-                        // Asignando "Vois" al campo tipoUsuario
-                        command.Parameters.AddWithValue("@tipoUsuario", "Void"); // Asigna "Cliente" como tipo de usuario
+                        // Asignando "Void" al campo tipoUsuario
+                        command.Parameters.AddWithValue("@tipoUsuario", "Void");
 
                         // Otros campos
                         command.Parameters.AddWithValue("@activo", true); // El usuario está activo por defecto
@@ -82,23 +86,27 @@ namespace Xpectrum_Structure.Pages.Profile
                         command.Parameters.AddWithValue("@estado", "Activo"); // Estado por defecto
                         command.Parameters.AddWithValue("@preferenciasNotificaciones", true); // Notificaciones habilitadas por defecto
 
+                        // Ejecutar la consulta
                         await command.ExecuteNonQueryAsync();
                     }
 
                 }
 
+                // Si todo salió bien, mostrar mensaje de éxito y redirigir
                 Message = "Registration successful! Please log in.";
                 IsSuccess = true;
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("/Profile/Welcome");
             }
             catch (Exception ex)
             {
+                // Si ocurre un error, mostrar mensaje de error
                 Message = "An error occurred while registering. Please try again.";
                 IsSuccess = false;
                 return Page();
             }
         }
 
+        // Método para hashear la contraseña usando SHA256
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

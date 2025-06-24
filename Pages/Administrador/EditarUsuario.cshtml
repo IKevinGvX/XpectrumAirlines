@@ -31,8 +31,19 @@
             <label class="uk-form-label" for="direccion">Dirección</label>
             <input class="uk-input" id="direccion" type="text" asp-for="Usuario.Direccion" value="@Model.Usuario.Direccion" />
         </div>
+        <div class="uk-margin">
+            <label for="TipoUsuario" class="uk-form-label">Tipo de Usuario</label>
+            <select asp-for="Usuario.TipoUsuario" class="uk-select">
+                @foreach (var tipo in Model.TiposUsuario)
+                {
+                    <option value="@tipo">@tipo</option>
+                }
+            </select>
+        </div>
 
         <button type="submit" class="uk-button uk-button-primary">Actualizar Usuario</button>
+        <!-- Botón para regresar -->
+        <a href="javascript:history.back()" class="uk-button uk-button-default uk-margin-left">Regresar</a>
     </form>
 
     @if (TempData["Mensaje"] != null)

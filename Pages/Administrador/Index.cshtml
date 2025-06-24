@@ -1,5 +1,4 @@
-﻿
-@page
+﻿@page
 @model Xpectrum_Structure.Pages.Administrador.IndexModel
 @{
     ViewData["Title"] = "Panel de Administrador";
@@ -7,26 +6,49 @@
 }
 
 <section class="admin-panel">
-    <div class="container">
+    <div class="uk-container uk-margin-large-top">
         <h1>Bienvenido, Administrador</h1>
         <p class="subtitle">Panel de gestión del sistema</p>
 
-        <div class="card-grid">
-            <a href="Administrador/GestionUsuarios" class="card">
-                <i class="fas fa-users-cog icon"></i>
-                <span>Gestión de Usuarios</span>
+        <div class="uk-grid uk-child-width-1-4@s uk-child-width-1-2@m uk-text-center" uk-grid>
+            <!-- Gestión de Usuarios -->
+            <a href="Administrador/GestionUsuarios" class="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-hover-large">
+                <div class="uk-card-media-top">
+                    <i class="fas fa-users-cog icon"></i>
+                </div>
+                <div class="uk-card-footer">
+                    <span>Gestión de Usuarios</span>
+                </div>
             </a>
-            <a href="Administrador/ConfiguracionSistema" class="card">
-                <i class="fas fa-cogs icon"></i>
-                <span>Configuración del Sistema</span>
+
+            <!-- Configuración del Sistema -->
+            <a href="Administrador/ConfiguracionSistema" class="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-hover-large">
+                <div class="uk-card-media-top">
+                    <i class="fas fa-cogs icon"></i>
+                </div>
+                <div class="uk-card-footer">
+                    <span>Configuración del Sistema</span>
+                </div>
             </a>
-            <a href="Administrador/Generales" class="card">
-                <i class="fas fa-chart-line icon"></i>
-                <span>Reportes Generales</span>
+
+            <!-- Reportes Generales -->
+            <a href="Administrador/Generales" class="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-hover-large">
+                <div class="uk-card-media-top">
+                    <i class="fas fa-chart-line icon"></i>
+                </div>
+                <div class="uk-card-footer">
+                    <span>Reportes Generales</span>
+                </div>
             </a>
-            <a href="/Shared/Logout" class="card logout">
-                <i class="fas fa-sign-out-alt icon"></i>
-                <span>Cerrar Sesión</span>
+
+            <!-- Cerrar Sesión -->
+            <a href="/Shared/Logout" class="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-hover-large uk-card-muted">
+                <div class="uk-card-media-top">
+                    <i class="fas fa-sign-out-alt icon"></i>
+                </div>
+                <div class="uk-card-footer">
+                    <span>Cerrar Sesión</span>
+                </div>
             </a>
         </div>
     </div>
@@ -43,48 +65,26 @@
         margin-bottom: 30px;
     }
 
-    .card-grid {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 25px;
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: #f5f5f5;
-        border-radius: 12px;
-        padding: 25px;
-        width: 220px;
-        text-decoration: none;
-        color: #333;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .card:hover {
-        background: #e0e0e0;
-        transform: translateY(-5px);
-    }
-
-    .card.logout {
-        background: #ffe6e6;
-        color: #b71c1c;
-    }
-
-    .card.logout:hover {
-        background: #ffcccc;
-    }
-
     .icon {
         font-size: 40px;
-        margin-bottom: 15px;
         color: #007bff;
     }
 
-    .card.logout .icon {
+    .uk-card-footer {
+        color: #333;
+        font-weight: bold;
+    }
+
+    .uk-card-muted {
+        background-color: #ffe6e6;
+    }
+
+        .uk-card-muted:hover {
+            background-color: #ffcccc;
+        }
+
+    /* Añadir transición a los iconos */
+    .uk-card:hover .icon {
         color: #d32f2f;
     }
 </style>

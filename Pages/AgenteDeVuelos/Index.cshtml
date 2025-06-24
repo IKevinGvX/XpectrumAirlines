@@ -1,0 +1,137 @@
+﻿@page
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.IndexModel
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Dashboard - Agente de Vuelos";
+    Layout = "_Layout";
+    var letras = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I" };
+}
+
+<h2 class="uk-heading-line uk-text-center"><span>Bienvenido Agente, ¿Qué Quieres Hacer Hoy?</span></h2>
+
+<!-- SECCIÓN: VUELOS -->
+<li>
+@if (Model.VuelosPaginados != null && Model.VuelosPaginados.Count > 0)
+{
+    <div class="uk-overflow-auto uk-animation-fade">
+        <table class="uk-table uk-table-divider uk-table-hover uk-table-striped uk-table-middle uk-animation-slide-bottom-small">
+            <thead>
+                <tr>
+                    <th>Vuelo ID</th>
+                    <th>Origen</th>
+                    <th>País Natal</th>
+                    <th>Fecha de Salida</th>
+                    <th>Hora de Salida</th>
+                    <th>Precio (USD)</th>
+                    <th>Precio (PEN)</th>
+                    <th>Estado</th>
+                    <th>Ver Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vuelo in Model.VuelosPaginados)
+                {
+                    var vueloJson = JsonSerializer.Serialize(vuelo);
+                    <tr onclick="mostrarDetalleVuelo('@Html.Raw(Uri.EscapeDataString(vueloJson))')" style="cursor:pointer;" class="uk-transition-toggle">
+                        <td>@vuelo.CodigoVuelo</td>
+                        <td>@vuelo.AeropuertoOrigen (@vuelo.CiudadOrigen)</td>
+                        <td>@vuelo.PaisOrigen</td>
+                        <td>@vuelo.FechaSalida.ToString("yyyy-MM-dd")</td>
+                        <td>@vuelo.HoraSalida</td>
+                        <td>@vuelo.PrecioUSD.ToString("C")</td>
+                        <td>@vuelo.PrecioPEN.ToString("C")</td>
+                        <td><span class="uk-label uk-label-success">@vuelo.EstadoVuelo</span></td>
+                        <td><a href="/AgenteDeVuelos/DetallesVuelo?codigoVuelo=@vuelo.CodigoVuelo" class="uk-button uk-button-primary uk-button-small">Ver Detalles</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación tipo A, B, C -->
+    <div class="uk-flex uk-flex-center uk-margin-top">
+        <ul class="uk-pagination uk-flex-center">
+            @for (int i = 1; i <= Model.TotalPaginas; i++)
+            {
+                var letra = letras.Length >= i ? letras[i - 1] : $"P{i}";
+                <li class="@(Model.Pagina == i ? "uk-active" : "")">
+                    <a href="?pagina=@i">@letra</a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <div class="uk-alert-primary uk-animation-fade uk-padding-small uk-margin">
+        <p>No se encontraron vuelos en la base de datos.</p>
+    </div>
+}
+</li>
+
+<!-- SECCIÓN: DETALLES DE VUELO -->
+<li>
+    <div class="uk-card uk-card-default uk-card-body">
+        <h3 class="uk-card-title">Detalles de Vuelo</h3>
+        <div id="detalle-vuelo">
+            <p>Haz clic en un vuelo para ver los detalles aquí.</p>
+        </div>
+    </div>
+</li>
+
+<!-- SECCIÓN: GESTIÓN DE PASAJEROS -->
+<li>
+    <a href="/AgenteDeVuelos/GestionPasajeros" class="uk-link-toggle">
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+            <h3 class="uk-card-title uk-link-heading">Gestión de Pasajeros</h3>
+            <p>Interfaz para listar, agregar o eliminar pasajeros.</p>
+        </div>
+    </a>
+</li>
+
+<!-- SECCIÓN: GESTIÓN DE AERONAVES -->
+<li>
+    <a href="/AgenteDeVuelos/GestionAeronaves" class="uk-link-toggle">
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+            <h3 class="uk-card-title uk-link-heading">Gestión de Aeronaves</h3>
+            <p>Interfaz para registrar o gestionar aeronaves disponibles.</p>
+        </div>
+    </a>
+</li>
+
+<!-- SECCIÓN: GESTIÓN DE VUELOS -->
+<li>
+    <a href="/AgenteDeVuelos/GestionVuelos" class="uk-link-toggle">
+        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+            <h3 class="uk-card-title uk-link-heading">Gestión de Vuelos</h3>
+            <p>Panel para crear o cancelar vuelos.</p>
+        </div>
+    </a>
+</li>
+
+<!-- SCRIPT PARA MOSTRAR DETALLES -->
+<script>
+    function mostrarDetalleVuelo(encodedJson) {
+        const vuelo = JSON.parse(decodeURIComponent(encodedJson));
+        const contenedor = document.getElementById("detalle-vuelo");
+
+        contenedor.innerHTML = `
+            <ul class="uk-list uk-list-divider">
+                <li><strong>Código:</strong> ${vuelo.codigoVuelo}</li>
+                <li><strong>Aerolínea:</strong> ${vuelo.aerolinea}</li>
+                <li><strong>Origen:</strong> ${vuelo.aeropuertoOrigen} (${vuelo.ciudadOrigen}, ${vuelo.paisOrigen})</li>
+                <li><strong>Fecha:</strong> ${vuelo.fechaSalida}</li>
+                <li><strong>Hora Salida:</strong> ${vuelo.horaSalida}</li>
+                <li><strong>Capitán:</strong> ${vuelo.tripulacionCapitan}</li>
+                <li><strong>Copiloto:</strong> ${vuelo.tripulacionCopiloto}</li>
+                <li><strong>Auxiliares:</strong> ${vuelo.tripulacionAuxiliares}</li>
+                <li><strong>Servicios:</strong> ${vuelo.serviciosAdicionales}</li>
+                <li><strong>Precio:</strong> ${vuelo.precioUSD} USD / ${vuelo.precioPEN} PEN</li>
+                <li><strong>Estado:</strong> ${vuelo.estadoVuelo}</li>
+            </ul>
+        `;
+
+        // Scroll automático al detalle
+        contenedor.scrollIntoView({ behavior: "smooth" });
+    }
+</script>

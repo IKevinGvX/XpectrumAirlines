@@ -11,6 +11,11 @@
 <div class="uk-container uk-margin-large-top">
     <h2 class="uk-heading-divider">👥 Gestión de Usuarios</h2>
 
+    <div class="uk-margin-bottom">
+        <a href="/Administrador" class="uk-button uk-button-default uk-border-rounded uk-box-shadow-small">Regresar</a>
+        <!-- Puedes agregar un botón de "Ver" para cada usuario si lo deseas -->
+    </div>
+
     <table class="uk-table uk-table-divider uk-table-hover uk-table-striped uk-box-shadow-medium uk-table-responsive">
         <thead>
             <tr>
@@ -49,10 +54,38 @@
                     </td>
                     <td>@user.PreferenciasNotificaciones</td>
                     <td class="uk-text-center">
-                        <a class="uk-button uk-button-primary uk-button-small" href="/Administrador/EditarUsuario?id=@user.UsuarioId">Editar</a>
+                        <a class="uk-button uk-button-primary uk-button-small uk-border-rounded uk-box-shadow-hover-large" href="/Administrador/EditarUsuario?id=@user.UsuarioId">Editar</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<style>
+    /* Efecto hover para el botón "Regresar" */
+    .uk-button-default:hover {
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    /* Efectos hover para los botones de "Editar" y "Ver" */
+    .uk-button-small:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+
+    .uk-button-secondary:hover {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    /* Mejorar la apariencia de las etiquetas de estado */
+    .uk-label-success {
+        background-color: #28a745;
+    }
+
+    .uk-label-danger {
+        background-color: #dc3545;
+    }
+</style>

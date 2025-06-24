@@ -87,31 +87,31 @@ namespace Xpectrum_Structure.Pages.Account
                 }
                 else if (userInfo.TipoUsuario == "Agente de vuelos")
                 {
-                    return RedirectToPage("/AgenteDeVuelos/GestionVuelos");
+                    return RedirectToPage("/AgenteDeVuelos/Index");
                 }
                 else if (userInfo.TipoUsuario == "Atención al cliente")
                 {
-                    return RedirectToPage("/AtencionAlCliente/ConsultaCliente");
+                    return RedirectToPage("/AtencionAlCliente/Index");
                 }
                 else if (userInfo.TipoUsuario == "Contabilidad")
                 {
-                    return RedirectToPage("/Contabilidad/GestionPagos");
+                    return RedirectToPage("/Contabilidad/Index");
                 }
                 else if (userInfo.TipoUsuario == "Supervisor de operaciones")
                 {
-                    return RedirectToPage("/Operaciones/SupervisionOperaciones");
+                    return RedirectToPage("/Operaciones/Index");
                 }
                 else if (userInfo.TipoUsuario == "Gerente de ventas")
                 {
-                    return RedirectToPage("/Ventas/VentaBoletos");
+                    return RedirectToPage("/Ventas/Index");
                 }
                 else if (userInfo.TipoUsuario == "Jefe de tripulación")
                 {
-                    return RedirectToPage("/Tripulacion/AsignarTripulacion");
+                    return RedirectToPage("/Tripulacion/Index");
                 }
                 else if (userInfo.TipoUsuario == "Encargado de equipaje")
                 {
-                    return RedirectToPage("/Equipaje/GestionEquipaje");
+                    return RedirectToPage("/Equipaje/Index");
                 }
                 else
                 {

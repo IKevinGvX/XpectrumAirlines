@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- UIkit CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/uikit@3.6.0/dist/css/uikit.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="uk-navbar uk-navbar-container uk-margin uk-background-primary">
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo uk-text-white" href="#">Xpectrum Airlines</a>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="/AgenteDeVuelos" class="uk-button uk-button-default uk-text-white">Gestionar Vuelos</a></li>
+                <li><a href="/AgenteDeVuelos/GestionAeronaves" class="uk-button uk-button-default uk-text-white">Gestionar Aeronaves</a></li>
+                <li><a href="/AgenteDeVuelos/GestionPasajeros" class="uk-button uk-button-default uk-text-white">Gestionar Pasajeros</a></li>
+                <li><a href="/AgenteDeVuelos/GestionVuelos" class="uk-button uk-button-default uk-text-white">Gestionar Vuelos</a></li>
+                <li><a href="/Shared/Logout" class="uk-button uk-button-default uk-text-white">Cerrar sesión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="uk-container">
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
+    <footer class="uk-section uk-section-small uk-background-muted uk-text-center">
+        <div class="uk-container">
+            <p class="uk-text-meta">© 2025 Xpectrum Airlines. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.0/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.0/dist/js/uikit-icons.min.js"></script>
+
+    @RenderSection("Scripts", required: false) <!-- 👈 ESTA LÍNEA ES LA CLAVE -->
+</body>
+</html>

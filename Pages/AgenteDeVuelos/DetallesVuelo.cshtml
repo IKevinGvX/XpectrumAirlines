@@ -1,4 +1,70 @@
-﻿@page
-@model Xpectrum_Structure.Pages.Agente_de_vuelo.DetallesVueloModel
+﻿@page "{codigoVuelo?}"
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.DetallesVueloModel
 @{
+    ViewData["Title"] = "Detalle del Vuelo";
+    Layout = "_Layout";
+}
+
+<h2 class="uk-heading-line uk-text-center uk-margin-top"><span>🛫 Detalle del Vuelo</span></h2>
+
+@if (Model.Vuelo != null)
+{
+    <div id="pdf-container" class="uk-container uk-margin-top uk-width-2xlarge uk-align-center uk-animation-fade">
+        <div class="uk-card uk-card-default uk-box-shadow-large uk-card-body uk-border-rounded" style="background: #f9f9f9;">
+            <h3 class="uk-heading-divider uk-text-primary">✈️ @Model.Vuelo.CodigoVuelo - @Model.Vuelo.Aerolinea</h3>
+            <table class="uk-table uk-table-small uk-table-divider uk-table-middle">
+                <tbody>
+                    <tr><td><strong>Origen</strong></td><td>@Model.Vuelo.AeropuertoOrigen (@Model.Vuelo.CiudadOrigen, @Model.Vuelo.PaisOrigen)</td></tr>
+                    <tr><td><strong>Destino</strong></td><td>@Model.Vuelo.CiudadDestino, @Model.Vuelo.PaisDestino</td></tr>
+                    <tr><td><strong>Fecha Salida</strong></td><td>@Model.Vuelo.FechaSalida:yyyy-MM-dd</td></tr>
+                    <tr><td><strong>Hora Salida</strong></td><td>@Model.Vuelo.HoraSalida</td></tr>
+                    <tr><td><strong>Fecha Llegada</strong></td><td>@Model.Vuelo.FechaLlegada:yyyy-MM-dd</td></tr>
+                    <tr><td><strong>Hora Llegada</strong></td><td>@Model.Vuelo.HoraLlegada</td></tr>
+                    <tr><td><strong>Aeronave</strong></td><td>ID @Model.Vuelo.AeronaveId</td></tr>
+                    <tr><td><strong>Capitán</strong></td><td>@Model.Vuelo.TripulacionCapitan</td></tr>
+                    <tr><td><strong>Copiloto</strong></td><td>@Model.Vuelo.TripulacionCopiloto</td></tr>
+                    <tr><td><strong>Auxiliares</strong></td><td>@Model.Vuelo.TripulacionAuxiliares</td></tr>
+                    <tr><td><strong>Escala</strong></td><td>@(Model.Vuelo.EscalaId.HasValue ? $"#{Model.Vuelo.EscalaId} - {Model.Vuelo.DuracionEscala} min" : "Sin escala")</td></tr>
+                    <tr><td><strong>Servicios</strong></td><td>@Model.Vuelo.ServiciosAdicionales</td></tr>
+                    <tr><td><strong>Tarifa Especial</strong></td><td>@Model.Vuelo.TarifaEspecial.ToString("C") @Model.Vuelo.Moneda</td></tr>
+                    <tr><td><strong>Precio USD</strong></td><td>@Model.Vuelo.PrecioUSD.ToString("C")</td></tr>
+                    <tr><td><strong>Precio PEN</strong></td><td>@Model.Vuelo.PrecioPEN.ToString("C")</td></tr>
+                    <tr><td><strong>Condiciones</strong></td><td>@Model.Vuelo.CondicionesAdicionales</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="uk-alert-danger uk-text-center uk-margin-top">
+        <p>⚠️ No se encontró el vuelo solicitado.</p>
+    </div>
+}
+<div class="uk-flex uk-flex-center uk-margin-top">
+    <button class="uk-button uk-button-default uk-margin-small-right" onclick="window.print()">
+        🖨️ Imprimir o Guardar PDF
+    </button>
+
+</div>
+
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function exportarSoloPDF() {
+            const elemento = document.getElementById("pdf-container");
+
+            const opciones = {
+                margin: 0,
+                filename: 'DetalleVuelo.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opciones).from(elemento).save();
+        }
+    </script>
 }

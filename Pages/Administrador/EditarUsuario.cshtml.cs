@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Xpectrum_Structure.Pages.Administrador
@@ -22,8 +23,8 @@ namespace Xpectrum_Structure.Pages.Administrador
                 conn.Open();
 
                 // Consulta para obtener los datos del usuario
-                string queryUser = @"SELECT usuarioId, nombre, email, telefono, direccion 
-                                     FROM usuarios WHERE usuarioId = @id";
+                string queryUser = @"SELECT usuarioId, nombre, email, telefono, direccion, tipoUsuario 
+                     FROM usuarios WHERE usuarioId = @id";
 
                 using (SqlCommand cmd = new SqlCommand(queryUser, conn))
                 {
@@ -37,6 +38,7 @@ namespace Xpectrum_Structure.Pages.Administrador
                             Usuario.Email = reader.GetString(2);
                             Usuario.Telefono = reader.IsDBNull(3) ? "" : reader.GetString(3);
                             Usuario.Direccion = reader.IsDBNull(4) ? "" : reader.GetString(4);
+                            Usuario.TipoUsuario = reader.GetString(5);
                         }
                     }
                 }
@@ -60,11 +62,13 @@ namespace Xpectrum_Structure.Pages.Administrador
                     conn.Open();
 
                     string query = @"UPDATE usuarios SET 
-                                    nombre = @nombre,
-                                    email = @correo,
-                                    telefono = @telefono,
-                                    direccion = @direccion
-                                    WHERE usuarioId = @id";
+                nombre = @nombre,
+                email = @correo,
+                telefono = @telefono,
+                direccion = @direccion,
+                tipoUsuario = @tipo
+                WHERE usuarioId = @id";
+
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -74,7 +78,7 @@ namespace Xpectrum_Structure.Pages.Administrador
                         cmd.Parameters.AddWithValue("@correo", Usuario.Email);
                         cmd.Parameters.AddWithValue("@telefono", Usuario.Telefono);
                         cmd.Parameters.AddWithValue("@direccion", Usuario.Direccion);
-
+                        cmd.Parameters.AddWithValue("@tipo", Usuario.TipoUsuario);
                         // Ejecutar el comando para actualizar los datos
                         int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -111,6 +115,22 @@ namespace Xpectrum_Structure.Pages.Administrador
             public string Email { get; set; }
             public string Telefono { get; set; }
             public string Direccion { get; set; }
+            public string TipoUsuario { get; set; } // NUEVO CAMPO
         }
+
+        public List<string> TiposUsuario { get; } = new List<string>
+{
+    "Cliente",
+    "Administrador",
+    "Agente de vuelos",
+    "Atención al cliente",
+    "Contabilidad",
+    "Supervisor de operaciones",
+    "Gerente de ventas",
+    "Jefe de tripulación",
+    "Encargado de equipaje",
+    "Usuario"
+};
+
     }
 }

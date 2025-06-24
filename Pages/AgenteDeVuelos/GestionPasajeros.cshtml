@@ -1,4 +1,139 @@
 ﻿@page
-@model Xpectrum_Structure.Pages.Agente_de_vuelo.GestionPasajerosModel
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionPasajerosModel
 @{
+    ViewData["Title"] = "Gestión de Pasajeros";
+    Layout = "_Layout";
+}
+
+
+<!-- Panel principal -->
+<div class="uk-section uk-section-muted uk-padding-large" style="background: linear-gradient(to right, #4facfe, #00f2fe); min-height: 100vh;">
+    <div class="uk-container">
+        <div class="uk-card uk-card-default uk-card-body uk-box-shadow-large uk-animation-slide-top-small">
+            <h2 class="uk-heading-line uk-text-center uk-text-bold"><span><span uk-icon="icon: users; ratio: 1.5"></span> Gestión de Pasajeros</span></h2>
+            <a href="/AgenteDeVuelos" class="uk-button uk-button-small uk-button-default uk-margin-small-bottom"><span uk-icon="arrow-left"></span> REGRESAR</a>
+
+            <!-- Botón para abrir el formulario de nuevo pasajero -->
+            <button class="uk-button uk-button-primary uk-margin-small-top" uk-toggle="target: #modal-agregar">
+                <span uk-icon="plus"></span> Nuevo Pasajero
+            </button>
+
+            <!-- Botón para redirigir a la página de reserva -->
+            <a href="/AgenteDeVuelos/GestionReserva" class="uk-button uk-button-primary uk-margin-small-top">
+                <span uk-icon="plus"></span> Reservar Cita
+            </a>
+
+            <div class="uk-overflow-auto uk-margin-top uk-animation-fade">
+                <table class="uk-table uk-table-hover uk-table-striped uk-table-divider uk-table-small">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>F. Nacimiento</th>
+                            <th>Activo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pasajero in Model.ListaPasajeros)
+                        {
+                            <tr>
+                                <td>@pasajero.UsuarioId</td>
+                                <td>@pasajero.Nombre</td>
+                                <td>@pasajero.Email</td>
+                                <td>@pasajero.Telefono</td>
+                                <td>@pasajero.Direccion</td>
+                                <td>@(pasajero.FechaNacimiento?.ToString("yyyy-MM-dd"))</td>
+                                <td><span class="uk-label @(pasajero.Activo ? "uk-label-success" : "uk-label-danger")">@(pasajero.Activo ? "Sí" : "No")</span></td>
+                                <td>@pasajero.Estado</td>
+                                <td>
+                                    <button class="uk-button uk-button-small uk-button-secondary" uk-toggle="target: #modal-editar-@pasajero.UsuarioId">Editar</button>
+                                    <button class="uk-button uk-button-small uk-button-danger" onclick="eliminarPasajero('@pasajero.UsuarioId')">Eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agregar un nuevo pasajero -->
+<div id="modal-agregar" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-background-muted">
+        <h3 class="uk-modal-title">Agregar Pasajero</h3>
+        <form method="post">
+            <div class="uk-margin">
+                <label class="uk-form-label">Nombre</label>
+                <input class="uk-input" name="Pasajero.Nombre" required />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Email</label>
+                <input class="uk-input" name="Pasajero.Email" required />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Teléfono</label>
+                <input class="uk-input" name="Pasajero.Telefono" />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Dirección</label>
+                <input class="uk-input" name="Pasajero.Direccion" />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">F. Nacimiento</label>
+                <input class="uk-input" type="date" name="Pasajero.FechaNacimiento" />
+            </div>
+            <div class="uk-margin">
+                <label><input class="uk-checkbox" type="checkbox" name="Pasajero.Activo" checked /> Activo</label>
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Estado</label>
+                <select class="uk-select" name="Pasajero.Estado">
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+            <button type="submit" class="uk-button uk-button-primary">Agregar</button>
+            <button class="uk-button uk-button-default uk-modal-close">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function eliminarPasajero(id) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `?handler=Eliminar&id=${id}`;
+                }
+            });
+        }
+
+        // Mostrar alerta de éxito si hay TempData["Mensaje"]
+        @if (TempData["Mensaje"] != null)
+        {
+                <text>
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: '@TempData["Mensaje"]',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                </text>
+        }
+    </script>
 }

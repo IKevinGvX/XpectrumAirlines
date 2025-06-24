@@ -1,0 +1,86 @@
+﻿@page "/AgenteDeVuelos/GestionProceso"
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionProcesoModel
+@{
+    ViewData["Title"] = "Gestion de Reservas";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <div class="uk-container">
+        <h1>Detalles de la Reserva de Vuelo</h1>
+
+        <!-- Dropdown para seleccionar un usuario -->
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3>Seleccionar Usuario</h3>
+            <form method="get">
+                <label for="userSelect">Seleccionar Usuario</label>
+                <select id="userSelect" class="uk-select">
+                    <option value="">Selecciona un usuario</option>
+                    @foreach (var usuario in Model.UsuariosList)
+                    {
+                        <option value="@usuario.UsuarioId">@usuario.Nombre</option>
+                    }
+                </select>
+            </form>
+        </div>
+
+        <!-- Información del Usuario -->
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3>Información del Usuario</h3>
+            <p><strong>Nombre:</strong> @Model.Usuarios.Nombre</p>
+            <p><strong>Email:</strong> @Model.Usuarios.Email</p>
+            <p><strong>Teléfono:</strong> @Model.Usuarios.Telefono</p>
+            <p><strong>Dirección:</strong> @Model.Usuarios.Direccion</p>
+        </div>
+
+        <!-- Detalles del Vuelo -->
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3>Detalles del Vuelo</h3>
+            <p><strong>Ciudad de Origen:</strong> @Model.Vuelos.CiudadOrigen</p>
+            <p><strong>País de Origen:</strong> @Model.Vuelos.PaisOrigen</p>
+            <p><strong>Código de Vuelo:</strong> @Model.Vuelos.CodigoVuelo</p>
+            <p><strong>Aerolínea:</strong> @Model.Vuelos.Aerolinea</p>
+        </div>
+
+        <!-- Pagos y Descuentos -->
+        <div class="uk-card uk-card-default uk-card-body">
+            <h3>Detalles de Pago</h3>
+            <p><strong>Precio USD:</strong> @Model.Vuelos.PrecioUSD</p>
+            <p><strong>Precio PEN:</strong> @Model.Vuelos.PrecioPEN</p>
+            <p><strong>Tarifa Especial:</strong> @Model.Vuelos.Tarifaespecial</p>
+            <p><strong>Total a Pagar:</strong> @Model.TotalPago</p>
+            <p><strong>Categoría:</strong> @Model.Categoria</p>
+            <p><strong>Descuento:</strong> @Model.Descuento</p>
+        </div>
+
+        <!-- Botón para continuar -->
+        <button class="uk-button uk-button-primary">Confirmar Reserva</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit.min.js"></script>
+
+    <script>
+        // Function to handle dropdown change
+        document.getElementById("userSelect").addEventListener("change", function() {
+            var usuarioId = this.value; // Get selected user ID
+            var codigoVuelo = '@Model.CodigoVuelo'; // Get the current flight code from the model
+
+            if (usuarioId) {
+                // Redirect to the same page with the selected usuarioId and codigoVuelo
+                window.location.href = '/AgenteDeVuelos/GestionProceso?usuarioId=' + usuarioId + '&codigoVuelo=' + codigoVuelo;
+            }
+        });
+
+    </script>
+
+</body>
+</html> 

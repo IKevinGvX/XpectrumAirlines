@@ -1,0 +1,147 @@
+﻿@page
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionAeronavesModel
+@{
+    ViewData["Title"] = "Gestionar Aeronaves";
+    Layout = "_Layout";
+}
+
+<!-- Panel principal -->
+<div class="uk-section uk-section-muted uk-padding-large" style="background-image: url('/img/airline-bg.jpg'); background-size: cover; background-position: center; min-height: 100vh;">
+    <div class="uk-container">
+        <div class="uk-card uk-card-default uk-card-body uk-box-shadow-large uk-animation-slide-top-small">
+            <h2 class="uk-heading-line uk-text-center uk-text-bold"><span><span uk-icon="icon: close; ratio: 1.5"></span> Gestión de Aeronaves</span></h2>
+            <a href="/AgenteDeVuelos" class="uk-button uk-button-small uk-button-default uk-margin-small-bottom"><span uk-icon="arrow-left"></span> REGRESAR</a>
+
+            <!-- Botón para abrir modal -->
+            <button class="uk-button uk-button-primary uk-margin-small-top" uk-toggle="target: #modal-agregar">
+                <span uk-icon="plus"></span> Nueva Aeronave
+            </button>
+
+            <!-- Tabla scrollable -->
+            <div class="uk-overflow-auto uk-margin-top uk-animation-fade">
+                <table class="uk-table uk-table-hover uk-table-striped uk-table-divider uk-table-small">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Modelo</th>
+                            <th>Capacidad</th>
+                            <th>Matrícula</th>
+                            <th>Año</th>
+                            <th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ListaAeronaves != null)
+                        {
+                            foreach (var aeronave in Model.ListaAeronaves)
+                            {
+                                <tr>
+                                    <td>@aeronave.AeronaveId</td>
+                                    <td>@aeronave.Modelo</td>
+                                    <td>@aeronave.Capacidad</td>
+                                    <td>@aeronave.Matricula</td>
+                                    <td>@aeronave.AñoFabricacion</td>
+                                    <td>@aeronave.TipoAeronave</td>
+                                    <td>
+                                        <button class="uk-button uk-button-small uk-button-secondary" uk-toggle="target: #modal-editar-@aeronave.AeronaveId">Editar</button>
+                                    </td>
+                                </tr>
+
+                                <!-- Modal de edición -->
+                                <div id="modal-editar-@aeronave.AeronaveId" uk-modal>
+                                    <div class="uk-modal-dialog uk-modal-body uk-background-muted">
+                                        <h3 class="uk-modal-title">Editar Aeronave</h3>
+                                        <form method="post" asp-page-handler="Editar">
+                                            <input type="hidden" name="Aeronave.AeronaveId" value="@aeronave.AeronaveId" />
+
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label">Modelo</label>
+                                                <input class="uk-input" name="Aeronave.Modelo" value="@aeronave.Modelo" required />
+                                            </div>
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label">Capacidad</label>
+                                                <input class="uk-input" type="number" name="Aeronave.Capacidad" value="@aeronave.Capacidad" required />
+                                            </div>
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label">Matrícula</label>
+                                                <input class="uk-input" name="Aeronave.Matricula" value="@aeronave.Matricula" />
+                                            </div>
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label">Año</label>
+                                                <input class="uk-input" type="number" name="Aeronave.AñoFabricacion" value="@aeronave.AñoFabricacion" />
+                                            </div>
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label">Tipo</label>
+                                                <input class="uk-input" name="Aeronave.TipoAeronave" value="@aeronave.TipoAeronave" />
+                                            </div>
+
+                                            <button type="submit" class="uk-button uk-button-primary">Guardar</button>
+                                            <button class="uk-button uk-button-default uk-modal-close">Cancelar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="7" class="uk-text-center uk-text-muted">No hay aeronaves registradas.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de agregar -->
+<div id="modal-agregar" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-background-muted">
+        <h3 class="uk-modal-title">Agregar Nueva Aeronave</h3>
+        <form method="post">
+            <div class="uk-margin">
+                <label class="uk-form-label">Modelo</label>
+                <input class="uk-input" name="Aeronave.Modelo" required />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Capacidad</label>
+                <input class="uk-input" type="number" name="Aeronave.Capacidad" required />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Matrícula</label>
+                <input class="uk-input" name="Aeronave.Matricula" />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Año</label>
+                <input class="uk-input" type="number" name="Aeronave.AñoFabricacion" />
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Tipo de Aeronave</label>
+                <input class="uk-input" name="Aeronave.TipoAeronave" />
+            </div>
+            <button type="submit" class="uk-button uk-button-primary">Agregar</button>
+            <button class="uk-button uk-button-default uk-modal-close">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function eliminarAeronave(id) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción no se puede deshacer.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `?handler=Eliminar&id=${id}`;
+            }
+        });
+    }
+</script>
+}

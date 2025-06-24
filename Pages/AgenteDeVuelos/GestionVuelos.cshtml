@@ -1,4 +1,60 @@
 ﻿@page
-@model Xpectrum_Structure.Pages.Agente_de_vuelo.GestionVuelosModel
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionVuelosModel
 @{
+    ViewData["Title"] = "Gestionar Vuelos";
+    Layout = "_Layout";  
 }
+<h2 class="uk-heading-divider uk-text-center">Gestionar Vuelos</h2>
+
+<!-- Formulario para agregar un vuelo -->
+<form method="post" class="uk-form-stacked">
+    <fieldset class="uk-fieldset">
+
+        <legend class="uk-legend">Agregar Nuevo Vuelo</legend>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="Origen">Origen</label>
+            <input class="uk-input" type="text" id="Origen" name="Vuelo.Origen" required />
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="Destino">Destino</label>
+            <input class="uk-input" type="text" id="Destino" name="Vuelo.Destino" required />
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="Fecha">Fecha</label>
+            <input class="uk-input" type="date" id="Fecha" name="Vuelo.Fecha" required />
+        </div>
+
+        <button type="submit" class="uk-button uk-button-primary">Agregar Vuelo</button>
+    </fieldset>
+</form>
+
+<!-- Tabla para mostrar los vuelos -->
+<h3 class="uk-heading-line uk-text-center"><span>Vuelos Disponibles</span></h3>
+
+<table class="uk-table uk-table-divider uk-table-hover uk-table-striped uk-table-responsive">
+    <thead>
+        <tr>
+            <th>Vuelo ID</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Aquí puedes utilizar un bucle para mostrar los datos de los vuelos -->
+        <tr>
+            <td>1</td>
+            <td>Lima</td>
+            <td>Cusco</td>
+            <td>2025-06-24</td>
+            <td>
+                <a href="/AgenteDeVuelos/DetallesVuelo" class="uk-button uk-button-small uk-button-default">Ver</a>
+                <a href="#" class="uk-button uk-button-small uk-button-danger">Eliminar</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

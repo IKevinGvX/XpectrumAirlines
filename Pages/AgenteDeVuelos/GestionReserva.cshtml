@@ -1,0 +1,69 @@
+﻿@page
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionReservasModel
+@{
+    ViewData["Title"] = "Gestion de Reservas";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+    <div class="uk-container">
+        <h1>Vuelos y Aeropuertos</h1>
+
+        <!-- Verifica si AeropuertosVuelos no es null y tiene datos -->
+        @if (Model.AeropuertosVueloss != null && Model.AeropuertosVueloss.Any())
+        {
+            <table class="uk-table uk-table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Ciudad</th>
+                        <th>País</th>
+                        <th>Código de Vuelo</th>
+                        <th>Aerolínea</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var aeropuertoVuelo in Model.AeropuertosVueloss)
+                    {
+                        <tr>
+                            <td>@aeropuertoVuelo.Nombre</td>
+                            <td>@aeropuertoVuelo.Ciudad</td>
+                            <td>@aeropuertoVuelo.Pais</td>
+                            <td>@aeropuertoVuelo.CodigoVuelo</td>
+                            <td>@aeropuertoVuelo.Aerolinea</td>
+                            <td>
+                                <!-- Al hacer clic, redirigir directamente a la página de gestion de proceso -->
+                                <button class="uk-button uk-button-primary" onclick="redirigirAProceso('@aeropuertoVuelo.CodigoVuelo')">Reservar</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No se encontraron vuelos ni aeropuertos.</p>
+        }
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit.min.js"></script>
+
+    <script>
+        function redirigirAProceso(codigoVuelo) {
+            // Redirigir directamente a la página de gestion de proceso con el codigoVuelo
+            window.location.href = `/AgenteDeVuelos/GestionProceso?codigoVuelo=${codigoVuelo}`;
+        }
+    </script>
+
+</body>
+</html>
