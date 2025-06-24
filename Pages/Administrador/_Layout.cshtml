@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = null; // solo si esto es un layout personalizado, de lo contrario puedes quitarlo también
 }
 
@@ -7,28 +7,85 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - Xpectrum</title>
+    <title>@ViewData["Title"] - Xpectrum Admin</title>
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/css/uikit.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Custom Admin Styles -->
+    <link rel="stylesheet" href="~/css/admin-layout.css" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="~/favicon.ico">
 </head>
 <body>
-
-    <!-- Navbar o encabezado opcional -->
-    <nav class="uk-navbar-container uk-margin" uk-navbar>
+    <!-- Navigation -->
+    <nav class="uk-navbar-container" uk-navbar>
         <div class="uk-navbar-left">
-            <a class="uk-navbar-item uk-logo" href="/Administrador/Index">Xpectrum Admin</a>
+            <a class="uk-navbar-item uk-logo" href="/Administrador/">
+                <span>Xpectrum Airlines</span>
+            </a>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="/Administrador/"><i class="fas fa-home uk-margin-small-right"></i> Inicio</a></li>
+                <li><a href="/Administrador/GestionUsuarios"><i class="fas fa-users-cog uk-margin-small-right"></i> Usuarios</a></li>
+                <li><a href="/Administrador/ConfiguracionSistema"><i class="fas fa-cog uk-margin-small-right"></i> Configuración</a></li>
+                <li><a href="/Administrador/Generales"><i class="fas fa-chart-line uk-margin-small-right"></i> Reportes</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Cuerpo de la página -->
-    <div class="uk-container uk-margin-top">
+    <!-- Main Content -->
+    <div class="uk-container uk-margin-top uk-margin-bottom">
+        @if (ViewData["Title"] != null)
+        {
+            <div class="uk-margin-medium-bottom">
+                <h1 class="uk-heading-line uk-text-center">
+                <span style="color: white">@ViewData["Title"]</span>
+                </h1>
+            </div>
+        }
+        
         @RenderBody()
     </div>
+
+    <!-- Footer -->
+    <footer class="uk-section uk-section-small uk-text-center uk-text-muted">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-center">
+                <div>
+                    <p class="uk-margin-remove">&copy; @DateTime.Now.Year Xpectrum Airlines. Todos los derechos reservados.</p>
+                    <p class="uk-text-small uk-margin-remove">v1.0.0</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit-icons.min.js"></script>
-
+    
+    <!-- Custom Scripts -->
+    <script>
+        // Initialize UIkit components
+        UIkit.util.ready(function() {
+            // Add active class to current nav item
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.uk-navbar-nav a').forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.closest('li').classList.add('uk-active');
+                }
+            });
+        });
+    </script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

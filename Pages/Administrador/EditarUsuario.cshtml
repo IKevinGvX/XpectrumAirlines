@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model Xpectrum_Structure.Pages.Administrador.EditarUsuarioModel
 @{
     ViewData["Title"] = "Editar Usuario";
@@ -8,43 +8,112 @@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<div class="uk-container uk-margin-large-top">
-    <h2 class="uk-heading-divider">✏️ Editar Usuario</h2>
+<div class="uk-container uk-margin-top">
+    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-medium-bottom">
+        <div>
+            <a href="javascript:history.back()" class="uk-button uk-button-text">
+                <span uk-icon="icon: arrow-left"></span> Volver
+            </a>
+            <h1 class="uk-heading-bullet uk-margin-remove-top">Editar Usuario</h1>
+        </div>
+    </div>
 
-    <form method="post">
-        <!-- Campo hidden para almacenar el usuarioId -->
-        <input type="hidden" asp-for="Usuario.UsuarioId" />
-
-        <div class="uk-margin">
-            <label class="uk-form-label" for="nombre">Nombre</label>
-            <input class="uk-input" id="nombre" type="text" asp-for="Usuario.Nombre" value="@Model.Usuario.Nombre" />
-        </div>
-        <div class="uk-margin">
-            <label class="uk-form-label" for="email">Email</label>
-            <input class="uk-input" id="email" type="email" asp-for="Usuario.Email" value="@Model.Usuario.Email" />
-        </div>
-        <div class="uk-margin">
-            <label class="uk-form-label" for="telefono">Teléfono</label>
-            <input class="uk-input" id="telefono" type="text" asp-for="Usuario.Telefono" value="@Model.Usuario.Telefono" />
-        </div>
-        <div class="uk-margin">
-            <label class="uk-form-label" for="direccion">Dirección</label>
-            <input class="uk-input" id="direccion" type="text" asp-for="Usuario.Direccion" value="@Model.Usuario.Direccion" />
-        </div>
-        <div class="uk-margin">
-            <label for="TipoUsuario" class="uk-form-label">Tipo de Usuario</label>
-            <select asp-for="Usuario.TipoUsuario" class="uk-select">
-                @foreach (var tipo in Model.TiposUsuario)
-                {
-                    <option value="@tipo">@tipo</option>
-                }
-            </select>
-        </div>
-
-        <button type="submit" class="uk-button uk-button-primary">Actualizar Usuario</button>
-        <!-- Botón para regresar -->
-        <a href="javascript:history.back()" class="uk-button uk-button-default uk-margin-left">Regresar</a>
-    </form>
+    <div class="uk-card uk-card-default uk-card-body uk-box-shadow-medium" style="border-radius: 8px;">
+        <form method="post" class="uk-form-stacked">
+            <input type="hidden" asp-for="Usuario.UsuarioId" />
+            
+            <div class="uk-grid-small" uk-grid>
+                <!-- Sección de información básica -->
+                <div class="uk-width-1-1">
+                    <div class="uk-card uk-card-small uk-card-body uk-card-secondary uk-light" style="border-radius: 6px; margin-bottom: 20px;">
+                        <h3 class="uk-card-title" style="font-size: 1.1rem;">
+                            <span uk-icon="icon: user" class="uk-margin-small-right"></span>
+                            Información Básica
+                        </h3>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-2@m">
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="nombre">Nombre Completo</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="nombre" type="text" asp-for="Usuario.Nombre" value="@Model.Usuario.Nombre" 
+                                   style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-2@m">
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="email">Correo Electrónico</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                                <input class="uk-input" id="email" type="email" asp-for="Usuario.Email" value="@Model.Usuario.Email" 
+                                       style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding-left: 40px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-2@m">
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="telefono">Teléfono</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon" uk-icon="icon: receiver"></span>
+                                <input class="uk-input" id="telefono" type="text" asp-for="Usuario.Telefono" value="@Model.Usuario.Telefono" 
+                                       style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding-left: 40px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-2@m">
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="direccion">Dirección</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon" uk-icon="icon: location"></span>
+                                <input class="uk-input" id="direccion" type="text" asp-for="Usuario.Direccion" value="@Model.Usuario.Direccion" 
+                                       style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding-left: 40px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-2@m">
+                    <div class="uk-margin">
+                        <label for="TipoUsuario" class="uk-form-label">Tipo de Usuario</label>
+                        <div class="uk-form-controls">
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                <select asp-for="Usuario.TipoUsuario" class="uk-select" 
+                                        style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding-left: 40px; -webkit-appearance: none; -moz-appearance: none; appearance: none;">
+                                    @foreach (var tipo in Model.TiposUsuario)
+                                    {
+                                        <option value="@tipo">@tipo</option>
+                                    }
+                                </select>
+                                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: triangle-down"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="uk-width-1-1 uk-margin-large-top">
+                    <div class="uk-flex uk-flex-right@m uk-flex-center uk-flex-wrap">
+                        <a href="javascript:history.back()" class="uk-button uk-button-default uk-margin-small-right" style="min-width: 120px;">
+                            <span uk-icon="icon: close"></span> Cancelar
+                        </a>
+                        <button type="submit" class="uk-button uk-button-primary" style="min-width: 150px;">
+                            <span uk-icon="icon: check"></span> Guardar Cambios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
     @if (TempData["Mensaje"] != null)
     {

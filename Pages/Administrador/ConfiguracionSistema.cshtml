@@ -1,62 +1,287 @@
-﻿@page
+@page
 @model Xpectrum_Structure.Pages.Administrador.ConfiguracionSistemaModel
 @{
     ViewData["Title"] = "Configuración del Sistema";
-    Layout = "_Layout"; // Asegúrate que _Layout incluya UIkit
+    Layout = "_Layout";
 }
 
-<div class="uk-container uk-margin-large-top">
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <h2 class="uk-heading-divider">⚙️ Configuración del Sistema</h2>
+<style>
+    .config-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .config-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    .config-badge {
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        padding: 4px 12px;
+        border-radius: 12px;
+    }
+    
+    .config-table th {
+        background: rgba(0, 0, 0, 0.2) !important;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .config-table td {
+        vertical-align: middle;
+        transition: background 0.2s ease;
+    }
+    
+    .config-table tbody tr {
+        transition: all 0.2s ease;
+        position: relative;
+    }
+    
+    .config-table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        transform: translateX(4px);
+    }
+    
+    .config-table tbody tr::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--accent);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+    
+    .config-table tbody tr:hover::after {
+        opacity: 1;
+    }
+    
+    .config-table tbody tr:hover td {
+        background: none !important;
+        position: relative;
+    }
+    
+    .config-input {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: #fff !important;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+    
+    .config-input:focus {
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 1px var(--accent) !important;
+    }
+    
+    .config-description {
+        font-size: 0.85rem;
+        opacity: 0.8;
+        line-height: 1.5;
+    }
+    
+    .config-key {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 0.9rem;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2px 6px;
+        border-radius: 4px;
+        display: inline-block;
+    }
+</style>
 
+<div class="uk-container uk-margin-top">
+    <!-- Header with Breadcrumb -->
+    <div class="uk-margin-bottom">
+        <ul class="uk-breadcrumb">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/Administrador">Panel</a></li>
+            <li><span>Configuración</span></li>
+        </ul>
+    </div>
+    
+    <!-- Page Header -->
+    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-medium-bottom">
+        <div>
+            <h1 class="uk-heading-bullet uk-margin-remove">
+                <span uk-icon="icon: settings; ratio: 1.3" class="uk-margin-small-right"></span>
+                Configuración del Sistema
+                <span class="uk-text-muted uk-text-small uk-margin-small-left">
+                    @Model.Configuraciones.Count configuraciones
+                </span>
+            </h1>
+            <p class="uk-text-muted uk-margin-remove-top">
+                <span uk-icon="icon: info" class="uk-margin-xsmall-right"></span>
+                Gestione la configuración general del sistema. Los cambios pueden afectar el comportamiento de la aplicación.
+            </p>
+        </div>
+        <div>
+            <a href="/Administrador" class="uk-button uk-button-default uk-button-small">
+                <span uk-icon="icon: arrow-left"></span> Volver
+            </a>
+        </div>
+    </div>
+
+    <!-- Success Message -->
     @if (TempData["Mensaje"] != null)
     {
-        <div class="uk-alert-success" uk-alert>
-            <p>@TempData["Mensaje"]</p>
+        <div class="uk-alert uk-alert-success uk-box-shadow-medium uk-animation-fade" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <div class="uk-flex uk-flex-middle">
+                <span uk-icon="icon: check-circle; ratio: 1.2" class="uk-margin-small-right"></span>
+                <div>
+                    <h4 class="uk-margin-remove-bottom">¡Configuración guardada!</h4>
+                    <p class="uk-margin-remove-top">@TempData["Mensaje"]</p>
+                </div>
+            </div>
         </div>
     }
 
-    <form method="post" class="uk-form-stacked">
-
-        <table class="uk-table uk-table-divider uk-table-hover uk-table-middle uk-table-responsive uk-box-shadow-medium uk-card uk-card-default">
-            <thead>
-                <tr>
-                    <th class="uk-text-bold">Clave</th>
-                    <th class="uk-text-bold">Valor</th>
-                    <th class="uk-text-bold uk-visible@s">Descripción</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Configuraciones.Count; i++)
-                {
-                    <tr>
-                        <td>
-                            @Model.Configuraciones[i].Clave
-                            <input type="hidden" asp-for="Configuraciones[@i].ConfiguracionSistemaId" />
-                            <input type="hidden" asp-for="Configuraciones[@i].Clave" />
-                        </td>
-                        <td>
-                            <input asp-for="Configuraciones[@i].Valor" class="uk-input uk-form-small uk-width-medium" />
-                        </td>
-                        <td class="uk-visible@s">
-                            <span class="uk-text-meta">@Model.Configuraciones[i].Descripcion</span>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        <div class="uk-margin-top">
-            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1" type="submit">
-                💾 Guardar Configuración
-            </button>
+    <!-- Configuration Card -->
+    <div class="uk-card uk-card-body uk-box-shadow-medium config-card uk-margin-bottom">
+        <div class="uk-card-badge uk-label uk-label-success config-badge">
+            <span uk-icon="icon: database" class="uk-margin-xsmall-right"></span>
+            @Model.Configuraciones.Count Configuraciones
         </div>
+        
+        <form method="post" class="uk-form-stacked">
+            <div class="uk-overflow-auto uk-margin-bottom">
+                <table class="uk-table uk-table-divider uk-table-hover uk-table-middle config-table">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-medium">
+                                <div class="uk-flex uk-flex-column">
+                                    <span class="uk-text-bold">Clave</span>
+                                    <span class="uk-text-meta">Identificador único</span>
+                                </div>
+                            </th>
+                            <th class="uk-width-large">
+                                <div class="uk-flex uk-flex-column">
+                                    <span class="uk-text-bold">Valor</span>
+                                    <span class="uk-text-meta">Establecer nuevo valor</span>
+                                </div>
+                            </th>
+                            <th class="uk-visible@m">
+                                <div class="uk-flex uk-flex-column">
+                                    <span class="uk-text-bold">Descripción</span>
+                                    <span class="uk-text-meta">Propósito de la configuración</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Configuraciones.Count; i++)
+                        {
+                            <tr>
+                                <td class="uk-text-nowrap">
+                                    <div class="uk-flex uk-flex-column">
+                                        <span class="config-key">@Model.Configuraciones[i].Clave</span>
+                                        <input type="hidden" asp-for="Configuraciones[@i].ConfiguracionSistemaId" />
+                                        <input type="hidden" asp-for="Configuraciones[@i].Clave" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="uk-inline uk-width-1-1">
+                                        <span class="uk-form-icon" uk-icon="icon: pencil"></span>
+                                        <input asp-for="Configuraciones[@i].Valor" 
+                                               class="uk-input uk-form-small config-input"
+                                               placeholder="Ingrese el valor..." />
+                                    </div>
+                                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState[$"Configuraciones[{i}].Valor"]?.Errors?.Count > 0)
+                                    {
+                                        <div class="uk-text-danger uk-text-small uk-margin-small-top">
+                                            @ViewData.ModelState[$"Configuraciones[{i}].Valor"].Errors[0].ErrorMessage
+                                        </div>
+                                    }
+                                </td>
+                                <td class="uk-visible@m">
+                                    <div class="config-description">
+                                        @if (!string.IsNullOrEmpty(Model.Configuraciones[i].Descripcion))
+                                        {
+                                            @Model.Configuraciones[i].Descripcion
+                                        }
+                                        else
+                                        {
+                                            <span class="uk-text-muted">Sin descripción disponible</span>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
 
-        <!-- Botón de "Regresar" -->
-        <div class="uk-margin-top uk-text-center">
-            <a href="javascript:history.back()" class="uk-button uk-button-default uk-button-large uk-width-1-1 uk-border-rounded">
-                🔙 Regresar
-            </a>
-        </div>
-    </form>
+            <div class="uk-flex uk-flex-between uk-flex-wrap uk-margin-large-top">
+                <div>
+                    <span class="uk-text-meta">
+                        <span uk-icon="icon: info" class="uk-margin-xsmall-right"></span>
+                        Los cambios se guardarán automáticamente al hacer clic en "Guardar Cambios"
+                    </span>
+                </div>
+                <div class="uk-margin-small-top">
+                    <a href="/Administrador" class="uk-button uk-button-default uk-margin-small-right">
+                        <span uk-icon="icon: close"></span> Cancelar
+                    </a>
+                    <button type="submit" class="uk-button uk-button-primary">
+                        <span uk-icon="icon: check" class="uk-margin-small-right"></span> Guardar Cambios
+                    </button>
+                </div>
+            </div>
+
+            <!-- Configuración avanzada -->
+            <div class="uk-margin-large-top uk-card uk-card-body uk-card-small uk-card-secondary uk-border-rounded">
+                <h3 class="uk-card-title uk-text-bold">
+                    <span uk-icon="icon: lock" class="uk-margin-small-right"></span>
+                    Configuración Avanzada
+                </h3>
+                <p class="uk-text-meta">
+                    Estas opciones afectan el comportamiento crítico del sistema. Modifíquelas con precaución.
+                </p>
+                <div class="uk-margin-top">
+                    <a href="#" class="uk-button uk-button-text uk-text-danger">
+                        <span uk-icon="icon: refresh"></span> Restaurar valores por defecto
+                    </a>
+                    <a href="#" class="uk-button uk-button-text uk-margin-small-left">
+                        <span uk-icon="icon: download"></span> Exportar configuración
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+
+<script>
+    // Add smooth scrolling to form elements
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add animation to form submission
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const submitButton = form.querySelector('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<span uk-spinner="ratio: 0.8"></span> Guardando...';
+                }
+            });
+        }
+        
+        // Add tooltips
+        UIkit.util.ready(function() {
+            UIkit.util.$$('[data-uk-tooltip]').forEach(function(el) {
+                UIkit.tooltip(el);
+            });
+        });
+    });
+</script>

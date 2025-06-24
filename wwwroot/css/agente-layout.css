@@ -1,0 +1,243 @@
+/* Agente Layout Styles */
+:root {
+    --primary: #0a192f;
+    --secondary: #112240;
+    --accent: #64ffda;
+    --text: #e6f1ff;
+    --text-secondary: #8892b0;
+    --bg: #0a192f;
+    --card-bg: rgba(17, 34, 64, 0.6);
+    --border: rgba(100, 255, 218, 0.1);
+}
+
+body {
+    background: var(--bg);
+    color: #ffffff !important;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Force white text for all elements */
+body * {
+    color: #ffffff !important;
+}
+
+/* Override any specific elements that might be overriding the white color */
+.uk-heading-bullet,
+.uk-table th,
+.uk-table td,
+.uk-navbar-item,
+.uk-navbar-nav > li > a,
+.uk-navbar-toggle,
+.uk-logo,
+.uk-card-title,
+.uk-form-label,
+.uk-button-default,
+.uk-button-text,
+.uk-breadcrumb > * > *,
+.uk-tab > * > a {
+    color: #ffffff !important;
+}
+
+/* Make sure placeholders are visible */
+::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1;
+}
+
+/* For WebKit browsers */
+::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* For Firefox */
+::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1;
+}
+
+/* For Microsoft Edge */
+::-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* For Internet Explorer 10-11 */
+:-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Navigation */
+.uk-navbar-container {
+    background: rgba(10, 25, 47, 0.85) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+}
+
+.uk-navbar-item, 
+.uk-navbar-nav > li > a,
+.uk-logo {
+    color: #ffffff !important;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    min-height: 70px;
+}
+
+.uk-logo {
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.uk-logo::before {
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+
+/* Container */
+.uk-container {
+    max-width: 1400px;
+    padding: 0 1.5rem;
+}
+
+/* Cards */
+.uk-navbar-dropdown {
+    background: var(--secondary);
+    border: 1px solid var(--border);
+}
+
+.uk-navbar-dropdown a {
+    color: #ffffff !important;
+}
+
+.uk-navbar-dropdown a:hover {
+    color: var(--accent) !important;
+}
+
+.uk-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.uk-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+}
+
+/* Buttons */
+.uk-button-primary {
+    background-color: var(--accent);
+    color: var(--primary) !important;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    padding: 0 20px;
+    height: 42px;
+    transition: all 0.3s ease;
+}
+
+.uk-button-primary:hover {
+    background-color: #52d9bb;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+}
+
+/* Tables */
+.table-container {
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.table-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.table-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: #ffffff;
+}
+
+.custom-table th {
+    background: rgba(17, 34, 64, 0.8);
+    color: var(--accent);
+    font-weight: 500;
+    padding: 15px 20px;
+    text-align: left;
+}
+
+.custom-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.custom-table tr:last-child td {
+    border-bottom: none;
+}
+
+.custom-table tr:hover {
+    background: rgba(100, 255, 218, 0.05);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 960px) {
+    .uk-container {
+        padding: 0 1rem;
+    }
+    
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .table-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

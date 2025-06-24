@@ -1,16 +1,23 @@
-﻿@page
+@page
 @model Xpectrum_Structure.Pages.Administrador.IndexModel
 @{
-    ViewData["Title"] = "Panel de Administrador";
-    Layout = "_Layout"; // o Layout personalizado si lo deseas
+    ViewData["Title"] = "Panel de Administrador - Xpectrum Airlines";
+    Layout = "_Layout";
 }
 
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- CDN de Font Awesome 6 (versión gratuita) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="~/css/admin-panel.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
 <section class="admin-panel">
+    <!-- Particles will be added here by JavaScript -->
     <div class="uk-container uk-margin-large-top">
         <h1>Bienvenido, Administrador</h1>
         <p class="subtitle">Panel de gestión del sistema</p>
 
-        <div class="uk-grid uk-child-width-1-4@s uk-child-width-1-2@m uk-text-center" uk-grid>
+        <div class="uk-grid uk-child-width-1-1 uk-text-center" uk-grid style="max-width: 500px; margin: 0 auto;">
             <!-- Gestión de Usuarios -->
             <a href="Administrador/GestionUsuarios" class="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-hover-large">
                 <div class="uk-card-media-top">
@@ -54,37 +61,7 @@
     </div>
 </section>
 
-<style>
-    .admin-panel {
-        padding: 40px;
-        text-align: center;
-    }
+<!-- Add the particles script -->
+<script src="~/js/admin-particles.js"></script>
 
-    .subtitle {
-        color: gray;
-        margin-bottom: 30px;
-    }
 
-    .icon {
-        font-size: 40px;
-        color: #007bff;
-    }
-
-    .uk-card-footer {
-        color: #333;
-        font-weight: bold;
-    }
-
-    .uk-card-muted {
-        background-color: #ffe6e6;
-    }
-
-        .uk-card-muted:hover {
-            background-color: #ffcccc;
-        }
-
-    /* Añadir transición a los iconos */
-    .uk-card:hover .icon {
-        color: #d32f2f;
-    }
-</style>

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\Xpectrum-Structure.csproj": {}
+    "C:\\Users\\Bytezon\\Desktop\\XpectrumAirlines\\Xpectrum-Structure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\Xpectrum-Structure.csproj": {
+    "C:\\Users\\Bytezon\\Desktop\\XpectrumAirlines\\Xpectrum-Structure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\Xpectrum-Structure.csproj",
+        "projectUniqueName": "C:\\Users\\Bytezon\\Desktop\\XpectrumAirlines\\Xpectrum-Structure.csproj",
         "projectName": "Xpectrum-Structure",
-        "projectPath": "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\Xpectrum-Structure.csproj",
-        "packagesPath": "C:\\Users\\PC - OS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC - OS\\source\\repos\\XpectrumAirlines\\obj\\",
+        "projectPath": "C:\\Users\\Bytezon\\Desktop\\XpectrumAirlines\\Xpectrum-Structure.csproj",
+        "packagesPath": "C:\\Users\\Bytezon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bytezon\\Desktop\\XpectrumAirlines\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC - OS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Bytezon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -79,6 +78,12 @@
               "target": "Package",
               "version": "[9.0.6, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[9.0.6, )"
@@ -103,15 +108,11 @@
             },
             "QRCoder": {
               "target": "Package",
-              "version": "[1.6.0, )"
+              "version": "[1.4.3, )"
             },
             "QRCoder-ImageSharp": {
               "target": "Package",
               "version": "[0.10.0, )"
-            },
-            "QrCode.Net": {
-              "target": "Package",
-              "version": "[0.4.0, )"
             },
             "System.Drawing.Common": {
               "target": "Package",
@@ -125,9 +126,9 @@
               "target": "Package",
               "version": "[2.4.1, )"
             },
-            "iTextSharp": {
+            "itext7": {
               "target": "Package",
-              "version": "[5.5.13.4, )"
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -144,15 +145,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.6, 9.0.6]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.6, 9.0.6]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.6, 9.0.6]"
+              "version": "[9.0.5, 9.0.5]"
             }
           ],
           "frameworkReferences": {
@@ -163,7 +164,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

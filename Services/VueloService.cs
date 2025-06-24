@@ -1,47 +1,51 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Xpectrum_Structure.Pages;
-using Xpectrum_Structure.Pages.Promotions;
+using Microsoft.EntityFrameworkCore;
+using Xpectrum_Structure.Data;
+using Xpectrum_Structure.Models;
+using Xpectrum_Structure.ViewModels;
 
-public class VueloService
+namespace Xpectrum_Structure.Services
 {
-    private readonly ApplicationDbContext _context;
-    private readonly VueloService _vueloService;
-
-    public async Task<List<VueloViewModel>> ListarVuelosAsync()
+    public class VueloService
     {
-        var vuelos = await _context.Vuelos
-            .FromSqlRaw("EXEC ListarVuelos") // Llamada al procedimiento almacenado
-            .ToListAsync();
+        private readonly ApplicationDbContext _context;
 
-        // Asegúrate de que 'vuelo' sea un objeto que coincida con 'VueloViewModel'
-        var vuelosViewModel = vuelos.Select(v => new VueloViewModel
+        public VueloService(ApplicationDbContext context)
         {
-            CodigoVuelo = v.CodigoVuelo,
-            AeropuertoOrigen = v.AeropuertoOrigen,
-            CiudadOrigen = v.CiudadOrigen,
-            FechaSalida = v.FechaSalida,
-            FechaLlegada = v.FechaLlegada,
-            EstadoVuelo = v.EstadoVuelo,
-            // Asegúrate de mapear los campos correctos
-        }).ToList();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
 
-        return vuelosViewModel;
-    }
-    public class Vuelos
-    {
-        public string CodigoVuelo { get; set; }
-        public DateTime? FechaSalida { get; set; }
-        public string HoraSalida { get; set; }
-        public DateTime? FechaLlegada { get; set; }
-        public string HoraLlegada { get; set; }
-        public string EstadoVuelo { get; set; }
-        public string Aerolinea { get; set; }
-        public double PrecioUSD { get; set; }
-        public double PrecioPEN { get; set; }
+        public async Task<List<VueloViewModel>> ListarVuelosAsync()
+        {
+            try
+            {
+                var vuelos = await _context.Vuelos
+                    .FromSqlRaw("EXEC ListarVuelos") // Llamada al procedimiento almacenado
+                    .ToListAsync();
 
-        // Nuevas propiedades para los datos del aeropuerto de origen
-        public string AeropuertoOrigen { get; set; }
-        public string CiudadOrigen { get; set; }
-        public string PaisOrigen { get; set; }
+                var vuelosViewModel = vuelos.Select(v => new VueloViewModel
+                {
+                    CodigoVuelo = v.CodigoVuelo,
+                    AeropuertoOrigen = v.AeropuertoOrigen,
+                    CiudadOrigen = v.CiudadOrigen,
+                    FechaSalida = v.FechaSalida,
+                    FechaLlegada = v.FechaLlegada,
+                    EstadoVuelo = v.EstadoVuelo,
+                    HoraSalida = v.HoraSalida,
+                    HoraLlegada = v.HoraLlegada,
+                    Aerolinea = v.Aerolinea,
+                    PrecioUSD = v.PrecioUSD,
+                    PrecioPEN = v.PrecioPEN
+                }).ToList();
+
+                return vuelosViewModel;
+            }
+            catch (Exception)
+            {
+                // Log the error (consider using ILogger)
+                return new List<VueloViewModel>();
+            }
+        }
     }
+
+    // La clase Vuelo ahora está en Xpectrum_Structure.Models
 }

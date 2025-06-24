@@ -13,18 +13,18 @@ builder.Services.AddRazorPages();
 // Configura HttpClient para BoletoService
 builder.Services.AddHttpClient<BoletoService>(client =>
 {
-    client.BaseAddress = new Uri("https://www.apiswagger.somee.com/"); // Cambié http a https
+    client.BaseAddress = new Uri("https://www.apiswagger.somee.com/"); // CambiÃ© http a https
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
-// Configuración de CORS
+// ConfiguraciÃ³n de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirTodo", builder =>
     {
         builder
             .AllowAnyOrigin()              // Permite cualquier origen
-            .AllowAnyMethod()              // Permite todos los métodos HTTP (GET, POST, etc)
+            .AllowAnyMethod()              // Permite todos los mÃ©todos HTTP (GET, POST, etc)
             .AllowAnyHeader();            // Permite todas las cabeceras
     });
 });
@@ -33,41 +33,52 @@ builder.Services.AddRazorPages().AddMvcOptions(options =>
     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 });
 
-// Configuración de la base de datos
+// ConfiguraciÃ³n de la base de datos
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseSqlServer(connectionString, sqlOptions => 
+    {
+        sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null);
+    });
+    options.EnableSensitiveDataLogging(builder.Environment.IsDevelopment());
+});
 
-// Registrar otros servicios personalizados
+// Registrar servicios personalizados
 builder.Services.AddScoped<FlightService>();
+builder.Services.AddScoped<VueloService>();
 
-// Configuración de la autenticación basada en cookies (si la estás utilizando)
+// ConfiguraciÃ³n de la autenticaciÃ³n basada en cookies (si la estÃ¡s utilizando)
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login"; // Página de login
-        options.LogoutPath = "/Account/Logout"; // Página de logout
+        options.LoginPath = "/Account/Login"; // PÃ¡gina de login
+        options.LogoutPath = "/Account/Logout"; // PÃ¡gina de logout
         options.Cookie.HttpOnly = true;  // Asegura que la cookie no sea accesible desde JavaScript
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Asegura que la cookie solo se envíe por HTTPS
-        options.SlidingExpiration = true; // Permite que la sesión se renueve
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Asegura que la cookie solo se envÃ­e por HTTPS
+        options.SlidingExpiration = true; // Permite que la sesiÃ³n se renueve
     });
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 var app = builder.Build();
 
-// Configuración de localización (idiomas soportados)
+// ConfiguraciÃ³n de localizaciÃ³n (idiomas soportados)
 app.UseRequestLocalization(new RequestLocalizationOptions
 {
-    DefaultRequestCulture = new RequestCulture("es-ES"), // Establece el idioma predeterminado a español
+    DefaultRequestCulture = new RequestCulture("es-ES"), // Establece el idioma predeterminado a espaÃ±ol
     SupportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("es-ES") },
     SupportedUICultures = new[] { new CultureInfo("en-US"), new CultureInfo("es-ES") }
 });
 
-// Configuración de error para producción
+// ConfiguraciÃ³n de error para producciÃ³n
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error"); // Página de errores genérica
-    app.UseHsts(); // HSTS en producción
+    app.UseExceptionHandler("/Error"); // PÃ¡gina de errores genÃ©rica
+    app.UseHsts(); // HSTS en producciÃ³n
 }
 
 app.UseHttpsRedirection();
@@ -78,9 +89,9 @@ app.UseCors("PermitirTodo");
 
 app.UseRouting();
 
-// Agregar autenticación y autorización
-app.UseAuthentication(); // Se coloca aquí, antes de UseAuthorization
-app.UseAuthorization();  // Se coloca aquí, después de UseAuthentication
+// Agregar autenticaciÃ³n y autorizaciÃ³n
+app.UseAuthentication(); // Se coloca aquÃ­, antes de UseAuthorization
+app.UseAuthorization();  // Se coloca aquÃ­, despuÃ©s de UseAuthentication
 
 app.MapRazorPages();
 
