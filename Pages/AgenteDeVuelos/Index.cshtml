@@ -73,8 +73,8 @@ else
 <li>
     <div class="uk-card uk-card-default uk-card-body">
         <h3 class="uk-card-title">Detalles de Vuelo</h3>
-        <div id="detalle-vuelo">
-            <p>Haz clic en un vuelo para ver los detalles aquí.</p>
+        <div id="detalle-vuelo" class="detalle-vuelo-container">
+            <p class="uk-text-muted">Haz clic en un vuelo para ver los detalles aquí.</p>
         </div>
     </div>
 </li>
@@ -116,7 +116,12 @@ else
         const contenedor = document.getElementById("detalle-vuelo");
 
         contenedor.innerHTML = `
-            <ul class="uk-list uk-list-divider">
+            <ul class="elementstyle" >
+                <style>
+                    #detalle-vuelo, #detalle-vuelo * {
+                        color: #000 !important;
+                    }
+                </style>
                 <li><strong>Código:</strong> ${vuelo.codigoVuelo}</li>
                 <li><strong>Aerolínea:</strong> ${vuelo.aerolinea}</li>
                 <li><strong>Origen:</strong> ${vuelo.aeropuertoOrigen} (${vuelo.ciudadOrigen}, ${vuelo.paisOrigen})</li>
@@ -139,15 +144,22 @@ else
     /* Estilos generales */
     body {
         background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
-        color: #e6f1ff;
+        color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         min-height: 100vh;
     }
+    .elementstyle {
+    background: #172a45;
+}
 
     /* Tarjetas de navegación */
     .uk-card {
-        background: rgba(23, 42, 69, 0.6) !important;
-        border: 1px solid rgba(100, 255, 218, 0.1);
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
+        color: #333;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         transition: all 0.3s ease;
         backdrop-filter: blur(10px);
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
@@ -169,6 +181,45 @@ else
     .uk-card-body p {
         color: #8892b0;
         margin-top: 10px;
+    }
+
+    /* Estilos para el contenedor de detalles de vuelo */
+    #detalle-vuelo {
+        background-color: #fff !important;
+        padding: 20px !important;
+        border-radius: 8px !important;
+        color: #333 !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    #detalle-vuelo * {
+        color: #333 !important;
+    }
+
+    #detalle-vuelo ul {
+        list-style-type: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    #detalle-vuelo li {
+        padding: 8px 0 !important;
+        border-bottom: 1px solid #eee !important;
+        color: #333 !important;
+    }
+
+    #detalle-vuelo li:last-child {
+        border-bottom: none !important;
+    }
+
+    #detalle-vuelo strong {
+        color: #1e87f0 !important;
+        margin-right: 8px !important;
+    }
+
+    /* Estilos para el texto del placeholder */
+    .uk-text-muted {
+        color: #666 !important;
     }
 
     /* Tabla de vuelos */

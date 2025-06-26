@@ -1,4 +1,4 @@
-﻿@page "{codigoVuelo?}"
+@page "{codigoVuelo?}"
 @model Xpectrum_Structure.Pages.AgenteDeVuelos.DetallesVueloModel
 @{
     ViewData["Title"] = "Detalle del Vuelo";
@@ -10,7 +10,7 @@
 @if (Model.Vuelo != null)
 {
     <div id="pdf-container" class="uk-container uk-margin-top uk-width-2xlarge uk-align-center uk-animation-fade">
-        <div class="uk-card uk-card-default uk-box-shadow-large uk-card-body uk-border-rounded" style="background: #f9f9f9;">
+        <div class="uk-card uk-card-default uk-box-shadow-large uk-card-body uk-border-rounded" style="background: #172a45;">
             <h3 class="uk-heading-divider uk-text-primary">@Model.Vuelo.CodigoVuelo - @Model.Vuelo.Aerolinea</h3>
             <table class="uk-table uk-table-small uk-table-divider uk-table-middle">
                 <tbody>
@@ -42,11 +42,24 @@ else
         <p>⚠️ No se encontró el vuelo solicitado.</p>
     </div>
 }
-<div class="uk-flex uk-flex-center uk-margin-top">
-    <button class="uk-button uk-button-default uk-margin-small-right" onclick="window.print()">
-        🖨️ Imprimir o Guardar PDF
+<div class="uk-flex uk-flex-center uk-margin-large-top">
+    <button class="uk-button uk-button-primary uk-button-large uk-box-shadow-hover-large" onclick="window.print()" 
+            style="background: linear-gradient(135deg, #1e87f0 0%, #0f6ecd 100%);
+                   color: white;
+                   top: -40px;
+                   border: none;
+                   border-radius: 50px;
+                   padding: 12px 30px;
+                   font-weight: 600;
+                   letter-spacing: 0.5px;
+                   text-transform: uppercase;
+                   transition: all 0.3s ease;
+                   position: relative;
+                   overflow: hidden;
+                   box-shadow: 0 4px 15px rgba(30, 135, 240, 0.3);">
+        <span class="uk-margin-small-right" uk-icon="icon: print"></span>
+        Imprimir o Guardar PDF
     </button>
-
 </div>
 
 

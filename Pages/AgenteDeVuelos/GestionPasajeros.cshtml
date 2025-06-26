@@ -63,51 +63,114 @@
                             </tr>
                             
                             <!-- Modal para editar pasajero -->
-                            <div id="modal-editar-@pasajero.UsuarioId" uk-modal>
-                                <div class="uk-modal-dialog uk-modal-body">
-                                    <button class="uk-modal-close-default" type="button" uk-close></button>
-                                    <h3 class="uk-modal-title">Editar Pasajero</h3>
-                                    <form method="post" asp-page-handler="Actualizar">
-                                        <input type="hidden" name="id" value="@pasajero.UsuarioId" />
-                                        <div class="uk-margin">
-                                            <label class="uk-form-label">Nombre</label>
-                                            <input class="uk-input" name="Nombre" value="@pasajero.Nombre" required />
-                                        </div>
-                                        <div class="uk-margin">
-                                            <label class="uk-form-label">Email</label>
-                                            <input class="uk-input" name="Email" value="@pasajero.Email" required />
-                                        </div>
-                                        <div class="uk-margin">
-                                            <label class="uk-form-label">Teléfono</label>
-                                            <input class="uk-input" name="Telefono" value="@pasajero.Telefono" />
-                                        </div>
-                                        <div class="uk-margin">
-                                            <label class="uk-form-label">Dirección</label>
-                                            <input class="uk-input" name="Direccion" value="@pasajero.Direccion" />
-                                        </div>
-                                        <div class="uk-margin">
-                                            <label class="uk-form-label">F. Nacimiento</label>
-                                            <input class="uk-input" type="date" name="FechaNacimiento" 
-                                                   value="@(pasajero.FechaNacimiento?.ToString("yyyy-MM-dd"))" />
-                                        </div>
-                                        <div class="uk-margin">
-                                            <label>
-                                                <input class="uk-checkbox" type="checkbox" name="Activo" 
-                                                       @(pasajero.Activo ? "checked" : "") /> Activo
-                                            </label>
-                                        </div>
-                                        <div class="uk-margin">
-                                            <label class="uk-form-label">Estado</label>
-                                            <select class="uk-select" name="Estado">
-                                                <option value="Activo" selected="@(pasajero.Estado == "Activo")">Activo</option>
-                                                <option value="Inactivo" selected="@(pasajero.Estado == "Inactivo")">Inactivo</option>
-                                            </select>
-                                        </div>
-                                        <div class="uk-margin uk-text-right">
-                                            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                                            <button type="submit" class="uk-button uk-button-primary">Guardar Cambios</button>
-                                        </div>
-                                    </form>
+                            <div id="modal-editar-@pasajero.UsuarioId" class="uk-modal-container" uk-modal>
+                                <div class="uk-modal-dialog uk-margin-auto-vertical" style="border-radius: 12px; overflow: hidden; max-width: 600px;">
+                                    <div class="uk-modal-header" style="background: linear-gradient(135deg, #1e87f0 0%, #0f6ecd 100%); padding: 20px 30px;">
+                                        <h2 class="uk-modal-title" style="color: white; margin: 0; font-size: 1.5em; display: flex; align-items: center;">
+                                            <span uk-icon="icon: user; ratio: 1.2" class="uk-margin-small-right"></span>
+                                            Editar Información del Pasajero
+                                        </h2>
+                                        <button class="uk-modal-close-default" type="button" uk-close style="color: white;"></button>
+                                    </div>
+                                    <div class="uk-modal-body" style="padding: 30px; background: #172a45; color: #e6f1ff;">
+                                        <form method="post" asp-page-handler="Actualizar" class="uk-form-stacked">
+                                            <input type="hidden" name="id" value="@pasajero.UsuarioId" />
+                                            
+                                            <div class="uk-grid-small" uk-grid>
+                                                <div class="uk-width-1-2@m">
+                                                    <label class="uk-form-label" style="font-weight: 600; color: #333; margin-bottom: 5px;">Nombre Completo</label>
+                                                    <div class="uk-form-controls">
+                                                        <input class="uk-input" type="text" name="Nombre" value="@pasajero.Nombre" required 
+                                                               style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-2@m">
+                                                    <label class="uk-form-label" style="font-weight: 600; color: #333; margin-bottom: 5px;">Email</label>
+                                                    <div class="uk-form-controls">
+                                                        <input class="uk-input" type="email" name="Email" value="@pasajero.Email" required
+                                                               style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Teléfono</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" type="tel" name="Telefono" value="@pasajero.Telefono" 
+                                                           style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Dirección</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" type="text" name="Direccion" value="@pasajero.Direccion"
+                                                           style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-grid-small" uk-grid>
+                                                <div class="uk-width-1-2@m">
+                                                    <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Fecha de Nacimiento</label>
+                                                    <div class="uk-form-controls">
+                                                        <input class="uk-input" type="date" name="FechaNacimiento" 
+                                                               value="@(pasajero.FechaNacimiento?.ToString("yyyy-MM-dd"))"
+                                                               style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                                                        <style>
+                                                            /* Estilo para el calendario en navegadores que lo soportan */
+                                                            input[type="date"]::-webkit-calendar-picker-indicator {
+                                                                filter: invert(1);
+                                                            }
+                                                        </style>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-2@m">
+                                                    <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Estado</label>
+                                                    <div class="uk-form-controls">
+                                                        <select class="uk-select" name="Estado" 
+                                                                style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                                                            <style>
+                                                                /* Estilo para las opciones del select */
+                                                                option {
+                                                                    background: #1a2d4a;
+                                                                    color: #e6f1ff;
+                                                                }
+                                                            </style>
+                                                            <option value="Activo" selected="@(pasajero.Estado == "Activo")">Activo</option>
+                                                            <option value="Inactivo" selected="@(pasajero.Estado == "Inactivo")">Inactivo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff;">Estado de la Cuenta</label>
+                                                <div class="uk-form-controls" style="margin-top: 5px;">
+                                                    <label style="cursor: pointer; display: flex; align-items: center;">
+                                                        <input class="uk-checkbox" type="checkbox" name="Activo" 
+                                                               @(pasajero.Activo ? "checked" : "") style="margin-right: 8px;"> 
+                                                        <span style="color: #e6f1ff;">Usuario Activo</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="uk-margin uk-text-right" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #2a3f5f;">
+                                                <button class="uk-button uk-button-default uk-modal-close" type="button" 
+                                                        style="border-radius: 6px; padding: 8px 20px; margin-right: 10px;
+                                                               background: #2a3f5f; color: #e6f1ff; border: 1px solid #3a4f6f;">
+                                                    Cancelar
+                                                </button>
+                                                <button type="submit" class="uk-button uk-button-primary" 
+                                                        style="background: linear-gradient(135deg, #1e87f0 0%, #0f6ecd 100%);
+                                                               border: none; border-radius: 6px; padding: 8px 25px;
+                                                               font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;
+                                                               box-shadow: 0 2px 10px rgba(30, 135, 240, 0.3);">
+                                                    <span uk-icon="icon: check" class="uk-margin-small-right"></span>
+                                                    Guardar Cambios
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -119,49 +182,109 @@
 </div>
 
 <!-- Modal para agregar un nuevo pasajero -->
-<div id="modal-agregar" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <h3 class="uk-modal-title">Agregar Nuevo Pasajero</h3>
-        <form method="post" asp-page-handler="Agregar">
-            <div class="uk-margin">
-                <label class="uk-form-label">Nombre Completo</label>
-                <input class="uk-input" name="Nombre" required />
-            </div>
-            <div class="uk-margin">
-                <label class="uk-form-label">Correo Electrónico</label>
-                <input class="uk-input" type="email" name="Email" required />
-            </div>
-            <div class="uk-margin">
-                <label class="uk-form-label">Teléfono</label>
-                <input class="uk-input" name="Telefono" />
-            </div>
-            <div class="uk-margin">
-                <label class="uk-form-label">Dirección</label>
-                <textarea class="uk-textarea" name="Direccion" rows="2"></textarea>
-            </div>
-            <div class="uk-margin">
-                <label class="uk-form-label">Fecha de Nacimiento</label>
-                <input class="uk-input" type="date" name="FechaNacimiento" />
-            </div>
-            <div class="uk-margin">
-                <label>
-                    <input class="uk-checkbox" type="checkbox" name="Activo" checked /> 
-                    Activo
-                </label>
-            </div>
-            <div class="uk-margin">
-                <label class="uk-form-label">Estado</label>
-                <select class="uk-select" name="Estado">
-                    <option value="Activo">Activo</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
-            </div>
-            <div class="uk-margin uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <button type="submit" class="uk-button uk-button-primary">Agregar</button>
-            </div>
-        </form>
+<div id="modal-agregar" class="uk-modal-container" uk-modal>
+    <div class="uk-modal-dialog uk-margin-auto-vertical" style="border-radius: 12px; overflow: hidden; max-width: 600px;">
+        <div class="uk-modal-header" style="background: linear-gradient(135deg, #1e87f0 0%, #0f6ecd 100%); padding: 20px 30px;">
+            <h3 class="uk-modal-title" style="color: white; margin: 0; font-size: 1.5em; display: flex; align-items: center;">
+                <span uk-icon="icon: user-plus; ratio: 1.2" class="uk-margin-small-right"></span>
+                Agregar Nuevo Pasajero
+            </h3>
+            <button class="uk-modal-close-default" type="button" uk-close style="color: white;"></button>
+        </div>
+        <div class="uk-modal-body" style="padding: 30px; background: #172a45; color: #e6f1ff;">
+            <form method="post" asp-page-handler="Agregar" class="uk-form-stacked">
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                        <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Nombre Completo</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" name="Nombre" required 
+                                   style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                        </div>
+                    </div>
+                    <div class="uk-width-1-2@m">
+                        <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Email</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="email" name="Email" required
+                                   style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Teléfono</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="tel" name="Telefono" 
+                               style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Dirección</label>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" name="Direccion" rows="2" 
+                                 style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff; resize: vertical;"></textarea>
+                    </div>
+                </div>
+
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-1-2@m">
+                        <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Fecha de Nacimiento</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="date" name="FechaNacimiento" 
+                                   style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                            <style>
+                                input[type="date"]::-webkit-calendar-picker-indicator {
+                                    filter: invert(1);
+                                }
+                            </style>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-2@m">
+                        <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Estado</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" name="Estado" 
+                                    style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
+                                <style>
+                                    option {
+                                        background: #1a2d4a;
+                                        color: #e6f1ff;
+                                    }
+                                </style>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff;">Estado de la Cuenta</label>
+                    <div class="uk-form-controls" style="margin-top: 5px;">
+                        <label style="cursor: pointer; display: flex; align-items: center;">
+                            <input class="uk-checkbox" type="checkbox" name="Activo" checked 
+                                   style="margin-right: 8px;"> 
+                            <span style="color: #e6f1ff;">Usuario Activo</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="uk-margin uk-text-right" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #2a3f5f;">
+                    <button class="uk-button uk-button-default uk-modal-close" type="button" 
+                            style="border-radius: 6px; padding: 8px 20px; margin-right: 10px;
+                                   background: #2a3f5f; color: #e6f1ff; border: 1px solid #3a4f6f;">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="uk-button uk-button-primary" 
+                            style="background: linear-gradient(135deg, #1e87f0 0%, #0f6ecd 100%);
+                                   border: none; border-radius: 6px; padding: 8px 25px;
+                                   font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;
+                                   box-shadow: 0 2px 10px rgba(30, 135, 240, 0.3);">
+                        <span uk-icon="icon: plus" class="uk-margin-small-right"></span>
+                        Agregar Pasajero
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -170,16 +293,57 @@
         function eliminarPasajero(id) {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡No podrás revertir esto!",
+                text: "¡No podrás revertir esta acción!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Sí, eliminar',
                 cancelButtonText: 'Cancelar',
                 customClass: {
                     confirmButton: 'uk-button uk-button-danger',
-                    cancelButton: 'uk-button uk-button-default'
+                    cancelButton: 'uk-button uk-button-default',
+                    container: 'swal-dark',
+                    popup: 'swal-dark',
+                    header: 'swal-dark',
+                    title: 'swal-dark',
+                    content: 'swal-dark',
+                    icon: 'swal-dark',
+                    actions: 'swal-actions',
+                    confirmButton: 'swal-confirm',
+                    cancelButton: 'swal-cancel',
+                    footer: 'swal-dark'
                 },
-                buttonsStyling: false
+                background: '#172a45',
+                color: '#e6f1ff',
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'uk-button uk-button-danger',
+                    cancelButton: 'uk-button uk-button-default',
+                    container: 'swal-dark',
+                    popup: 'swal-dark',
+                    header: 'swal-dark',
+                    title: 'swal-dark',
+                    content: 'swal-dark',
+                    icon: 'swal-dark',
+                    actions: 'swal-actions',
+                    confirmButton: 'swal-confirm',
+                    cancelButton: 'swal-cancel',
+                    footer: 'swal-dark'
+                },
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#2a3f5f',
+                confirmButtonText: '<span uk-icon="icon: trash"></span> Eliminar',
+                cancelButtonText: '<span uk-icon="icon: close"></span> Cancelar',
+                reverseButtons: true,
+                showClass: {
+                    popup: 'swal2-show',
+                    backdrop: 'swal2-backdrop-show',
+                    icon: 'swal2-icon-show'
+                },
+                hideClass: {
+                    popup: 'swal2-hide',
+                    backdrop: 'swal2-backdrop-hide',
+                    icon: 'swal2-icon-hide'
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = `?handler=Eliminar&id=${id}`;
@@ -203,13 +367,68 @@
     </script>
 }
 <style>
-
-.uk-light .uk-button-secondary {
-    background-color: #007bff;
-    color: #fff;
-}
-.uk-light .uk-label{
+    /* Estilos generales para modales oscuros */
+    .uk-light .uk-button-secondary {
+        background-color: #007bff;
+        color: #fff;
+    }
+    
+    .uk-light .uk-label {
         color: #2ed573;
-}
+    }
+    
+    /* Estilos para SweetAlert2 oscuro */
+    .swal2-popup.swal2-modal.swal2-show {
+        background-color: #172a45;
+        color: #e6f1ff;
+        border: 1px solid #2a3f5f;
+        border-radius: 12px;
+    }
+    
+    .swal2-title {
+        color: #e6f1ff !important;
+    }
+    
+    .swal2-content, .swal2-html-container {
+        color: #e6f1ff !important;
+    }
+    
+    .swal2-confirm {
+        background-color: #d33 !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 8px 20px !important;
+    }
+    
+    .swal2-cancel {
+        background-color: #2a3f5f !important;
+        color: #e6f1ff !important;
+        border: 1px solid #3a4f6f !important;
+        border-radius: 6px !important;
+        padding: 8px 20px !important;
+        margin-right: 10px !important;
+    }
+    
+    .swal2-actions {
+        margin: 1.25em auto 0 !important;
+    }
+    
+    /* Estilos para los inputs en los modales */
+    .uk-input, .uk-select, .uk-textarea {
+        background-color: #1a2d4a !important;
+        color: #e6f1ff !important;
+        border: 1px solid #2a3f5f !important;
+    }
+    
+    /* Estilo para el placeholder */
+    ::placeholder {
+        color: #8e9fb1 !important;
+        opacity: 1;
+    }
+    
+    /* Estilo para los labels */
+    .uk-form-label {
+        color: #e6f1ff !important;
+    }
 </style>
 
