@@ -23,7 +23,6 @@
                 </a>
             </div>
         </div>
-        
         <div class="table-responsive">
             <table class="custom-table">
                 <thead>
@@ -35,151 +34,24 @@
                         <th>Dirección</th>
                         <th>F. Nacimiento</th>
                         <th>Estado</th>
-                        <th class="uk-text-center">Acciones</th>
                     </tr>
                 </thead>
-                    <tbody>
-                        @foreach (var pasajero in Model.ListaPasajeros)
-                        {
-                            <tr>
-                                <td>@pasajero.UsuarioId</td>
-                                <td>@pasajero.Nombre</td>
-                                <td>@pasajero.Email</td>
-                                <td>@pasajero.Telefono</td>
-                                <td>@(string.IsNullOrEmpty(pasajero.Direccion) ? "-" : pasajero.Direccion)</td>
-                                <td>@(pasajero.FechaNacimiento?.ToString("yyyy-MM-dd") ?? "-")</td>
-                                
-                                <td>@(string.IsNullOrEmpty(pasajero.Estado) ? "-" : pasajero.Estado)</td>
-                                <td class="uk-text-center">
-                                    <div class="action-buttons">
-                                        <button class="uk-button uk-button-small uk-button-secondary" uk-toggle="target: #modal-editar-@pasajero.UsuarioId">
-                                            <span uk-icon="icon: pencil"></span>
-                                        </button>
-                                        <button class="uk-button uk-button-small uk-button-danger" onclick="eliminarPasajero('@pasajero.UsuarioId')">
-                                            <span uk-icon="icon: trash"></span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            
-                            <!-- Modal para editar pasajero -->
-                            <div id="modal-editar-@pasajero.UsuarioId" class="uk-modal-container" uk-modal>
-                                <div class="uk-modal-dialog uk-margin-auto-vertical" style="border-radius: 12px; overflow: hidden; max-width: 600px;">
-                                    <div class="uk-modal-header" style="background: linear-gradient(135deg, #1e87f0 0%, #0f6ecd 100%); padding: 20px 30px;">
-                                        <h2 class="uk-modal-title" style="color: white; margin: 0; font-size: 1.5em; display: flex; align-items: center;">
-                                            <span uk-icon="icon: user; ratio: 1.2" class="uk-margin-small-right"></span>
-                                            Editar Información del Pasajero
-                                        </h2>
-                                        <button class="uk-modal-close-default" type="button" uk-close style="color: white;"></button>
-                                    </div>
-                                    <div class="uk-modal-body" style="padding: 30px; background: #172a45; color: #e6f1ff;">
-                                        <form method="post" asp-page-handler="Actualizar" class="uk-form-stacked">
-                                            <input type="hidden" name="id" value="@pasajero.UsuarioId" />
-                                            
-                                            <div class="uk-grid-small" uk-grid>
-                                                <div class="uk-width-1-2@m">
-                                                    <label class="uk-form-label" style="font-weight: 600; color: #333; margin-bottom: 5px;">Nombre Completo</label>
-                                                    <div class="uk-form-controls">
-                                                        <input class="uk-input" type="text" name="Nombre" value="@pasajero.Nombre" required 
-                                                               style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-1-2@m">
-                                                    <label class="uk-form-label" style="font-weight: 600; color: #333; margin-bottom: 5px;">Email</label>
-                                                    <div class="uk-form-controls">
-                                                        <input class="uk-input" type="email" name="Email" value="@pasajero.Email" required
-                                                               style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="uk-margin">
-                                                <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Teléfono</label>
-                                                <div class="uk-form-controls">
-                                                    <input class="uk-input" type="tel" name="Telefono" value="@pasajero.Telefono" 
-                                                           style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
-                                                </div>
-                                            </div>
-
-                                            <div class="uk-margin">
-                                                <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Dirección</label>
-                                                <div class="uk-form-controls">
-                                                    <input class="uk-input" type="text" name="Direccion" value="@pasajero.Direccion"
-                                                           style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
-                                                </div>
-                                            </div>
-
-                                            <div class="uk-grid-small" uk-grid>
-                                                <div class="uk-width-1-2@m">
-                                                    <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Fecha de Nacimiento</label>
-                                                    <div class="uk-form-controls">
-                                                        <input class="uk-input" type="date" name="FechaNacimiento" 
-                                                               value="@(pasajero.FechaNacimiento?.ToString("yyyy-MM-dd"))"
-                                                               style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
-                                                        <style>
-                                                            /* Estilo para el calendario en navegadores que lo soportan */
-                                                            input[type="date"]::-webkit-calendar-picker-indicator {
-                                                                filter: invert(1);
-                                                            }
-                                                        </style>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-width-1-2@m">
-                                                    <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff; margin-bottom: 5px;">Estado</label>
-                                                    <div class="uk-form-controls">
-                                                        <select class="uk-select" name="Estado" 
-                                                                style="border-radius: 6px; border: 1px solid #2a3f5f; padding: 10px 15px; background: #1a2d4a; color: #e6f1ff;">
-                                                            <style>
-                                                                /* Estilo para las opciones del select */
-                                                                option {
-                                                                    background: #1a2d4a;
-                                                                    color: #e6f1ff;
-                                                                }
-                                                            </style>
-                                                            <option value="Activo" selected="@(pasajero.Estado == "Activo")">Activo</option>
-                                                            <option value="Inactivo" selected="@(pasajero.Estado == "Inactivo")">Inactivo</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="uk-margin">
-                                                <label class="uk-form-label" style="font-weight: 600; color: #e6f1ff;">Estado de la Cuenta</label>
-                                                <div class="uk-form-controls" style="margin-top: 5px;">
-                                                    <label style="cursor: pointer; display: flex; align-items: center;">
-                                                        <input class="uk-checkbox" type="checkbox" name="Activo" 
-                                                               @(pasajero.Activo ? "checked" : "") style="margin-right: 8px;"> 
-                                                        <span style="color: #e6f1ff;">Usuario Activo</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="uk-margin uk-text-right" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #2a3f5f;">
-                                                <button class="uk-button uk-button-default uk-modal-close" type="button" 
-                                                        style="border-radius: 6px; padding: 8px 20px; margin-right: 10px;
-                                                               background: #2a3f5f; color: #e6f1ff; border: 1px solid #3a4f6f;">
-                                                    Cancelar
-                                                </button>
-                                                <button type="submit" class="uk-button uk-button-primary" 
-                                                        style="background: linear-gradient(135deg, #1e87f0 0%, #0f6ecd 100%);
-                                                               border: none; border-radius: 6px; padding: 8px 25px;
-                                                               font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;
-                                                               box-shadow: 0 2px 10px rgba(30, 135, 240, 0.3);">
-                                                    <span uk-icon="icon: check" class="uk-margin-small-right"></span>
-                                                    Guardar Cambios
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                <tbody>
+                    @foreach (var pasajero in Model.ListaPasajeros)
+                    {
+                        <tr>
+                            <td>@pasajero.UsuarioId</td>
+                            <td>@pasajero.Nombre</td>
+                            <td>@pasajero.Email</td>
+                            <td>@pasajero.Telefono</td>
+                            <td>@(string.IsNullOrEmpty(pasajero.Direccion) ? "-" : pasajero.Direccion)</td>
+                            <td>@(pasajero.FechaNacimiento?.ToString("yyyy-MM-dd") ?? "-")</td>
+                            <td>@(string.IsNullOrEmpty(pasajero.Estado) ? "-" : pasajero.Estado)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-    </div>
-</div>
 
 <!-- Modal para agregar un nuevo pasajero -->
 <div id="modal-agregar" class="uk-modal-container" uk-modal>

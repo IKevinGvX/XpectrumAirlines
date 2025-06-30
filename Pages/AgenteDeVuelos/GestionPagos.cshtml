@@ -1,0 +1,101 @@
+﻿@page "/AgenteDeVuelos/GestionPagos"
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionPagosModel
+@{
+    ViewData["Title"] = "Pasarela de Pago";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="uk-container uk-margin-large-top">
+    <h2 class="uk-heading-divider">Pasarela de Pago</h2>
+
+    <div class="uk-grid-match uk-child-width-1-2@m uk-grid-small" uk-grid>
+        <!-- Panel Izquierdo -->
+        <div>
+            <div class="uk-card uk-card-default uk-card-body" style="background-color: rgba(30, 58, 95, 0.9); color: white;">
+                <h3 class="uk-card-title">Resumen de Reserva</h3>
+                <p><strong>Nombre del Cliente:</strong> @Model.NombreCliente</p>
+                <p><strong>Código de Vuelo:</strong> @Model.CodigoVuelo</p>
+                <p><strong>Total a Pagar:</strong> @Model.TotalPago.ToString("C")</p>
+                <p><strong>Descuento Aplicado:</strong> @Model.Descuento%</p>
+                <p><strong>Categoría:</strong> @Model.Categoria</p>
+                <p><strong>Tipo de Pago:</strong> @Model.TipoPago</p>
+            </div>
+        </div>
+
+        <ul uk-accordion class="uk-margin">
+            <li class="uk-open">
+                <a class="uk-accordion-title" href="#" style="color: white; background-color: #1e3a5f; padding: 10px;">Seleccionar Pasarela de Pago</a>
+                <div class="uk-accordion-content" style="background-color: #2a4a75; color: white; padding: 15px;">
+                    <form method="get" asp-page="/AgenteDeVuelos/ConfirmacionPago">
+                        <input type="hidden" name="reservaId" value="@Model.ReservaId" />
+                        <label for="tipoPago">Elige un método de pago</label>
+                        <select id="tipoPago" name="tipoPago" class="uk-select" onchange="mostrarTarjetaSeleccionada()" required>
+                            <option value="">Seleccione una pasarela</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="Yape">Yape</option>
+                            <option value="Plin">Plin</option>
+                            <option value="Interbank">Interbank</option>
+                            <option value="BCP">BCP</option>
+                            <option value="Pichincha">Banco Pichincha</option>
+                            <option value="WesternUnion">Western Union</option>
+                        </select>
+
+                        <button type="submit" class="uk-button uk-button-primary uk-margin-top uk-width-1-1">
+                            Proceder con el Pago
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+
+        </div>
+    </div>
+</div>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.getElementById("pagoForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Previene envío inmediato
+
+        const pasarela = document.getElementById("TipoPago").value;
+
+        if (!pasarela) {
+            Swal.fire({
+                icon: "warning",
+                title: "Falta seleccionar una pasarela",
+                text: "Por favor, elige un método de pago para continuar."
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: "¿Confirmar pago?",
+            text: `Procederás con el pago mediante ${TipoPago}.`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sí, confirmar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Simula un pequeño loading (opcional)
+                Swal.fire({
+                    title: "Procesando...",
+                    text: "Por favor, espera unos segundos",
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        setTimeout(() => {
+                            e.target.submit(); // Ahora sí envía el form
+                        }, 1200);
+                    }
+                });
+            }
+        });
+    });
+</script>

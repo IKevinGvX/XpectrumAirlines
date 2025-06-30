@@ -1,0 +1,89 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Aeropuertos.NuevoAeropuertoModel
+@{
+    ViewData["Title"] = "Nuevo Aeropuerto";
+    Layout = "_Layout";
+}
+
+<h2 class="uk-heading-line uk-text-center"><span>Registrar Nuevo Aeropuerto</span></h2>
+
+<form class="uk-form-stacked uk-margin-large" method="post" enctype="multipart/form-data">
+    <div class="uk-grid-small uk-child-width-1-2@s" uk-grid>
+        <div>
+            <label class="uk-form-label">Código IATA</label>
+            <input class="uk-input" type="text" name="CodigoIata" required />
+        </div>
+        <div>
+            <label class="uk-form-label">Nombre</label>
+            <input class="uk-input" type="text" name="Nombre" required />
+        </div>
+        <div>
+            <label class="uk-form-label">Ciudad</label>
+            <input class="uk-input" type="text" name="Ciudad" required />
+        </div>
+        <div>
+            <label class="uk-form-label">País</label>
+            <input class="uk-input" type="text" name="Pais" required />
+        </div>
+        <div>
+            <label class="uk-form-label">Latitud</label>
+            <input class="uk-input" type="number" step="0.000001" name="Latitud" required />
+        </div>
+        <div>
+            <label class="uk-form-label">Longitud</label>
+            <input class="uk-input" type="number" step="0.000001" name="Longitud" required />
+        </div>
+        <div>
+            <label class="uk-form-label">Zona Horaria</label>
+            <input class="uk-input" type="text" name="ZonaHoraria" />
+        </div>
+        <div>
+            <label class="uk-form-label">Imagen del Aeropuerto</label>
+            <input class="uk-input" type="file" name="Imagen" accept="image/*" />
+        </div>
+    </div>
+
+    <div id="previewContainer" class="uk-margin-top uk-text-center" style="display:none;">
+        <p class="uk-text-muted">Vista previa de la imagen:</p>
+        <img id="imagenPreview" style="max-height: 200px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.4); transition: opacity 0.4s ease-in-out;" />
+    </div>
+</form>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registro exitoso!',
+                text: '@TempData["SuccessMessage"]',
+                confirmButtonColor: '#1e3a5f'
+            });
+        </script>
+    }
+}
+
+<script>
+    document.querySelector('input[name="Imagen"]').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        const preview = document.getElementById('imagenPreview');
+        const container = document.getElementById('previewContainer');
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                container.style.display = 'block';
+                preview.style.opacity = '0';
+                setTimeout(() => {
+                    preview.style.opacity = '1';
+                }, 10);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            container.style.display = 'none';
+        }
+    });
+</script>

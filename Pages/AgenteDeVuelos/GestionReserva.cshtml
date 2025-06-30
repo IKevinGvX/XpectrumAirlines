@@ -1,7 +1,7 @@
 ﻿@page
 @model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionReservasModel
 @{
-    ViewData["Title"] = "Gestion de Reservas";
+    ViewData["Title"] = "Gestión de Reservas";
 }
 
 <!DOCTYPE html>
@@ -18,10 +18,18 @@
     <div class="uk-container">
         <h1>Vuelos y Aeropuertos</h1>
 
-        <!-- Verifica si AeropuertosVuelos no es null y tiene datos -->
+        <div class="uk-grid-small uk-child-width-1-2@s uk-margin-bottom" uk-grid>
+            <div>
+                <input class="uk-input" type="text" placeholder="Filtrar por Código de Vuelo" onkeyup="filtrarTabla()" id="filtroCodigo">
+            </div>
+            <div>
+                <input class="uk-input" type="text" placeholder="Filtrar por Aerolínea" onkeyup="filtrarTabla()" id="filtroAerolinea">
+            </div>
+        </div>
+
         @if (Model.AeropuertosVueloss != null && Model.AeropuertosVueloss.Any())
         {
-            <table class="uk-table uk-table-striped">
+            <table class="uk-table uk-table-striped" id="tablaReservas">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -42,7 +50,6 @@
                             <td>@aeropuertoVuelo.CodigoVuelo</td>
                             <td>@aeropuertoVuelo.Aerolinea</td>
                             <td>
-                                <!-- Al hacer clic, redirigir directamente a la página de gestion de proceso -->
                                 <button class="uk-button uk-button-primary" onclick="redirigirAProceso('@aeropuertoVuelo.CodigoVuelo')">Reservar</button>
                             </td>
                         </tr>
@@ -60,8 +67,25 @@
 
     <script>
         function redirigirAProceso(codigoVuelo) {
-            // Redirigir directamente a la página de gestion de proceso con el codigoVuelo
             window.location.href = `/AgenteDeVuelos/GestionProceso?codigoVuelo=${codigoVuelo}`;
+        }
+
+        function filtrarTabla() {
+            const inputCodigo = document.getElementById("filtroCodigo").value.toLowerCase();
+            const inputAerolinea = document.getElementById("filtroAerolinea").value.toLowerCase();
+            const tabla = document.getElementById("tablaReservas");
+            const filas = tabla.getElementsByTagName("tr");
+
+            for (let i = 1; i < filas.length; i++) {
+                const celdas = filas[i].getElementsByTagName("td");
+                const codigoVuelo = celdas[3]?.textContent.toLowerCase() || "";
+                const aerolinea = celdas[4]?.textContent.toLowerCase() || "";
+
+                const coincideCodigo = codigoVuelo.includes(inputCodigo);
+                const coincideAerolinea = aerolinea.includes(inputAerolinea);
+
+                filas[i].style.display = (coincideCodigo && coincideAerolinea) ? "" : "none";
+            }
         }
     </script>
 

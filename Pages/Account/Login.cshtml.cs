@@ -40,7 +40,6 @@ namespace Xpectrum_Structure.Pages.Account
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);  // Cerrar sesión
             return RedirectToPage("/Index");  // Redirigir a la página de inicio
         }
-
         public async Task<IActionResult> OnPost()
         {
             var result = ValidateUserLogin(Email, Password);
@@ -56,77 +55,53 @@ namespace Xpectrum_Structure.Pages.Account
                     return Page();
                 }
 
+                // Registrar login exitoso
+                RegistrarLogin(userInfo.UserId, true);
+
                 // Guardar el nombre del usuario en TempData (para usar en el perfil)
                 TempData["nombre"] = userInfo.name;
 
                 // Crear las claims para la sesión
                 var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, userInfo.name),
-                    new Claim(ClaimTypes.NameIdentifier, userInfo.UserId.ToString()),
-                    new Claim(ClaimTypes.Role, userInfo.TipoUsuario)  // Aquí cambiamos "Role" por "TipoUsuario"
-                };
+        {
+            new Claim(ClaimTypes.Name, userInfo.name),
+            new Claim(ClaimTypes.NameIdentifier, userInfo.UserId.ToString()),
+            new Claim(ClaimTypes.Role, userInfo.TipoUsuario)
+        };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
 
-                // Iniciar sesión
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-
-                // Actualizar la columna fechaUltimoLogin en la base de datos
                 UpdateLastLogin(userInfo.UserId);
 
                 // Redirigir según el tipo de usuario
-                if (userInfo.TipoUsuario == "Administrador")
+                switch (userInfo.TipoUsuario)
                 {
-                    return RedirectToPage("/Administrador/Index");
-                }
-                else if (userInfo.TipoUsuario == "Cliente")
-                {
-                    return RedirectToPage("/Index");
-                }
-                else if (userInfo.TipoUsuario == "Agente de vuelos")
-                {
-                    return RedirectToPage("/AgenteDeVuelos/Index");
-                }
-                else if (userInfo.TipoUsuario == "Atención al cliente")
-                {
-                    return RedirectToPage("/AtencionAlCliente/Index");
-                }
-                else if (userInfo.TipoUsuario == "Contabilidad")
-                {
-                    return RedirectToPage("/Contabilidad/Index");
-                }
-                else if (userInfo.TipoUsuario == "Supervisor de operaciones")
-                {
-                    return RedirectToPage("/Operaciones/Index");
-                }
-                else if (userInfo.TipoUsuario == "Gerente de ventas")
-                {
-                    return RedirectToPage("/Ventas/Index");
-                }
-                else if (userInfo.TipoUsuario == "Jefe de tripulación")
-                {
-                    return RedirectToPage("/Tripulacion/Index");
-                }
-                else if (userInfo.TipoUsuario == "Encargado de equipaje")
-                {
-                    return RedirectToPage("/Equipaje/Index");
-                }
-                else
-                {
-                    // Si el tipo de usuario es "Void" o no está definido, mostrar error
-                    TempData["ErrorMessage"] = "Acción no permitida. Contacte con soporte.";
-                    return RedirectToPage("/Erronea/PaginaErrorVoid");
+                    case "Administrador": return RedirectToPage("/Administrador/Index");
+                    case "Cliente": return RedirectToPage("/Index");
+                    case "Agente de vuelos": return RedirectToPage("/AgenteDeVuelos/Index");
+                    case "Atención al cliente": return RedirectToPage("/AtencionAlCliente/Index");
+                    case "Contabilidad": return RedirectToPage("/Contabilidad/Index");
+                    case "Supervisor de operaciones": return RedirectToPage("/Operaciones/Index");
+                    case "Gerente de ventas": return RedirectToPage("/Ventas/Index");
+                    case "Jefe de tripulación": return RedirectToPage("/Tripulacion/Index");
+                    case "Encargado de equipaje": return RedirectToPage("/Equipaje/Index");
+                    default:
+                        TempData["ErrorMessage"] = "Acción no permitida. Contacte con soporte.";
+                        return RedirectToPage("/Erronea/PaginaErrorVoid");
                 }
             }
             else
             {
-                // Mostrar error si las credenciales son incorrectas
+                // Registrar intento fallido (opcional: busca usuarioId real si se desea)
+                RegistrarLogin(0, false); // 0 si no sabemos quién es
+
                 TempData["ErrorMessage"] = result;
                 return Page();
             }
         }
+
 
         // Método para obtener la información del usuario desde la base de datos
         public (string name, int UserId, string TipoUsuario) GetUserInfoFromDb(string email)
@@ -192,6 +167,33 @@ namespace Xpectrum_Structure.Pages.Account
                 }
             }
         }
+        private void RegistrarLogin(int usuarioId, bool exito)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    string query = @"
+                INSERT INTO HistorialLogins (usuarioId, fechaLogin, exito, ipOrigen, agenteUsuario)
+                VALUES (@usuarioId, GETDATE(), @exito, @ipOrigen, @agenteUsuario);";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@usuarioId", usuarioId);
+                    cmd.Parameters.AddWithValue("@exito", exito);
+                    cmd.Parameters.AddWithValue("@ipOrigen", HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Desconocido");
+                    cmd.Parameters.AddWithValue("@agenteUsuario", Request.Headers["User-Agent"].ToString());
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log temporal para depuración rápida
+                System.IO.File.AppendAllText("logErroresLogin.txt", $"{DateTime.Now}: {ex.Message}{Environment.NewLine}");
+            }
+        }
+
 
         // Método para actualizar la fecha de último login
         public void UpdateLastLogin(int userId)

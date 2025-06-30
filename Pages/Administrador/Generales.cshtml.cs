@@ -64,6 +64,65 @@ namespace Xpectrum_Structure.Pages.Administrador
                 throw new Exception("Error al actualizar el estado de los usuarios", ex);
             }
         }
+        public ContentResult OnGetUltimosCambios()
+        {
+            var html = new System.Text.StringBuilder();
+
+            html.Append("<table style='width:100%; color:#e0e0e0; background-color:#0f172a; border-collapse:collapse; font-size: 0.9rem;'>");
+            html.Append("<thead style='background-color:#1e293b;'>");
+            html.Append("<tr style='color:#60a5fa; text-align:left;'>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>ID Usuario</th>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>Campo</th>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>Valor Anterior</th>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>Valor Nuevo</th>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>Operación</th>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>Fecha</th>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>Operador</th>");
+            html.Append("<th style='padding:8px; border-bottom:1px solid #334155;'>IP</th>");
+            html.Append("</tr></thead><tbody>");
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                string query = @"
+            SELECT TOP 10 
+                usuarioAfectadoId, campoModificado, valorAnterior, valorNuevo, 
+                operacion, fechaOperacion, usuarioOperadorId, ipOrigen 
+            FROM AuditoriaUsuarios
+            ORDER BY fechaOperacion DESC";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int? usuarioId = reader.IsDBNull(0) ? (int?)null : reader.GetInt32(0);
+                        string campo = reader.IsDBNull(1) ? "N/A" : reader.GetString(1);
+                        string valorAnterior = reader.IsDBNull(2) ? "N/A" : reader.GetString(2);
+                        string valorNuevo = reader.IsDBNull(3) ? "N/A" : reader.GetString(3);
+                        string operacion = reader.IsDBNull(4) ? "N/A" : reader.GetString(4);
+                        DateTime? fecha = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5);
+                        int? operadorId = reader.IsDBNull(6) ? (int?)null : reader.GetInt32(6);
+                        string ip = reader.IsDBNull(7) ? "N/A" : reader.GetString(7);
+
+                        html.Append("<tr style='border-bottom:1px solid #334155;'>");
+                        html.Append($"<td style='padding:8px'>{(usuarioId.HasValue ? usuarioId.ToString() : "Sin ID")}</td>");
+                        html.Append($"<td style='padding:8px'>{campo}</td>");
+                        html.Append($"<td style='padding:8px'>{valorAnterior}</td>");
+                        html.Append($"<td style='padding:8px'>{valorNuevo}</td>");
+                        html.Append($"<td style='padding:8px'>{operacion}</td>");
+                        html.Append($"<td style='padding:8px'>{(fecha.HasValue ? fecha.Value.ToString("g") : "Sin fecha")}</td>");
+                        html.Append($"<td style='padding:8px'>{(operadorId.HasValue ? operadorId.ToString() : "Desconocido")}</td>");
+                        html.Append($"<td style='padding:8px'>{ip}</td>");
+                        html.Append("</tr>");
+                    }
+                }
+            }
+
+            html.Append("</tbody></table>");
+            return Content(html.ToString(), "text/html");
+        }
 
 
         // Método para actualizar las preferencias de notificación
@@ -88,28 +147,55 @@ namespace Xpectrum_Structure.Pages.Administrador
                 cmd.ExecuteNonQuery();
             }
         }
-
-        // Método para realizar auditoría de cambios
         private void PerformUserAudit()
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
-                string query = "DECLARE @usuarioId INT, @estado NVARCHAR(50), @fechaUltimoLogin DATETIME, @fechaCambio DATETIME; " +
-                               "DECLARE usuarios_cursor CURSOR FOR " +
-                               "SELECT usuarioId, estado, fechaUltimoLogin " +
-                               "FROM usuarios; " +
-                               "OPEN usuarios_cursor; FETCH NEXT FROM usuarios_cursor INTO @usuarioId, @estado, @fechaUltimoLogin; " +
-                               "WHILE @@FETCH_STATUS = 0 BEGIN " +
-                               "SET @fechaCambio = GETDATE(); " +
-                               "INSERT INTO AuditoriaUsuarios (usuarioId, estadoAnterior, fechaUltimoLogin, fechaCambio) " +
-                               "VALUES (@usuarioId, @estado, @fechaUltimoLogin, @fechaCambio); " +
-                               "FETCH NEXT FROM usuarios_cursor INTO @usuarioId, @estado, @fechaUltimoLogin; " +
-                               "END CLOSE usuarios_cursor; DEALLOCATE usuarios_cursor;";
+                string query = @"
+        DECLARE @usuarioId INT, @estadoAnterior NVARCHAR(50), @fechaUltimoLogin DATETIME;
+        DECLARE usuarios_cursor CURSOR FOR
+        SELECT usuarioId, estado, fechaUltimoLogin FROM usuarios;
+
+        OPEN usuarios_cursor;
+        FETCH NEXT FROM usuarios_cursor INTO @usuarioId, @estadoAnterior, @fechaUltimoLogin;
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            INSERT INTO AuditoriaUsuarios (
+                usuarioAfectadoId,
+                operacion,
+                campoModificado,
+                valorAnterior,
+                valorNuevo,
+                fechaOperacion,
+                usuarioOperadorId,
+                ipOrigen,
+                observaciones
+            )
+            VALUES (
+                @usuarioId,
+                'UPDATE',
+                'estado',
+                @estadoAnterior,
+                'AUDITADO',
+                GETDATE(),
+                1, -- Cambia esto por el ID del admin si lo tienes disponible
+                '127.0.0.1', -- O usa HttpContext.Connection.RemoteIpAddress.ToString()
+                'Auditoría programada desde Generales.cshtml.cs'
+            );
+
+            FETCH NEXT FROM usuarios_cursor INTO @usuarioId, @estadoAnterior, @fechaUltimoLogin;
+        END;
+
+        CLOSE usuarios_cursor;
+        DEALLOCATE usuarios_cursor;
+        ";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
         }
+
     }
 }

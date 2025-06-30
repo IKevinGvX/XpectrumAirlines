@@ -1,0 +1,109 @@
+﻿@page
+@model Xpectrum_Structure.Pages.AtencionAlCliente.SoporteModel
+@{
+    ViewData["Title"] = "Soporte - Xpectrum";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-[Inter]">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/"><img src="~/img/loggo.jpg" class="w-36" alt="Xpectrum"></a>
+            <nav class="space-x-6">
+                <a href="/AtencionAlCliente/Index" class="hover:text-blue-600">Inicio</a>
+                <a href="/AtencionAlCliente/Soporte" class="text-blue-600 font-semibold">Soporte</a>
+                <a href="/Shared/Logout" class="text-red-500">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto py-10 px-4">
+        <div class="bg-white rounded-xl shadow p-6 mb-10">
+            <h1 class="text-xl font-bold text-gray-800 mb-6">Seleccionar Usuario</h1>
+            <form method="get">
+                <select asp-for="UsuarioIdSeleccionado" asp-items="Model.UsuariosLista" class="...">
+                    <option value="">-- Selecciona un usuario --</option>
+                </select>
+                <button type="submit" class="...">Cargar Datos</button>
+            </form>
+
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 mb-10">
+            <h1 class="text-xl font-bold text-gray-800 mb-6">Datos del Usuario</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-semibold text-gray-600">Nombre:</span> @Model.UsuarioActual?.Nombre</div>
+                <div><span class="font-semibold text-gray-600">Email:</span> @Model.UsuarioActual?.Email</div>
+                <div><span class="font-semibold text-gray-600">Teléfono:</span> @Model.UsuarioActual?.Telefono</div>
+                <div><span class="font-semibold text-gray-600">Dirección:</span> @Model.UsuarioActual?.Direccion</div>
+                <div><span class="font-semibold text-gray-600">Tipo Usuario:</span> @Model.UsuarioActual?.TipoUsuario</div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6">
+            <h1 class="text-xl font-bold text-gray-800 mb-6">Gestor de Soporte Aéreo</h1>
+            <form method="post">
+                <div class="mb-4">
+                    <label asp-for="NuevoTicket.Asunto" class="block text-sm font-semibold mb-1 text-gray-700">Asunto</label>
+                    <input asp-for="NuevoTicket.Asunto" class="w-full border border-gray-300 rounded-lg px-4 py-2" />
+                    <span asp-validation-for="NuevoTicket.Asunto" class="text-red-500 text-xs"></span>
+                </div>
+                <div class="mb-4">
+                    <label asp-for="NuevoTicket.Descripcion" class="block text-sm font-semibold mb-1 text-gray-700">Descripción del problema</label>
+                    <textarea asp-for="NuevoTicket.Descripcion" class="w-full border border-gray-300 rounded-lg px-4 py-2 h-32"></textarea>
+                    <span asp-validation-for="NuevoTicket.Descripcion" class="text-red-500 text-xs"></span>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Enviar Ticket</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 mt-10">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Tickets Recientes</h2>
+            <table class="w-full text-sm text-left border">
+                <thead>
+                    <tr class="text-gray-500 bg-gray-100">
+                        <th class="p-2">#</th>
+                        <th class="p-2">Asunto</th>
+                        <th class="p-2">Estado</th>
+                        <th class="p-2">Creado</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    @if (Model.ListaTickets != null)
+                    {
+                        foreach (var ticket in Model.ListaTickets)
+                        {
+                            <tr class="border-t">
+                                <td class="p-2">@ticket.TicketId</td>
+                                <td class="p-2">@ticket.Asunto</td>
+                                <td class="p-2">
+                                    <span class="px-2 py-1 rounded-full text-xs font-semibold
+                                                        @(ticket.EstadoTicket == "Pendiente" ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800")">
+                                        @ticket.EstadoTicket
+                                    </span>
+                                </td>
+                                <td class="p-2">@ticket.FechaCreacion.ToString("dd/MM/yyyy")</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t mt-10 py-6 text-center text-sm text-gray-500">
+        &copy; 2025 Xpectrum Airlines. Todos los derechos reservados.
+    </footer>
+</body>
+</html>

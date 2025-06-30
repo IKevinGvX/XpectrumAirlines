@@ -1,0 +1,222 @@
+﻿@page
+@model Contabilidad.IndexModel
+@{
+    ViewData["Title"] = "Contabilidad - Xpectrum";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Xpectrum Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #1b2a41;
+            color: #e0e0e0;
+        }
+
+        header, footer {
+            background: #131e31;
+            color: #00e1ff;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card, .chart-box {
+            background: #273849;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+            .card h3 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+                color: #88cfff;
+            }
+
+        .value {
+            font-size: 1.8rem;
+            color: #00ffc8;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 280px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panel Contable Xpectrum</h1>
+        <p>Bienvenido, Contador. Hoy es @DateTime.Now.ToString("dd MMMM yyyy")</p>
+        <nav>
+            <a href="/Contabilidad/LibroDiario">Libro Diario</a> |
+            <a href="/Contabilidad/BalanceGeneral">Balance General</a> |
+            <a href="/Contabilidad/FlujoEfectivo">Flujo de Efectivo</a> |
+            <a href="/Contabilidad/ResumenVentas">Resumen de Ventas</a>
+            <a href="/Shared/Logout">Cerrar Sesion</a>
+        </nav>
+    </header>
+
+    <header>
+        <h1>Panel Contable Xpectrum</h1>
+    </header>
+
+    <main class="dashboard">
+
+        <!-- KPI Cards -->
+        <div class="card">
+            <h3>Total Ventas</h3>
+            <div class="value">$16,250</div>
+        </div>
+        <div class="card">
+            <h3>Pagos del Mes</h3>
+            <div class="value">$9,840</div>
+        </div>
+        <div class="card">
+            <h3>Usuarios Activos</h3>
+            <div class="value">213</div>
+        </div>
+        <div class="card">
+            <h3>Tickets Abiertos</h3>
+            <div class="value">12</div>
+        </div>
+
+        <!-- Doughnut Chart -->
+        <div class="chart-box">
+            <h3>Distribución de Tipos de Usuario</h3>
+            <div class="chart-container">
+                <canvas id="tipoUsuarioChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="chart-box">
+            <h3>Usuarios por Estado</h3>
+            <div class="chart-container">
+                <canvas id="estadoUsuarioChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="chart-box">
+            <h3>Estado de Vuelos</h3>
+            <div class="chart-container">
+                <canvas id="estadoVuelosChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Line Chart -->
+        <div class="chart-box">
+            <h3>Evolución de Ventas (Últimos 6 meses)</h3>
+            <div class="chart-container">
+                <canvas id="ventasLineChart"></canvas>
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer>
+        <strong>Tareas del Contador:</strong>
+        <ul style="list-style: square; padding-left: 20px; line-height: 1.6;">
+            <li>✔ Validar las transacciones del día</li>
+            <li>✔ Revisar flujo de caja semanal</li>
+            <li>✔ Emitir reporte de ventas mensual</li>
+            <li>✔ Registrar pagos de proveedores</li>
+        </ul>
+        <p style="margin-top: 10px;">&copy; 2025 Xpectrum Airlines - Sistema Contable</p>
+    </footer>
+    <script>
+        // Gráfico Doughnut
+        new Chart(document.getElementById('tipoUsuarioChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Admin', 'Cliente', 'Técnico', 'Contador'],
+                datasets: [{
+                    data: [30, 100, 20, 10],
+                    backgroundColor: ['#00e1ff', '#ffaa00', '#85e085', '#ff4473']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#fff' } }
+                }
+            }
+        });
+
+        // Gráfico Bar
+        new Chart(document.getElementById('estadoUsuarioChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Activos', 'Inactivos'],
+                datasets: [{
+                    label: 'Usuarios',
+                    data: [213, 34],
+                    backgroundColor: ['#00ffc8', '#ff6f61']
+                }]
+            },
+            options: {
+                scales: {
+                    x: { ticks: { color: '#fff' } },
+                    y: { beginAtZero: true, ticks: { color: '#fff' } }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Gráfico Pie
+        new Chart(document.getElementById('estadoVuelosChart'), {
+            type: 'pie',
+            data: {
+                labels: ['En Vuelo', 'Programado', 'Retrasado', 'Cancelado'],
+                datasets: [{
+                    data: [10, 25, 5, 2],
+                    backgroundColor: ['#00bcd4', '#ff9800', '#ff3d00', '#9e9e9e']
+                }]
+            },
+            options: {
+                plugins: { legend: { position: 'bottom', labels: { color: '#fff' } } }
+            }
+        });
+
+        // Gráfico Line
+        new Chart(document.getElementById('ventasLineChart'), {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Ventas ($)',
+                    data: [4200, 4800, 5000, 4700, 5200, 6250],
+                    borderColor: '#00e1ff',
+                    backgroundColor: 'rgba(0, 225, 255, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                scales: {
+                    x: { ticks: { color: '#fff' } },
+                    y: { ticks: { color: '#fff' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#fff' } }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

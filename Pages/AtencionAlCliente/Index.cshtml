@@ -1,0 +1,164 @@
+﻿@page
+@model AtencionAlCliente.IndexModel
+@{
+    ViewData["Title"] = "Atención al Cliente - Xpectrum";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .card-hover:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Header / Navbar -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/">
+                <img src="~/img/loggo.jpg" alt="Xpectrum" class="w-36">
+            </a>
+            <nav class="space-x-6">
+                <a href="/AtencionAlCliente/Index" class="text-blue-600 font-semibold">Inicio</a>
+                <a href="/AtencionAlCliente/Soporte" class="hover:text-blue-500">Soporte</a>
+                <a href="/AtencionAlCliente/Reserva" class="hover:text-blue-500">Consultar Reserva</a>
+                <a href="/AtencionAlCliente/FAQ" class="hover:text-blue-500">FAQ</a>
+                <a href="/AtencionAlCliente/Contacto" class="hover:text-blue-500">Contacto</a>
+                <a href="/Shared/Logout" class="text-red-500 hover:underline">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Cards -->
+    <main class="max-w-7xl mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-blue-600 text-white p-6 rounded-xl shadow-md card-hover animate__animated animate__fadeIn">
+                <h3 class="text-xl font-bold mb-2">Total Reservas</h3>
+                <p class="text-sm mb-4">Resumen de todas las reservas actuales</p>
+                <p class="text-4xl font-semibold">@Model.TotalReservas</p>
+            </div>
+            <div class="bg-yellow-400 text-gray-900 p-6 rounded-xl shadow-md card-hover animate__animated animate__fadeIn animate__delay-1s">
+                <h3 class="text-xl font-bold mb-2">Usuarios Activos</h3>
+                <p class="text-sm mb-4">Usuarios conectados actualmente</p>
+                <p class="text-4xl font-semibold">@Model.UsuariosActivos</p>
+            </div>
+            <div class="bg-green-500 text-white p-6 rounded-xl shadow-md card-hover animate__animated animate__fadeIn animate__delay-2s">
+                <h3 class="text-xl font-bold mb-2">Tickets de Soporte</h3>
+                <p class="text-sm mb-4">Tickets pendientes de atención</p>
+                <p class="text-4xl font-semibold">@Model.TicketsPendientes</p>
+            </div>
+        </div>
+
+        <!-- Resumen rápido -->
+        <div class="mt-10 bg-white shadow rounded-xl">
+            <div class="p-6 border-b">
+                <h2 class="text-lg font-semibold">Resumen Rápido</h2>
+                <div class="mt-4 flex space-x-4">
+                    <button class="tablink text-sm px-4 py-2 bg-blue-100 text-blue-700 rounded-full active" onclick="openTab(event, 'reservas')">Últimas Reservas</button>
+                    <button class="tablink text-sm px-4 py-2 bg-blue-100 text-blue-700 rounded-full" onclick="openTab(event, 'tickets')">Últimos Tickets</button>
+                </div>
+            </div>
+            <div id="reservas" class="tabcontent p-6">
+                <table class="min-w-full text-sm text-left">
+                    <thead>
+                        <tr class="text-gray-500">
+                            <th>ID</th>
+                            <th>Vuelo</th>
+                            <th>Usuario</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        @foreach (var r in Model.UltimasReservas)
+                        {
+                            <tr>
+                                <td>@r.ReservaId</td>
+                                <td>@r.CodigoVuelo</td>
+                                <td>@r.NombreUsuario</td>
+                                <td><span class="font-semibold">@r.EstadoReserva</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div id="tickets" class="tabcontent p-6 hidden">
+                <table class="min-w-full text-sm text-left">
+                    <thead>
+                        <tr class="text-gray-500">
+                            <th>ID</th>
+                            <th>Asunto</th>
+                            <th>Usuario</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        @foreach (var t in Model.UltimosTickets)
+                        {
+                            <tr>
+                                <td>@t.TicketId</td>
+                                <td>@t.Asunto</td>
+                                <td>@t.NombreUsuario</td>
+                                <td><span class="font-semibold">@t.EstadoTicket</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 text-center text-sm py-6 mt-10">
+        <p>&copy; 2025 Xpectrum Airlines. Todos los derechos reservados.</p>
+        <div class="flex justify-center space-x-4 mt-2">
+            <a href="/AtencionAlCliente/FAQ" class="text-blue-500 hover:underline">FAQ</a>
+            <a href="/AtencionAlCliente/Politicas" class="text-blue-500 hover:underline">Políticas</a>
+            <a href="/AtencionAlCliente/Terminos" class="text-blue-500 hover:underline">Términos</a>
+            <a href="/AtencionAlCliente/Privacidad" class="text-blue-500 hover:underline">Privacidad</a>
+        </div>
+    </footer>
+
+    <script>
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.add("hidden");
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("bg-blue-500", "text-white");
+                tablinks[i].classList.add("bg-blue-100", "text-blue-700");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.remove("hidden");
+            evt.currentTarget.classList.add("bg-blue-500", "text-white");
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector(".tablink.active").click();
+        });
+    </script>
+</body>
+</html>

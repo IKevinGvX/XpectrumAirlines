@@ -2,59 +2,112 @@
 @model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionVuelosModel
 @{
     ViewData["Title"] = "Gestionar Vuelos";
-    Layout = "_Layout";  
+    Layout = "_Layout";
 }
 <h2 class="uk-heading-divider uk-text-center">Gestionar Vuelos</h2>
 
-<!-- Formulario para agregar un vuelo -->
-<form method="post" class="uk-form-stacked">
-    <fieldset class="uk-fieldset">
-
-        <legend class="uk-legend">Agregar Nuevo Vuelo</legend>
-
-        <div class="uk-margin">
-            <label class="uk-form-label" for="Origen">Origen</label>
-            <input class="uk-input" type="text" id="Origen" name="Vuelo.Origen" required />
-        </div>
-
-        <div class="uk-margin">
-            <label class="uk-form-label" for="Destino">Destino</label>
-            <input class="uk-input" type="text" id="Destino" name="Vuelo.Destino" required />
-        </div>
-
-        <div class="uk-margin">
-            <label class="uk-form-label" for="Fecha">Fecha</label>
-            <input class="uk-input" type="date" id="Fecha" name="Vuelo.Fecha" required />
-        </div>
-
-        <button type="submit" class="uk-button uk-button-primary">Agregar Vuelo</button>
-    </fieldset>
-</form>
+<!-- Botón para agregar nuevo aeropuerto -->
+<div class="uk-text-right uk-margin">
+    <a class="uk-button uk-button-primary uk-box-shadow-medium uk-border-pill" href="/AgenteDeVuelos/NuevoAeropuerto">
+        <span uk-icon="icon: plus"></span> Nuevo Aeropuerto
+    </a>
+</div>
 
 <!-- Tabla para mostrar los vuelos -->
 <h3 class="uk-heading-line uk-text-center"><span>Vuelos Disponibles</span></h3>
-
 <table class="uk-table uk-table-divider uk-table-hover uk-table-striped uk-table-responsive">
     <thead>
         <tr>
             <th>Vuelo ID</th>
+            <th>Código de Vuelo</th>
             <th>Origen</th>
             <th>Destino</th>
-            <th>Fecha</th>
+            <th>Fecha de Salida</th>
+            <th>Hora de Salida</th>
+            <th>Precio USD</th>
+            <th>Precio PEN</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Aquí puedes utilizar un bucle para mostrar los datos de los vuelos -->
-        <tr>
-            <td>1</td>
-            <td>Lima</td>
-            <td>Cusco</td>
-            <td>2025-06-24</td>
-            <td>
-                <a href="/AgenteDeVuelos/DetallesVuelo" class="uk-button uk-button-small uk-button-default">Ver</a>
-                <a href="#" class="uk-button uk-button-small uk-button-danger">Eliminar</a>
-            </td>
-        </tr>
+       @foreach (var vuelo in Model.Vuelos)
+       {
+           <tr>
+               <td>@vuelo.VueloId</td>
+               <td>@vuelo.CodigoVuelo</td>
+               <td>@vuelo.OrigenNombre, @vuelo.OrigenCiudad (@vuelo.OrigenCodigo)</td>
+               <td>@vuelo.DestinoNombre, @vuelo.DestinoCiudad (@vuelo.DestinoCodigo)</td>
+               <td>@vuelo.FechaSalida.ToString("dd/MM/yyyy")</td>
+               <td>@vuelo.HoraSalida.ToString(@"hh\:mm")</td>
+               <td>@vuelo.PrecioUSD</td>
+               <td>@vuelo.PrecioPEN</td>
+               <td>
+                   <button class="uk-button uk-button-primary" uk-toggle="target: #modal-@vuelo.VueloId">Ver Detalles</button>
+               </td>
+           </tr>
+
+           <!-- Modal individual por vuelo con estilo personalizado -->
+           <div id="modal-@vuelo.VueloId" uk-modal>
+               <div class="uk-modal-dialog uk-modal-body uk-width-2-3@m uk-background-secondary uk-light uk-border-rounded">
+                   <button class="uk-modal-close-default" type="button" uk-close></button>
+                   <h3 class="uk-modal-title uk-text-center uk-text-primary">Detalles del Vuelo @vuelo.CodigoVuelo</h3>
+
+                   <div class="uk-grid-small uk-child-width-1-2@s uk-margin" uk-grid>
+                       <div>
+                           <p><strong>✈️ Aerolínea:</strong> @vuelo.Aerolinea (@vuelo.CodigoAerolinea)</p>
+                           <p><strong>🆔 Vuelo ID:</strong> @vuelo.VueloId</p>
+                           <p><strong>🖼 Imagen:</strong></p>
+                           @if (!string.IsNullOrEmpty(vuelo.Imagen))
+                           {
+                               <img src="@vuelo.Imagen" class="uk-border-rounded" width="100%" />
+                           }
+                           else
+                           {
+                               <p class="uk-text-muted">Sin imagen disponible.</p>
+                           }
+                       </div>
+                       <div>
+                           <p><strong>📍 Origen:</strong> @vuelo.OrigenNombre - @vuelo.OrigenCiudad, @vuelo.OrigenPais (@vuelo.OrigenCodigo)</p>
+                           <p><strong>🎯 Destino:</strong> @vuelo.DestinoNombre - @vuelo.DestinoCiudad, @vuelo.DestinoPais (@vuelo.DestinoCodigo)</p>
+                           <p><strong>🕒 Salida:</strong> @vuelo.FechaSalida.ToString("dd/MM/yyyy") @vuelo.HoraSalida.ToString(@"hh\:mm")</p>
+                           <p><strong>🕒 Llegada:</strong> @vuelo.FechaLlegada.ToString("dd/MM/yyyy") @vuelo.HoraLlegada.ToString(@"hh\:mm")</p>
+                           <p><strong>🚏 Escala:</strong> @vuelo.EscalaId (Duración: @vuelo.DuracionEscala)</p>
+                           <p><strong>📌 Estado:</strong> <span class="uk-label uk-label-success">@vuelo.EstadoVuelo</span></p>
+                       </div>
+                   </div>
+
+                   <hr class="uk-divider-icon" />
+
+                   <h4 class="uk-heading-line uk-text-center"><span>👨‍✈️ Tripulación</span></h4>
+                   <p class="uk-text-center">
+                       <strong>Capitán:</strong> @vuelo.TripulacionCapitan<br />
+                       <strong>Copiloto:</strong> @vuelo.TripulacionCopiloto<br />
+                       <strong>Auxiliares:</strong> @vuelo.TripulacionAuxiliares
+                   </p>
+
+                   <h4 class="uk-heading-line uk-text-center"><span>💼 Tarifas y Servicios</span></h4>
+                   <ul class="uk-list uk-list-divider">
+                       <li><strong>💵 Precio USD:</strong> $@vuelo.PrecioUSD</li>
+                       <li><strong>💴 Precio PEN:</strong> S/@vuelo.PrecioPEN</li>
+                       <li><strong>🎫 Tarifa Especial:</strong> @vuelo.TarifaEspecial</li>
+                       <li><strong>💱 Moneda:</strong> @vuelo.Moneda</li>
+                       <li><strong>🧰 Servicios Adicionales:</strong> @vuelo.ServiciosAdicionales</li>
+                       <li><strong>📄 Condiciones:</strong> @vuelo.CondicionesAdicionales</li>
+                   </ul>
+               </div>
+           </div>
+       }
     </tbody>
 </table>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function mostrarConfirmacion() {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Vuelo editado exitosamente!',
+            text: 'El vuelo ha sido actualizado correctamente.',
+            confirmButtonColor: '#1e3a5f'
+        });
+    }
+</script>

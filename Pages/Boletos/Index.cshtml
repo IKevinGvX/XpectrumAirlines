@@ -1,62 +1,101 @@
 ﻿@page
-@model Xpectrum_Structure.Pages.Boletos.IndexModel
-
-<link rel="stylesheet" href="~/css/estiloboletos.css" />
-
-<h1>Lista de Boletos</h1>
-
-@if (Model.Boletos == null || !Model.Boletos.Any())
-{
-    <p class="no-boletos">No hay boletos disponibles.</p>
+@model Boletos.IndexModel
+@{
+    ViewData["Title"] = "Compra de Boletos - Xpectrum";
+    Layout = null;
 }
-else
-{
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Reserva ID</th>
-                <th>Código</th>
-                <th>Fecha Emisión</th>
-                <th>Estado</th>
-                <th>Código BO</th>
-                <th>QR</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 0; i < Model.Boletos.Count; i++)
-            {
-                var boleto = Model.Boletos[i];
-                var fechaEmisionStr = boleto.FechaEmision.ToString("dd/MM/yyyy");
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Área del Pasajero - Xpectrum</title>
+    <link href="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/css/uikit.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit-icons.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #1b2a41;
+            color: #e0e0e0;
+        }
 
-                <tr>
-                    <td>@boleto.BoletoId</td>
-                    <td>@boleto.ReservaId</td>
-                    <td>@boleto.CodigoBoleto</td>
-                    <td>@fechaEmisionStr</td>
-                    <td>@boleto.EstadoBoleto</td>
-                    <td>@boleto.CodigoBO</td>
-                    <td>
-                        <div id="qrcode-@i" class="qrcode-container"></div>
-                        <button type="button" onclick="downloadQRCode(@i, '@boleto.CodigoBO')" class="btn-link mt-2">Descargar QR</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        header, footer {
+            background-color: #131e31;
+            color: #00e1ff;
+            padding: 20px;
+            text-align: center;
+        }
 
-    <a href="/Boletos/Create" class="btn">Crear Nuevo Boleto</a>
-}
-<script>
-    window.boletoData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize<IEnumerable<dynamic>>(
-        Model.Boletos != null
-            ? Model.Boletos.Select(b => new { b.ReservaId, b.CodigoBoleto }).ToList()
-            : new List<dynamic>()
-    ))
+        .uk-card {
+            background-color: #273849;
+        }
 
+        .uk-button {
+            border-radius: 6px;
+        }
 
-</script>
+        .volver-btn {
+            margin-top: 30px;
+        }
 
+        footer {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="~/js/site.js"></script>
+    <!-- Header -->
+    <header>
+        <h2>Bienvenido al Área del Pasajero</h2>
+        <p>Gestiona tus boletos, vuelos y obtén ayuda en un solo lugar.</p>
+    </header>
+
+    <!-- Contenido -->
+    <div class="uk-section uk-section-small">
+        <div class="uk-container">
+
+            <div class="uk-card uk-card-default uk-card-body uk-light">
+                <h3 class="uk-card-title">Opciones Rápidas</h3>
+                <p>Selecciona una de las siguientes opciones para continuar:</p>
+                <div class="uk-section uk-section-small uk-text-center uk-padding-remove-top">
+                    <div class="uk-container">
+
+                        <div class="uk-margin-top uk-child-width-expand@s uk-grid-small" uk-grid>
+                            <div>
+                                <a class="uk-button uk-button-primary uk-border-pill" href="/Boletos/Boletos">
+                                    <span uk-icon="icon: file-text"></span> Ver Mis Boletos
+                                </a>
+                            </div>
+
+                            <div>
+                                <a class="uk-button uk-button-danger uk-border-pill" href="/Boletos/Reembolsos">
+                                    <span uk-icon="icon: credit-card"></span> Solicitar Reembolso
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Botón Volver -->
+                <div class="volver-btn">
+                    <a class="uk-button uk-button-danger uk-width-1-1" href="/Index">
+                        <span uk-icon="icon: arrow-left"></span> Volver al Inicio
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Xpectrum Airlines | Atención personalizada al pasajero | Contacto: soporte@xpectrum.com
+    </footer>
+
+</body>
+</html>
+

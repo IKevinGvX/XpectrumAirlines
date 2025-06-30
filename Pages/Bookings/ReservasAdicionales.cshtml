@@ -1,0 +1,130 @@
+﻿@page
+@model Xpectrum_Structure.Pages.MisViajes.ReservasAdicionalesModel
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservas Adicionales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #0f1e2e;
+            color: #fff;
+        }
+
+        .card {
+            background-color: #1a2a3a;
+            border-radius: 1rem;
+        }
+
+        .user-panel {
+            background-color: #162636;
+            border-left: 5px solid #0d6efd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .scroll-table {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        footer {
+            text-align: center;
+            color: #aaa;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center mb-4">Reservas Adicionales</h2>
+
+            @if (!string.IsNullOrEmpty(Model.Mensaje))
+            {
+                <div class="alert alert-warning text-center">@Model.Mensaje</div>
+            }
+
+            <div class="user-panel mb-4">
+                <h5 class="mb-2"><i class="bi bi-person-circle"></i> Bienvenido</h5>
+                <p class="mb-1 fs-6"><strong>@Model.NombreUsuario</strong></p>
+                <p><i class="bi bi-envelope-fill"></i> @Model.EmailUsuario</p>
+            </div>
+
+            @if (Model.VuelosDisponibles.Count > 0)
+            {
+                <div class="scroll-table">
+                    <table id="tablaVuelos" class="table table-dark table-bordered table-hover align-middle text-center">
+                        <thead class="table-light text-dark">
+                            <tr>
+                                <th>Vuelo</th>
+                                <th>Aerolínea</th>
+                                <th>Salida</th>
+                                <th>Llegada</th>
+                                <th>Precio PEN</th>
+                                <th>Precio USD</th>
+                                <th>Reservar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var vuelo in Model.VuelosDisponibles.Take(8))
+                            {
+                                <tr>
+                                    <td>@vuelo.CodigoVuelo</td>
+                                    <td>@vuelo.Aerolinea</td>
+                                    <td>@vuelo.FechaSalida.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>@vuelo.FechaLlegada.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>S/. @vuelo.PrecioPEN.ToString("N2")</td>
+                                    <td>$ @vuelo.PrecioUSD.ToString("N2")</td>
+                                    <td>
+                                        <form method="post">
+                                            <input type="hidden" name="vueloId" value="@vuelo.VueloId" />
+                                            <button type="submit" class="btn btn-outline-success btn-sm rounded-pill">
+                                                <i class="bi bi-check2-circle"></i> Reservar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+            <div class="text-center mt-4">
+                <a href="/Index" class="btn btn-outline-light rounded-pill">
+                    <i class="bi bi-arrow-left"></i> Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <footer>
+        &copy; 2025 Xpectrum Airlines – Reservas Adicionales
+    </footer>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new DataTable('#tablaVuelos');
+                });Swal.fire({
+            icon: 'success',
+            title: 'Reserva completada',
+            text: 'Has reservado el vuelo correctamente',
+            confirmButtonColor: '#0d6efd'
+        });
+
+    </script>
+
+</body>
+</html>

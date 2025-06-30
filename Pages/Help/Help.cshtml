@@ -1,0 +1,186 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Help.HelpModel
+@{
+    ViewData["Title"] = "Ayuda al Pasajero - Xpectrum";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayuda al Pasajero | Xpectrum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #1b2a41;
+            color: #e0e0e0;
+        }
+
+        header {
+            background-color: #131e31;
+            padding: 1rem 2rem;
+            text-align: center;
+            color: #00e1ff;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .faq {
+            margin-bottom: 2rem;
+        }
+
+        .faq h2 {
+            color: #88cfff;
+            margin-bottom: 1rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item h4 {
+            margin: 0 0 0.4rem;
+            color: #00ffc8;
+        }
+
+        .faq-item p {
+            margin: 0;
+            color: #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: #273849;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #394b5c;
+        }
+
+        th {
+            background-color: #32465a;
+            color: #fff;
+        }
+
+        td {
+            color: #ddd;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .cta-buttons a {
+            background-color: #00bcd4;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .cta-buttons a:hover {
+            background-color: #008ba3;
+        }
+
+        footer {
+            background-color: #131e31;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 40px;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Centro de Ayuda al Pasajero</h1>
+    <p>Encuentra soluciones, información y canales de contacto</p>
+</header>
+
+<main>
+    <section class="faq">
+        <h2>Preguntas Frecuentes</h2>
+
+        <div class="faq-item">
+            <h4>¿Cómo cambio la fecha de mi vuelo?</h4>
+            <p>Ingresa a tu cuenta, selecciona "Mis Reservas" y haz clic en "Modificar vuelo".</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>¿Qué hago si perdí mi vuelo?</h4>
+            <p>Contacta a soporte dentro de las 24 horas. Puede aplicar una tarifa de reprogramación.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>¿Cómo solicito reembolso?</h4>
+            <p>Si tu boleto es reembolsable, puedes solicitarlo desde "Gestión de Pagos" o llamar a soporte.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>¿Qué documentos necesito para viajar?</h4>
+            <p>Documento de identidad, pasaporte válido (si es internacional) y tarjeta de embarque.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Problemas Comunes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Problema</th>
+                    <th>Solución</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>No recibí confirmación por correo</td>
+                    <td>Revisa la carpeta de SPAM o verifica tu correo en tu cuenta</td>
+                </tr>
+                <tr>
+                    <td>Falló el pago</td>
+                    <td>Verifica si tu tarjeta está activa y vuelve a intentarlo desde "Gestionar Pagos"</td>
+                </tr>
+                <tr>
+                    <td>Problemas con el check-in</td>
+                    <td>El check-in online está habilitado desde 48h antes del vuelo</td>
+                </tr>
+                <tr>
+                    <td>Mi nombre está mal escrito</td>
+                    <td>Contacta a soporte antes de 24h de la salida para corregirlo sin costo</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="cta-buttons">
+        <a href="/Help/Soporte">Contactar Soporte</a>
+            <a href="/Boletos/Reembolsos">Política de Reembolsos</a>
+    </div>
+</main>
+
+<footer>
+    &copy; 2025 Xpectrum Airlines – Estamos para ayudarte 24/7
+</footer>
+
+</body>
+</html>

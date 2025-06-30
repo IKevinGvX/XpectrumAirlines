@@ -1,0 +1,117 @@
+﻿@page
+@model Xpectrum_Structure.Book.IndexModel
+@{
+    ViewData["Title"] = "Book Corporativo - Xpectrum";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.10/dist/js/uikit-icons.min.js"></script>
+</head>
+<body class="uk-background-muted uk-padding-large">
+
+    <header class="uk-background-primary uk-light uk-padding uk-border-rounded">
+        <div class="uk-container">
+            <h1 class="uk-heading-medium uk-text-center">Xpectrum Airlines</h1>
+            <p class="uk-text-center">Llevándote más allá de tus destinos.</p>
+        </div>
+    </header>
+
+    <section class="uk-section uk-container">
+        <ul uk-tab>
+            <li><a href="#">Misión</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Experiencia</a></li>
+            <li><a href="#">Valores</a></li>
+        </ul>
+
+        <ul class="uk-switcher uk-margin">
+            <li>
+                <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+                    <h3 class="uk-card-title">Nuestra Misión</h3>
+                    <p>Brindar experiencias de vuelo excepcionales con calidad, seguridad y tecnología de vanguardia.</p>
+                </div>
+            </li>
+            <li>
+                <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+                    <div>
+                        <div class="uk-card uk-card-hover uk-card-body uk-card-primary">
+                            <h3 class="uk-card-title">Vuelos Internacionales</h3>
+                            <p>Conectamos ciudades y culturas de manera segura y eficiente.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-hover uk-card-body uk-card-secondary">
+                            <h3 class="uk-card-title">X-Clubs</h3>
+                            <p>Acumula millas y accede a privilegios de élite con nuestro programa de lealtad.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-hover uk-card-body uk-card-default">
+                            <h3 class="uk-card-title">Atención 24/7</h3>
+                            <p>Soporte personalizado en todo momento para nuestros viajeros.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+                    <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+                        <h3 class="uk-card-title">Cabinas Confortables</h3>
+                        <p>Diseñadas para brindar máximo confort y descanso.</p>
+                    </div>
+                    <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+                        <h3 class="uk-card-title">Gastronomía a Bordo</h3>
+                        <p>Platos personalizados según preferencias y destinos.</p>
+                    </div>
+                    <div class="uk-card uk-card-default uk-card-body uk-border-rounded">
+                        <h3 class="uk-card-title">Tecnología Avanzada</h3>
+                        <p>Check-in digital, conectividad y entretenimiento interactivo.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
+                    <div>
+                        <div class="uk-card uk-card-small uk-card-body uk-card-default uk-border-rounded">
+                            <h4>Excelencia</h4>
+                            <p>Superamos expectativas con profesionalismo.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-small uk-card-body uk-card-muted uk-border-rounded">
+                            <h4>Innovación</h4>
+                            <p>Inversión constante en tecnología de punta.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-small uk-card-body uk-card-primary uk-light uk-border-rounded">
+                            <h4>Seguridad</h4>
+                            <p>Protocolo estricto y aeronaves modernas.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-small uk-card-body uk-card-secondary uk-light uk-border-rounded">
+                            <h4>Empatía</h4>
+                            <p>Nos importa cada pasajero, cada historia, cada vuelo.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <footer class="uk-section uk-section-small uk-text-center uk-text-muted">
+        <hr />
+        <p>&copy; 2025 Xpectrum Airlines. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

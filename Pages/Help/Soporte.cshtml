@@ -1,0 +1,86 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Help.SoporteModel
+@{
+    ViewData["Title"] = "Soporte al Pasajero";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soporte - Xpectrum Airlines</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit-icons.min.js"></script>
+    <style>
+        body {
+            background-color: #0f1e2e;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .uk-container {
+            max-width: 900px;
+        }
+
+        .uk-card {
+            background-color: #1d2a3a;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            background: #0a1523;
+            color: #aaa;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta-buttons a {
+            margin-right: 12px;
+        }
+
+        .uk-button-primary {
+            background-color: #00bcd4;
+        }
+
+        .uk-icon-button {
+            background: #00e1ff;
+            color: #0f1e2e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="uk-container uk-margin-top">
+        <div class="uk-card uk-card-default uk-card-body uk-text-center">
+            <h2 class="uk-heading-line"><span>¿Necesitas ayuda?</span></h2>
+            <p class="uk-text-lead">Estamos disponibles para resolver tus dudas o inconvenientes.</p>
+
+            <div class="uk-margin-top">
+                <a class="uk-button uk-button-primary uk-border-pill" href="https://wa.me/51941691210" target="_blank">
+                    <span uk-icon="icon: whatsapp"></span> Contactar por WhatsApp
+                </a>
+                <a class="uk-button uk-button-secondary uk-border-pill"
+                   href="mailto:kevinyouman.14@gmail.com?subject=Soporte%20Xpectrum&body=Hola%20equipo%20de%20Xpectrum%2C%0D%0A%0D%0AQuisiera%20hacer%20una%20consulta%20sobre...">
+                    <span uk-icon="icon: mail"></span> Enviar un Correo
+                </a>
+
+            </div>
+
+            <div class="uk-margin-top">
+                <a href="/Help/Help" class="uk-button uk-button-default uk-border-pill">
+                    <span uk-icon="arrow-left"></span> Volver a Ayuda
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Xpectrum Airlines – Centro de Soporte
+    </footer>
+
+</body>
+</html>

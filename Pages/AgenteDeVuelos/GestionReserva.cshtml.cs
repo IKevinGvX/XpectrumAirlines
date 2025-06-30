@@ -39,9 +39,19 @@ namespace Xpectrum_Structure.Pages.AgenteDeVuelos
             {
                 await connection.OpenAsync();
                 string query = @"
-                SELECT a.AeropuertoId, a.Nombre, a.Ciudad, a.Pais, v.CodigoVuelo, v.Aerolinea
-                FROM Aeropuertos a
-                INNER JOIN Vuelos v ON a.AeropuertoId = v.origenId OR a.AeropuertoId = v.destinoId
+                SELECT DISTINCT
+    a.AeropuertoId, 
+    a.Nombre, 
+    a.Ciudad, 
+    a.Pais, 
+    v.CodigoVuelo, 
+    v.Aerolinea
+FROM 
+    Aeropuertos a
+INNER JOIN 
+    Vuelos v 
+    ON a.AeropuertoId = v.origenId OR a.AeropuertoId = v.destinoId;
+
             ";
 
                 SqlCommand cmd = new SqlCommand(query, connection);

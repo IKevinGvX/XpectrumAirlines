@@ -1,0 +1,6 @@
+29/6/2025 18:58:50: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_HistorialLogins_Usuarios". The conflict occurred in database "xpectrum", table "dbo.Usuarios", column 'usuarioId'.
+The statement has been terminated.
+29/6/2025 23:15:37: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_HistorialLogins_Usuarios". The conflict occurred in database "xpectrum", table "dbo.Usuarios", column 'usuarioId'.
+The statement has been terminated.
+29/6/2025 23:15:45: The INSERT statement conflicted with the FOREIGN KEY constraint "FK_HistorialLogins_Usuarios". The conflict occurred in database "xpectrum", table "dbo.Usuarios", column 'usuarioId'.
+The statement has been terminated.

@@ -1,0 +1,67 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Promotions.DestinosModel
+@{
+    ViewData["Title"] = "Destinos del Mes";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Destinos del Mes | Xpectrum</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit-icons.min.js"></script>
+    <style>
+        body {
+            background-color: #0f1e2e;
+            color: #e0e0e0;
+        }
+
+        .uk-card {
+            background: #1e2b3a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #0a1523;
+            padding: 1rem;
+            color: #aaa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="uk-container uk-margin-top">
+        <h2 class="uk-heading-line uk-text-center"><span>Destinos en Promoción este Mes</span></h2>
+
+        <div class="uk-child-width-1-2@m uk-grid-match uk-grid-small" uk-grid>
+            @foreach (var d in Model.Destinos)
+            {
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">@d.CiudadDestino, @d.PaisDestino</h3>
+                        <p><strong>Desde:</strong> @d.CiudadOrigen, @d.PaisOrigen</p>
+                        <p><strong>Salida:</strong> @d.FechaSalida @d.HoraSalida</p>
+                        <p><strong>Aerolínea:</strong> @d.Aerolinea</p>
+                        <p><strong>Precio:</strong> @d.Moneda @d.Precio</p>
+                        <span class="uk-label uk-label-success">Promo</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="uk-text-center uk-margin-large-top">
+            <a class="uk-button uk-button-secondary uk-border-pill" href="/Index">
+                <span uk-icon="arrow-left"></span> Volver al Inicio
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Xpectrum Airlines – Ofertas de Temporada
+    </footer>
+</body>
+</html>

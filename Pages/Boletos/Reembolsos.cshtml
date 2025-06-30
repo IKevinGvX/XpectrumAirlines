@@ -1,0 +1,65 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Boletos.ReembolsosModel
+@{
+    ViewData["Title"] = "Solicitar Reembolso";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitar Reembolso - Xpectrum</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit-icons.min.js"></script>
+    <style>
+        body {
+            background: #0f1e2e;
+            color: #e0e0e0;
+        }
+        footer {
+            background: #0a1523;
+            color: #aaa;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="uk-container uk-padding">
+        <h2 class="uk-heading-line uk-text-center"><span>Solicitar Reembolso</span></h2>
+        <p class="uk-text-lead uk-text-center">Rellena el formulario para gestionar tu devolución.</p>
+
+        <form class="uk-form-stacked uk-margin">
+            <div class="uk-margin">
+                <label class="uk-form-label">Número de Boleto</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="text" placeholder="XPTR1234" />
+                </div>
+            </div>
+            <div class="uk-margin">
+                <label class="uk-form-label">Motivo del Reembolso</label>
+                <div class="uk-form-controls">
+                    <textarea class="uk-textarea" rows="4" placeholder="Describa el motivo..."></textarea>
+                </div>
+            </div>
+            <button class="uk-button uk-button-danger uk-border-pill" type="submit">
+                <span uk-icon="reply"></span> Enviar Solicitud
+            </button>
+        </form>
+
+        <div class="uk-text-center uk-margin-top">
+            <a class="uk-button uk-button-default uk-border-pill" href="/Index"">
+                <span uk-icon="arrow-left"></span> Volver a Ayuda
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Xpectrum Airlines – Gestión de Reembolsos
+    </footer>
+</body>
+</html>

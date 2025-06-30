@@ -111,12 +111,9 @@
                         Ofertas
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ofertasDropdown">
-                        <li><a class="dropdown-item" href="#">Destinos</a></li>
-                        <li><a class="dropdown-item" href="#">Paquetes turísticos</a></li>
-                        <li><a class="dropdown-item" href="#">Alojamientos</a></li>
-                        <li><a class="dropdown-item" href="#">Recepciones de hoteles</a></li>
-                        <li><a class="dropdown-item" href="#">Asistencia en viaje</a></li>
-                        <li><a class="dropdown-item" href="#">Más servicios</a></li>
+                        <li><a class="dropdown-item" href="Promotions/Destinos">Destinos</a></li>
+                        <li><a class="dropdown-item" href="Promotions/PaquetesTuristicos">Paquetes turísticos</a></li>
+                        <li><a class="dropdown-item" href="Promotions/Alojamientos">Alojamientos</a></li>
                     </ul>
                 </li>
 
@@ -126,23 +123,30 @@
                         Mis Viajes
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="misViajesDropdown">
-                        <li><a class="dropdown-item" asp-page="/Bookings/MyReservations">Administración de viajes</a></li>
-                        <li><a class="dropdown-item" asp-page="/CheckIn">Check-In</a></li>
-                        <li><a class="dropdown-item" asp-page="/Flights/Status">Consulta tus vuelos</a></li>
+                        <li><a class="dropdown-item" asp-page="/Bookings/Administracion">Administración de viajes</a></li>
+                        <li><a class="dropdown-item" asp-page="/Bookings/CheckIn">Check-In</a></li>
+                        <li><a class="dropdown-item" asp-page="/Bookings/ReservasAdicionales">Reservas Adicionales</a></li>
                     </ul>
                 </li>
-
                 <!-- Servicios Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="serviciosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Servicios
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="serviciosDropdown">
-                        <li><a class="dropdown-item" asp-page="/Services/Extras">Servicios adicionales</a></li>
-                        <li><a class="dropdown-item" asp-page="/Services/Luggage">Equipaje</a></li>
-                        <li><a class="dropdown-item" asp-page="/Services/Assistance">Asistencia especial</a></li>
+
+                        @if (User.Identity.IsAuthenticated) // Verifica si el usuario está autenticado
+                        {
+                            <li><a class="dropdown-item" asp-page="/Boletos/Index">Mis Boletos</a></li>
+                            <li><a class="dropdown-item" asp-page="/Help/Help">Ayuda</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="dropdown-item" href="/Account/Login">Inicia sesión para ver tu información y boletos</a></li>
+                        }
                     </ul>
                 </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link" asp-page="/About/informacion">Contacto</a>
@@ -156,8 +160,8 @@
                             <span>@TempData["nombre"]</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="/Profile/Profile">Ver perfil</a></li>
-                            <li><a class="dropdown-item" href="/Profile/Configuracion">Configuración</a></li>
+                            <li><a class="dropdown-item" href="/Profiles/Profile">Ver perfil</a></li>
+                            <li><a class="dropdown-item" href="/Profiles/Configuracion">Configuración</a></li>
                             <li><a class="dropdown-item" href="/Shared/Logout">Cerrar sesión</a></li>
                         </ul>
                     </li>

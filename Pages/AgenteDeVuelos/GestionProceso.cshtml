@@ -1,59 +1,69 @@
 ﻿@page "/AgenteDeVuelos/GestionProceso"
 @model Xpectrum_Structure.Pages.AgenteDeVuelos.GestionProcesoModel
 @{
-    ViewData["Title"] = "Gestion de Reservas";
+    ViewData["Title"] = "Gestión de Reservas";
 }
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-    <div class="uk-container">
-        <h1>Detalles de la Reserva de Vuelo</h1>
+    <div class="uk-container uk-margin-large-top">
+        <h1 class="uk-heading-divider">Detalles de la Reserva de Vuelo</h1>
 
-        <!-- Dropdown para seleccionar un usuario -->
-        <div class="uk-card uk-card-default uk-card-body">
-            <h3>Seleccionar Usuario</h3>
+
+<ul uk-accordion class="uk-margin">
+    <li class="uk-open">
+        <a class="uk-accordion-title" href="#" style="color: white; background-color: #1e3a5f; padding: 10px;">Seleccionar Usuario</a>
+        <div class="uk-accordion-content" style="background-color: #2a4a75; color: white; padding: 15px;">
             <form method="get">
+                <input type="hidden" name="codigoVuelo" value="@Model.CodigoVuelo" />
                 <label for="userSelect">Seleccionar Usuario</label>
-                <select id="userSelect" class="uk-select">
+                <select id="userSelect" name="usuarioId" class="uk-select" style="background-color: #3a5f8f; color: white;" onchange="this.form.submit()">
                     <option value="">Selecciona un usuario</option>
                     @foreach (var usuario in Model.UsuariosList)
                     {
-                        <option value="@usuario.UsuarioId">@usuario.Nombre</option>
-                    }
+                                <option value="@usuario.UsuarioId">@usuario.Nombre</option>
+                            }
                 </select>
             </form>
         </div>
+    </li>
+</ul>
 
-        <!-- Información del Usuario -->
-        <div class="uk-card uk-card-default uk-card-body">
-            <h3>Información del Usuario</h3>
+        <!-- Panel: Información del Usuario -->
+        <div class="uk-card uk-card-default uk-card-body uk-margin" style="background-color: #1e3a5f; color: white;">
+            <h3 class="uk-card-title" style="color: white;">Información del Usuario</h3>
             <p><strong>Nombre:</strong> @Model.Usuarios.Nombre</p>
             <p><strong>Email:</strong> @Model.Usuarios.Email</p>
             <p><strong>Teléfono:</strong> @Model.Usuarios.Telefono</p>
             <p><strong>Dirección:</strong> @Model.Usuarios.Direccion</p>
         </div>
 
-        <!-- Detalles del Vuelo -->
-        <div class="uk-card uk-card-default uk-card-body">
-            <h3>Detalles del Vuelo</h3>
-            <p><strong>Ciudad de Origen:</strong> @Model.Vuelos.CiudadOrigen</p>
-            <p><strong>País de Origen:</strong> @Model.Vuelos.PaisOrigen</p>
-            <p><strong>Código de Vuelo:</strong> @Model.Vuelos.CodigoVuelo</p>
-            <p><strong>Aerolínea:</strong> @Model.Vuelos.Aerolinea</p>
-        </div>
+        <ul uk-accordion class="uk-margin">
+            <li>
+                <a class="uk-accordion-title" href="#" style="color: white; background-color: #1e3a5f; padding: 10px;">Detalles del Vuelo</a>
+                <div class="uk-accordion-content" style="background-color: #2a4a75; color: white; padding: 15px;">
+                    <p><strong>Ciudad de Origen:</strong> <span id="ciudadOrigen">@Model.Vuelos.CiudadOrigen</span></p>
+                    <p><strong>País de Origen:</strong> <span id="paisOrigen">@Model.Vuelos.PaisOrigen</span></p>
+                    <p><strong>Código de Vuelo:</strong> <span id="codigoVuelo">@Model.Vuelos.CodigoVuelo</span></p>
+                    <p><strong>Aerolínea:</strong> <span id="aerolinea">@Model.Vuelos.Aerolinea</span></p>
+                </div>
+            </li>
+        </ul>
+    
 
-        <!-- Pagos y Descuentos -->
-        <div class="uk-card uk-card-default uk-card-body">
-            <h3>Detalles de Pago</h3>
+        <!-- Panel: Detalles de Pago -->
+        <div class="uk-card uk-card-default uk-card-body uk-margin" style="background-color: #1e3a5f; color: white;">
+            <h3 class="uk-card-title" style="color: white;">Detalles de Pago</h3>
             <p><strong>Precio USD:</strong> @Model.Vuelos.PrecioUSD</p>
             <p><strong>Precio PEN:</strong> @Model.Vuelos.PrecioPEN</p>
             <p><strong>Tarifa Especial:</strong> @Model.Vuelos.Tarifaespecial</p>
@@ -62,25 +72,61 @@
             <p><strong>Descuento:</strong> @Model.Descuento</p>
         </div>
 
-        <!-- Botón para continuar -->
-        <button class="uk-button uk-button-primary">Confirmar Reserva</button>
+
+        <div class="uk-margin">
+            <button class="uk-button uk-button-primary uk-width-1-2" type="button" onclick="UIkit.modal('#modal-pago').show()">Confirmar Reserva</button>
+        </div>
+
+    </div>
+    <!-- Modal de tipo de pago -->
+    <div id="modal-pago" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body" style="background-color: #1e3a5f; color: white;">
+            <h2 class="uk-modal-title" style="color: white;">Selecciona el tipo de pago</h2>
+
+            <form method="post">
+                <!-- Campos ocultos para usuario y vuelo -->
+                <input type="hidden" name="usuarioId" value="@Model.Usuarios.UsuarioId" />
+                <input type="hidden" name="codigoVuelo" value="@Model.Vuelos.CodigoVuelo" />
+
+                <!-- Selector de tipo de pago -->
+                <div class="uk-margin">
+                    <label for="tipoPago" style="color: white;">Método de Pago</label>
+                    <label for="tipoPago">Selecciona el tipo de pago</label>
+                    <select id="tipoPago" name="tipoPago" class="uk-select" style="background-color: #3a5f8f; color: white;" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="Tarjeta">Tarjeta de Crédito / Débito</option>
+                        <option value="Transferencia">Transferencia Bancaria</option>
+                        <option value="Efectivo">Pago en Efectivo</option>
+                        <option value="Yape">Yape</option>
+                        <option value="Plin">Plin</option>
+                        <option value="BCP">Depósito en BCP</option>
+                        <option value="Interbank">Depósito en Interbank</option>
+                        <option value="Pichincha">Banco Pichincha</option>
+                        <option value="WesternUnion">Western Union</option>
+                    </select>
+
+                </div>
+
+                <!-- Botón para confirmar -->
+                <div class="uk-margin">
+                    <button type="submit" class="uk-button uk-button-primary uk-width-1-1">Reservar Cita</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit.min.js"></script>
 
     <script>
-        // Function to handle dropdown change
-        document.getElementById("userSelect").addEventListener("change", function() {
-            var usuarioId = this.value; // Get selected user ID
-            var codigoVuelo = '@Model.CodigoVuelo'; // Get the current flight code from the model
-
-            if (usuarioId) {
-                // Redirect to the same page with the selected usuarioId and codigoVuelo
-                window.location.href = '/AgenteDeVuelos/GestionProceso?usuarioId=' + usuarioId + '&codigoVuelo=' + codigoVuelo;
-            }
-        });
+                // Redirección al cambiar usuario
+                document.getElementById("userSelect").addEventListener("change", function () {
+                    var usuarioId = this.value;
+                    var codigoVuelo = '@Model.CodigoVuelo';
+                    if (usuarioId) {
+                        window.location.href = '/AgenteDeVuelos/GestionProceso?usuarioId=' + usuarioId + '&codigoVuelo=' + codigoVuelo;
+                    }
+                });
 
     </script>
 
 </body>
-</html> 
+</html>

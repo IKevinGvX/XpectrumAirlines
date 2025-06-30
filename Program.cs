@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using Xpectrum_Structure.Pages.Aeropuertos;
 using Xpectrum_Structure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +65,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 20 * 1024 * 1024; // 20MB o más si lo necesitas
+});
+
 
 var app = builder.Build();
 

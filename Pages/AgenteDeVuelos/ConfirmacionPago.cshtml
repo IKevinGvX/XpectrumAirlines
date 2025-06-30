@@ -1,0 +1,113 @@
+﻿@page
+@model Xpectrum_Structure.Pages.AgenteDeVuelos.ConfirmacionPagoModel
+@{
+    ViewData["Title"] = "Confirmación de Pago";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    input[type="tel"] {
+        color: #000 !important;
+        background-color: #ffffff !important;
+        border: 1px solid #ccc !important;
+        z-index: 1 !important;
+        position: relative !important;
+        opacity: 1 !important;
+    }
+
+    .form-control::placeholder {
+        color: #666 !important;
+    }
+
+    .form-control:focus {
+        background-color: #fff !important;
+        color: #000 !important;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="mb-4 border-bottom pb-2">Pasarela de Pago Seleccionada</h2>
+
+    @foreach (var metodo in new[] { "Visa", "Mastercard", "Yape", "Plin", "Interbank", "BCP", "Pichincha", "WesternUnion" })
+    {
+        var metodoLower = metodo.ToLower();
+        <div id="card-@metodo" class="d-none">
+            <div class="card shadow-lg text-white mb-4" style="background-color:#1e3a5f; max-width: 420px; margin: auto;">
+                <div class="card-body text-center">
+                    <h4 class="card-title">@metodo</h4>
+                    <p class="card-text">Escanea el código QR con tu app para completar el pago.</p>
+                    <canvas id="canvas-@($"{metodoLower}QR")" class="mb-3 bg-white p-2"></canvas>
+
+                    <input type="tel" class="form-control mb-3" placeholder="Número WhatsApp"
+                           id="whatsappNumber-@($"{metodoLower}QR")" />
+
+                    <div class="row g-2">
+                        <div class="col">
+                            <button class="btn btn-outline-light w-100 download-btn"
+                                    data-canvas-id="canvas-@($"{metodoLower}QR")"
+                                    data-filename="QR_@($"{Model.reservaId}.png")">
+                                Descargar QR
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-success w-100 send-whatsapp-btn"
+                                    data-canvas-id="canvas-@($"{metodoLower}QR")"
+                                    data-number-input-id="whatsappNumber-@($"{metodoLower}QR")">
+                                Enviar por WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tipoPago = '@Model.tipoPago';
+        const reservaId = '@Model.reservaId';
+        const metodo = tipoPago.charAt(0).toUpperCase() + tipoPago.slice(1).toLowerCase();
+        const canvasId = `canvas-${tipoPago.toLowerCase()}QR`;
+        const card = document.getElementById("card-" + metodo);
+        const paymentUrl = `https://example.com/payment/${tipoPago.toLowerCase()}?reservaId=${reservaId}`;
+
+        if (card) {
+            card.classList.remove("d-none");
+        }
+
+        const canvas = document.getElementById(canvasId);
+        if (canvas) {
+            QRCode.toCanvas(canvas, paymentUrl, function (error) {
+                if (error) console.error("Error generando QR", error);
+            });
+        }
+
+        // Descargar QR
+        document.querySelectorAll(".download-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const canvas = document.getElementById(btn.dataset.canvasId);
+                const filename = btn.dataset.filename;
+                if (canvas) {
+                    const link = document.createElement("a");
+                    link.href = canvas.toDataURL("image/png");
+                    link.download = filename;
+                    link.click();
+                }
+            });
+        });
+
+        // Enviar por WhatsApp
+        document.querySelectorAll(".send-whatsapp-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const phoneInput = document.getElementById(btn.dataset.numberInputId);
+                const phone = phoneInput?.value.trim();
+                if (!phone) return alert("Por favor ingresa un número válido.");
+                const mensaje = `Hola, te compartimos el enlace de pago para tu reserva:\n${paymentUrl}`;
+                window.open(`https://wa.me/51${phone}?text=${encodeURIComponent(mensaje)}`, "_blank");
+            });
+        });
+    });
+</script>

@@ -95,7 +95,7 @@ namespace Xpectrum_Structure.Pages.Shared
                 // Si todo salió bien, mostrar mensaje de éxito y redirigir
                 Message = "Registration successful! Please log in.";
                 IsSuccess = true;
-                return RedirectToPage("/Profile/Welcome");
+                return RedirectToPage("/Profiles/Welcome");
             }
             catch (Exception ex)
             {

@@ -17,205 +17,249 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Xpectrum_Structure
 build_property.RootNamespace = Xpectrum_Structure
-build_property.ProjectDir = C:\Users\Bytezon\Desktop\XpectrumAirlines\
+build_property.ProjectDir = C:\Users\PC - OS\source\repos\XpectrumAirlines\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Bytezon\Desktop\XpectrumAirlines
+build_property.MSBuildProjectDirectory = C:\Users\PC - OS\source\repos\XpectrumAirlines
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/About/informacion.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/About/informacion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXRcaW5mb3JtYWNpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Account/Login.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Account/ResetPassword.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Administrador/ConfiguracionSistema.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Administrador/ConfiguracionSistema.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYWRvclxDb25maWd1cmFjaW9uU2lzdGVtYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Administrador/EditarUsuario.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Administrador/EditarUsuario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYWRvclxFZGl0YXJVc3VhcmlvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Administrador/Generales.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Administrador/Generales.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYWRvclxHZW5lcmFsZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Administrador/GestionUsuarios.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Administrador/GestionUsuarios.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYWRvclxHZXN0aW9uVXN1YXJpb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Administrador/Index.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Administrador/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYWRvclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Administrador/_Layout.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Administrador/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYWRvclxfTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/DetallesVuelo.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/ConfirmacionPago.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcQ29uZmlybWFjaW9uUGFnby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/DetallesVuelo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcRGV0YWxsZXNWdWVsby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/GestionAeronaves.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/GestionAeronaves.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcR2VzdGlvbkFlcm9uYXZlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/GestionPasajeros.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/GestionPagos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcR2VzdGlvblBhZ29zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/GestionPasajeros.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcR2VzdGlvblBhc2FqZXJvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/GestionProceso.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/GestionProceso.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcR2VzdGlvblByb2Nlc28uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/GestionReserva.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/GestionReserva.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcR2VzdGlvblJlc2VydmEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/GestionVuelos.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/GestionVuelos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcR2VzdGlvblZ1ZWxvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/Index.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AgenteDeVuelos/_layout.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/NuevoAeropuerto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcTnVldm9BZXJvcHVlcnRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AgenteDeVuelos/_layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdlbnRlRGVWdWVsb3NcX2xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AtencionAlCliente/ConsultaCliente.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AtencionAlCliente/ConsultaCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXRlbmNpb25BbENsaWVudGVcQ29uc3VsdGFDbGllbnRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/AtencionAlCliente/RespuestaConsulta.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AtencionAlCliente/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXRlbmNpb25BbENsaWVudGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AtencionAlCliente/RespuestaConsulta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXRlbmNpb25BbENsaWVudGVcUmVzcHVlc3RhQ29uc3VsdGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Boletos/Index.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/AtencionAlCliente/Soporte.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXRlbmNpb25BbENsaWVudGVcU29wb3J0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Boletos/Boletos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9sZXRvc1xCb2xldG9zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Boletos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9sZXRvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Contabilidad/GenerarFactura.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFiaWxpZGFkXEdlbmVyYXJGYWN0dXJhLmNzaHRtbA==
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Boletos/Reembolsos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9sZXRvc1xSZWVtYm9sc29zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Contabilidad/GestionPagos.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFiaWxpZGFkXEdlc3Rpb25QYWdvcy5jc2h0bWw=
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Bookings/Administracion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ3NcQWRtaW5pc3RyYWNpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Contabilidad/ReportesFinancieros.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFiaWxpZGFkXFJlcG9ydGVzRmluYW5jaWVyb3MuY3NodG1s
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Bookings/CheckIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ3NcQ2hlY2tJbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Erronea/ForgotPassword.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Bookings/ReservasAdicionales.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ3NcUmVzZXJ2YXNBZGljaW9uYWxlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Book/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Contabilidad/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFiaWxpZGFkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Erronea/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb25lYVxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Erronea/PaginaErrorVoid.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Erronea/PaginaErrorVoid.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb25lYVxQYWdpbmFFcnJvclZvaWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Erronea/ResetPasswordConfirmation.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Erronea/ResetPasswordConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb25lYVxSZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Error.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Index.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Help/Help.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGVscFxIZWxwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Help/Soporte.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGVscFxTb3BvcnRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Operaciones/SupervisionOperaciones.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3BlcmFjaW9uZXNcU3VwZXJ2aXNpb25PcGVyYWNpb25lcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Pasajero/ReservaVuelo.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGFzYWplcm9cUmVzZXJ2YVZ1ZWxvLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Privacy.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Profile/Configuracion.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVxDb25maWd1cmFjaW9uLmNzaHRtbA==
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Profiles/Configuracion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZXNcQ29uZmlndXJhY2lvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Profile/Profile.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVxQcm9maWxlLmNzaHRtbA==
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Profiles/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZXNcUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Profile/Welcome.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVxXZWxjb21lLmNzaHRtbA==
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Profiles/Welcome.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZXNcV2VsY29tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Promotions/Historial.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Promotions/Alojamientos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvbW90aW9uc1xBbG9qYW1pZW50b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Promotions/Destinos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvbW90aW9uc1xEZXN0aW5vcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Promotions/Historial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvbW90aW9uc1xIaXN0b3JpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Promotions/Vuelos.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Promotions/PaquetesTuristicos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvbW90aW9uc1xQYXF1ZXRlc1R1cmlzdGljb3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Promotions/Vuelos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvbW90aW9uc1xWdWVsb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Shared/Logout.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Shared/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXExvZ291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Shared/Register.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Shared/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXFJlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Shared/_Footer.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Gb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Shared/_Header.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Shared/_Header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9IZWFkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Shared/_ViewImports.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Shared/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Tripulacion/AsignarTripulacion.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJpcHVsYWNpb25cQXNpZ25hclRyaXB1bGFjaW9uLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Ventas/ReporteVentas.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Ventas/ReporteVentas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVudGFzXFJlcG9ydGVWZW50YXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Ventas/VentaBoletos.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Ventas/VentaBoletos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVudGFzXFZlbnRhQm9sZXRvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/_ViewImports.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/_ViewStart.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Bytezon/Desktop/XpectrumAirlines/Pages/Shared/_Layout.cshtml]
+[C:/Users/PC - OS/source/repos/XpectrumAirlines/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-3fhbybni37

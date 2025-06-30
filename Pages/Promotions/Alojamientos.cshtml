@@ -1,0 +1,82 @@
+﻿@page
+@model Xpectrum_Structure.Pages.Promotions.AlojamientosModel
+@{
+    ViewData["Title"] = "Alojamientos";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alojamientos - Xpectrum</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.12/dist/js/uikit-icons.min.js"></script>
+    <style>
+        body {
+            background-color: #0f1e2e;
+            color: #fff;
+        }
+
+        .uk-card {
+            background-color: #1c2a3a;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #0a1523;
+            color: #aaa;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="uk-container uk-margin-top">
+        <h2 class="uk-heading-line uk-text-center"><span>Alojamientos</span></h2>
+        <p class="uk-text-lead uk-text-center">Descubre alojamientos únicos con Xpectrum: confort, seguridad y estilo.</p>
+
+        <div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-match uk-grid-small uk-margin-top" uk-grid>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">Hotel Andino</h3>
+                    <p>Ubicado en Cusco. Ideal para aventuras y descanso andino.</p>
+                    <p><strong>Desde $75 por noche</strong></p>
+                    <a class="uk-button uk-button-primary uk-border-pill" href="#">Ver más</a>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">Mar Azul Resort</h3>
+                    <p>Relájate frente al mar en este exclusivo resort en Máncora.</p>
+                    <p><strong>Desde $120 por noche</strong></p>
+                    <a class="uk-button uk-button-primary uk-border-pill" href="#">Ver más</a>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">Casa Lima Colonial</h3>
+                    <p>Alojamiento boutique en el corazón histórico de Lima.</p>
+                    <p><strong>Desde $90 por noche</strong></p>
+                    <a class="uk-button uk-button-primary uk-border-pill" href="#">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-text-center uk-margin-large-top">
+            <a class="uk-button uk-button-secondary uk-border-pill" href="/Promotions/Index">
+                <span uk-icon="arrow-left"></span> Volver a Promociones
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Xpectrum Airlines – Alojamientos Recomendados
+    </footer>
+
+</body>
+</html>
